@@ -1838,7 +1838,7 @@ if(reactall === true)
                       {
                        await XeonBotInc.sendMessage(m.chat, { react: { text: `${owner_react}`, key: m.key }})
                       }
-                      else(m.sender != ownernumber)
+                      else if(m.sender != ownernumber)
                       {
                                 if(isCommand)
                                 {
