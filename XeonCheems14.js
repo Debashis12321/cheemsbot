@@ -1828,17 +1828,7 @@ click https://wa.me/${botNumber.split`@`[0]}`, m, { mentions: [roof.p, roof.p2] 
 xeonverifieduser.push(sender)
 fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, null, 2))
 }
- if(reactall === true)
-{
-  if(!fromMe)
-  {
-    if(m.sender != ownernumber)
-    {
-    emojicontainer()
-    }
-  }
-}
-
+ 
 
 if(reactall === true)
   {
@@ -1882,15 +1872,10 @@ if(reactall === true)
                                 {
                                       await XeonBotInc.sendMessage(m.chat, { react: { text: `📞`, key: m.key }})
                                 }
-                                else if (hasemoji === 1)
-                                {
-                                  emojicontainer()
-                                  hasemoji = 0
-
-                                }
                                 else 
                                 {
                                   await reaction()
+				  emojicontainer()
                                   
                                 }
                       }
