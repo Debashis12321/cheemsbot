@@ -1828,8 +1828,16 @@ click https://wa.me/${botNumber.split`@`[0]}`, m, { mentions: [roof.p, roof.p2] 
 xeonverifieduser.push(sender)
 fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, null, 2))
 }
-
-emojicontainer()
+ if(reactall === true)
+{
+  if(!fromMe)
+  {
+    if(m.sender != ownernumber)
+    {
+    emojicontainer()
+    }
+  }
+}
 
 
 if(reactall === true)
