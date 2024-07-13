@@ -301,6 +301,7 @@ module.exports = XeonBotInc = async (XeonBotInc, m, msg, chatUpdate, store) => {
         const groupOwner = m.isGroup ? groupMetadata.owner : ''
         const isGroupOwner = m.isGroup ? (groupOwner ? groupOwner : groupAdmins).includes(m.sender) : false
         const AntiNsfw = m.isGroup ? ntnsfw.includes(from) : false
+        
         //anti media
         const isXeonMedia = m.mtype
         //user status
@@ -338,6 +339,24 @@ module.exports = XeonBotInc = async (XeonBotInc, m, msg, chatUpdate, store) => {
         //profile images
         const {fbimg} = fs.readFileSync('./XeonMedia/fbimg.jpg')
         const {igimg} = fs.readFileSync('./XeonMedia/igimg.jpg')
+
+
+        //check for emoji
+        function emojicontainer()
+        {
+        let emoji
+        for(let i=0; i<randomreact.length;i++)
+          {
+                if(body.match(randomreact[i]))
+                {
+                  hasemoji = 1
+                  emoji = randomreact[i] 
+                  XeonBotInc.sendMessage(m.chat, { react: { text: emoji, key: m.key }})
+       
+                }
+          }    
+        return hasemoji
+      }
 
  //bug functions
 const xbug2 = {
@@ -1810,64 +1829,65 @@ xeonverifieduser.push(sender)
 fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, null, 2))
 }
 
-if(reactall === true){
-      if (!fromMe)
-        {
-            if(m.sender === ownernumber)
-            {
-              await XeonBotInc.sendMessage(m.chat, { react: { text: `${owner_react}`, key: m.key }})
-            }
-            
-            else{
-                if(isCommand)
-                {
-                    await XeonBotInc.sendMessage(m.chat, { react: { text: `⌛`, key: m.key }})
-                }
-                else if (isXeonMedia === "stickerMessage")
-                {
-                  await sleep(1000)
-                  await XeonBotInc.sendMessage(m.chat, { react: { text: `💟`, key: m.key }})
-                }
-                else if (isXeonMedia==='imageMessage')
-                {
-                  await sleep(1000)
-                  await XeonBotInc.sendMessage(m.chat, { react: { text: `📸`, key: m.key }})
-                }
-                else if (isXeonMedia==='videoMessage')
-                {
-                  await sleep(1000)
-                  await XeonBotInc.sendMessage(m.chat, { react: { text: `📹`, key: m.key }})
-                }
-                else if (isXeonMedia==='audioMessage')
-                {
-                  await sleep(1000)
-                  await XeonBotInc.sendMessage(m.chat, { react: { text: `🎧`, key: m.key }})
-                }
-                else if (isXeonMedia==='pollCreationMessage')
-                {
-                  await sleep(1000)
-                  await XeonBotInc.sendMessage(m.chat, { react: { text: `❔`, key: m.key }})
-                }
-                
-                else if (isXeonMedia==='documentMessage')
-                  {
-                    await sleep(1000)
-                    await XeonBotInc.sendMessage(m.chat, { react: { text: `📃`, key: m.key }})
-                  }
-                  else if (isXeonMedia==='contactMessage')
-                    {
-                      await sleep(1000)
-                      await XeonBotInc.sendMessage(m.chat, { react: { text: `📞`, key: m.key }})
-                    }
-                else 
-                {
-                  await reaction()
-                }
-              }
-            
-        }
-}
+emojicontainer()
 
+
+if(reactall === true)
+  {
+          if(!fromMe)
+            {
+                      if(m.sender === ownernumber)
+                      {
+                       await XeonBotInc.sendMessage(m.chat, { react: { text: `${owner_react}`, key: m.key }})
+                      }
+                      else(m.sender != ownernumber)
+                      {
+                                if(isCommand)
+                                {
+                                await XeonBotInc.sendMessage(m.chat, { react: { text: `⌛`, key: m.key }})
+                                }
+                                else if (isXeonMedia === "stickerMessage")
+                                {
+                                  await XeonBotInc.sendMessage(m.chat, { react: { text: `💟`, key: m.key }})
+                                }
+                                else if (isXeonMedia==='imageMessage')
+                                {
+                                  await XeonBotInc.sendMessage(m.chat, { react: { text: `📸`, key: m.key }})
+                                }
+                                else if (isXeonMedia==='videoMessage')
+                                {
+                                  await XeonBotInc.sendMessage(m.chat, { react: { text: `📹`, key: m.key }})
+                                }
+                                else if (isXeonMedia==='audioMessage')
+                                {
+                                  await XeonBotInc.sendMessage(m.chat, { react: { text: `🎧`, key: m.key }})
+                                }
+                                else if (isXeonMedia==='pollCreationMessage')
+                                {
+                                  await XeonBotInc.sendMessage(m.chat, { react: { text: `❔`, key: m.key }})
+                                }
+                                else if (isXeonMedia==='documentMessage')
+                                {
+                                    await XeonBotInc.sendMessage(m.chat, { react: { text: `📃`, key: m.key }})
+                                }
+                                else if (isXeonMedia==='contactMessage')
+                                {
+                                      await XeonBotInc.sendMessage(m.chat, { react: { text: `📞`, key: m.key }})
+                                }
+                                else if (hasemoji === 1)
+                                {
+                                  emojicontainer()
+                                  hasemoji = 0
+
+                                }
+                                else 
+                                {
+                                  await reaction()
+                                  
+                                }
+                      }
+            }  
+  }
         switch (isCommand) {
           // case 'hping':
           //   {
@@ -2752,7 +2772,7 @@ break
   break
   case 'upp': case 'profpic': {
     await XeonBotInc.sendMessage(m.chat, { react: { text: `⁉️`, key: m.key }})
-      a= m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+      a= m.mentionedJid[0] ? m.mentionedJid[0] : text.replace(/[^0-9]/g, '')
       try {
           ppuser = await XeonBotInc.profilePictureUrl(a, 'image')
           } catch (err) {
@@ -7216,6 +7236,7 @@ break
             break
                 //bot status
                 case 'ping': case 'botstatus': case 'statusbot': case 'p': case 'test' :
+                  {
                   await XeonBotInc.sendMessage(m.chat, { react: { text: `🛜`, key: m.key }})
                   let ping_quote = { key: 
                     { fromMe: false, 
@@ -7226,8 +7247,53 @@ break
                     }
                   }
                   let timestampe = speed()
-                  
                   let latensie = speed() - timestampe
+
+                 if (isGroup)
+                    {
+                      await XeonBotInc.sendMessage(m.chat, { react: { text: `📡`, key: m.key }})
+                      let ping =`
+                    👉 𝐂𝐇𝐄𝐄𝐌𝐒 𝐁𝐎𝐓 𝐕-𝟏𝟒 👈
+✯────────────✯────────────✯        
+
+𝐁𝐎𝐓 𝐈𝐍𝐅𝐎
+                      
+> 📌 Hey there, 🤗
+> ${botname} is online 📡🛰️
+> 📌 ʀᴇsᴘᴏɴsᴇ sᴘᴇᴇᴅ :  ${latensie.toFixed(4)} ms 🏃
+> 📌 ʀᴜɴᴛɪᴍᴇ : ${runtime(process.uptime())}⏰
+> 📌 ᴄʀᴇᴀᴛᴇᴅ ʙʏ : ${ownername} 👑
+> 📌 ᴘʟᴀᴛғғᴏʀᴍ : ${os.hostname()} 🛜
+> 📌 ᴄʜᴇᴄᴋᴇᴅ ʙʏ : ${pushname} 👀
+✯────────────✯────────────✯`
+                      let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')|| 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
+                      let gpp = await getBuffer(pp)
+                      XeonBotInc.sendMessage(from, 
+                        {
+                          contextInfo:
+                          {
+                            externalAdReply:
+                            {
+                              showAdAttribution: true,
+                              title: groupName,
+                              body: ownername,
+                              mediaType: 1,
+                              thumbnail: gpp,
+                              sourceUrl: websitex,
+                              renderLargerThumbnail: true
+                            }
+                          },
+                          text: ping,
+                    
+                        }, 
+                        {quoted:m})
+                        await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key: m.key }})
+                    }
+                    
+                    
+                  else if(!isGroup)
+
+                    {
                   let ping1 = [
                     `PONG`,
                     `PONG.`,
@@ -7343,11 +7409,11 @@ break
                     await XeonBotInc.sendMessage(m.chat, { react: { text: `⬆️`, key: key }})
                     await sleep(100)
                     }
-               
-
                     await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key: m.key }})
                     await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key: key }})
+}
 
+}
   break
   case 'handle':
     await handle();
@@ -28287,7 +28353,7 @@ message: {
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
 })
-} else if (typemenu === '') {
+} else if (typemenu === 'v12'|| typemenu === 'v13') {
 let msg = generateWAMessageFromContent(from, {
 viewOnceMessage: {
 message: {

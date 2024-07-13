@@ -29,6 +29,7 @@ global.websitex = "https://www.facebook.com/Debashi.Dey.X2/"
 global.wagc = "https://chat.whatsapp.com/C4NU6KefgoLL9W8vpbhbEY"
 global.repo_link = `https://github.com/DebashisX3/cheemsbot-md-v14`
 global.themeemoji = '📌'
+global.hasemoji = 0
 global.alive = `*Hello There* 😃, \n*${botname} is alive* 🥳\n 
 ✯────────────✯────────────✯
 Click below buttons for more.👇
@@ -63,7 +64,7 @@ global.premium = ["919339619072"] // Premium User
 global.hituet = 0
 
 //bot sett
-global.typemenu = 'v13' // menu type 'v1' => 'v12'
+global.typemenu = 'v12' // menu type 'v1' => 'v12'
 global.typereply = 'v4' // reply type 'v1' => 'v4'
 global.autoblocknumber = '92' //set autoblock country code
 global.antiforeignnumber = '91' //set anti foreign number country code

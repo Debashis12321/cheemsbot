@@ -1,4 +1,10 @@
-
+//base by DGXeon (Xeon Bot Inc.)
+//YouTube: @DGXeon
+//Instagram: unicorn_xeon13
+//Telegram: t.me/xeonbotinc
+//GitHub: @DGXeon
+//WhatsApp: +919339619072
+//want more free bot scripts? subscribe to my youtube channel: https://youtube.com/@DGXeon
 
 require('./settings')
 const pino = require('pino')
@@ -24,6 +30,10 @@ const readline = require("readline")
 const { parsePhoneNumber } = require("libphonenumber-js")
 const makeWASocket = require("@whiskeysockets/baileys").default
 
+// premium users
+let premium = JSON.parse(fs.readFileSync('./src/data/role/premium.json'))
+
+
 const store = makeInMemoryStore({
     logger: pino().child({
         level: 'silent',
@@ -48,6 +58,7 @@ global.loadDatabase = async function loadDatabase() {
     game: {},
     settings: {},
     message: {},
+    antipromote : {},
     ...(global.db.data || {})
   }
   global.db.chain = _.chain(global.db.data)
@@ -196,11 +207,9 @@ try{
             console.log(color(`🌿Connected to => ` + JSON.stringify(XeonBotInc.user, null, 2), 'yellow'))
             console.log(chalk.yellow(`\n\n               ${chalk.bold.blue(`[ ${botname} ]`)}\n\n`))
             console.log(color(`< ================================================== >`, 'cyan'))
-	        console.log(color(`\n${themeemoji} YT CHANNEL: Xeon`,'magenta'))
-            console.log(color(`${themeemoji} GITHUB: DGXeon `,'magenta'))
-            console.log(color(`${themeemoji} INSTAGRAM: @unicorn_xeon `,'magenta'))
-            console.log(color(`${themeemoji} WA NUMBER: ${owner}`,'magenta'))
-            console.log(color(`${themeemoji} CREDIT: ${wm}\n`,'magenta'))
+	          console.log(color(`${themeemoji} CREATED BY ${ownername}`,'magenta'))
+            console.log(color(`${themeemoji} GITHUB: DebashisX3 `,'magenta'))
+            console.log(color(`${themeemoji} OWNER : ${ownernumber}` ,'green'))
 		}
 	
 } catch (err) {
@@ -209,5 +218,17 @@ try{
 	}
 })
 XeonBotInc.ev.on('creds.update', saveCreds)
-XeonBotInc.ev.on("messages.upsert",  () => { })}
+XeonBotInc.ev.on("messages.upsert",  () => { })
 //------------------------------------------------------
+
+}
+
+let file = require.resolve(__filename)
+fs.watchFile(file, () => {
+    fs.unwatchFile(file)
+    console.log(chalk.redBright(`Update ${__filename}`))
+    delete require.cache[file]
+    require(file)
+})
+
+startXeonBotInc()
