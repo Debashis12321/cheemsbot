@@ -2292,7 +2292,7 @@ let emoji = good_react[Math.floor(Math.random() * good_react.length)] //select a
             
                 let audio_length =text.replace(/[^0-9]/g, '')  
                 XeonBotInc.sendMessage(m.chat, {
-                audio: fs.readFileSync('./XeonMedia/audio/bor.mp3'),
+                audio: fs.readFileSync('./XeonMedia/audio/Pritam.mp3'),
                 mimetype: 'audio/mpeg',
                 seconds: audio_length,
                 ptt: true //audio will be sent in voice message format

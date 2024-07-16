@@ -1,12 +1,4 @@
 {
-  "sticker": {},
-  "database": {},
-  "game": {
-    "math": []
-  },
-  "others": {
-    "vote": []
-  },
   "users": {
     "919366316018@s.whatsapp.net": {
       "serialNumber": "5748ef2731f9b0ab993964d915670166",
@@ -328,6 +320,7 @@
       "totalLimit": 0
     }
   },
+  "database": {},
   "chats": {
     "120363047626537933@g.us": {
       "badword": false,
@@ -781,6 +774,9 @@
       "antilinkgc": false
     }
   },
+  "game": {
+    "math": []
+  },
   "settings": {
     "919366316018@s.whatsapp.net": {
       "totalhit": 250,
@@ -973,7 +969,7 @@
       }
     },
     "61480003907@s.whatsapp.net": {
-      "totalhit": 735,
+      "totalhit": 737,
       "totalError": 0,
       "online": false,
       "autosticker": false,
@@ -1003,6 +999,10 @@
       }
     }
   },
+  "message": {},
   "antipromote": {},
-  "message": {}
+  "sticker": {},
+  "others": {
+    "vote": []
+  }
 }

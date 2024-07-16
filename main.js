@@ -503,6 +503,7 @@ else if (anu.action == 'demote') {
             let xeondate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
             let XeonWlcm = await getBuffer(ppuser)
             let xeonName = num
+            let demoter = anu.author
             xeonbody = ` *Oops!!* @${xeonName.split("@")[0]}, you have been *Demoted* from *Admin* \n*Demoted by* @${demoter.split("@")[0]}\n\n> Time:  ${xeontime.split("@")[0]} \n> Date:  ${xeondate.split("@")[0]}`
    XeonBotInc.sendMessage(anu.id,
     { text: xeonbody,
