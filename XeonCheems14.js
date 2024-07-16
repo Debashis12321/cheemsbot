@@ -1520,7 +1520,7 @@ const xeonfeature = () =>{
 }
         //autoreply
 for (let BhosdikaXeon of VoiceNoteXeon) {
-if (budy.match(BhosdikaXeon)) {
+if (budy === BhosdikaXeon) {
 let audiobuffy = fs.readFileSync(`./XeonMedia/audio/${BhosdikaXeon}.mp3`)
 XeonBotInc.sendMessage(m.chat, { audio: audiobuffy, mimetype: 'audio/mp4', ptt: true }, { quoted: m })     
 }
@@ -1941,9 +1941,18 @@ if(reactall === true)
               {
                 let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')|| 'https://images.app.goo.gl/5kHFgvSatAYWunaw9' //group icon link
                 let Icon = await getBuffer(pp) //group icon image
-                let groupaddress = await XeonBotInc.groupInviteCode(m.chat) //invite link of that group in which aliv message is sent
-                let grouplink = `https://chat.whatsapp.com/${groupaddress}`//group link associated with alive message(when alive response message is sent to a group, response message will contain invite link of that group)
-                let {key} = await XeonBotInc.sendMessage(from,
+                 //invite link of that group in which aliv message is sent
+                let groupaddress 
+                 let grouplink 
+                 if(isBotAdmins)
+                 {
+                   groupaddress = await XeonBotInc.groupInviteCode(m.chat)
+                   grouplink = `https://chat.whatsapp.com/${groupaddress}`
+                 }
+                 else 
+                 {grouplink =wagc} //group link associated with alive message(when alive response message is sent to a group, response message will contain invite link of that group)
+                
+                 let {key} = await XeonBotInc.sendMessage(from,
                   {
                     image : Icon,
                     caption : alive,
@@ -7214,8 +7223,15 @@ break
                       let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')|| 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
                       let groupicon = await getBuffer(pp)
                       await XeonBotInc.sendMessage(m.chat, { react: { text: `📡`, key: m.key }})
-                      let groupaddress = await XeonBotInc.groupInviteCode(m.chat)
-                      let grouplink = `https://chat.whatsapp.com/${groupaddress}`
+                      let groupaddress 
+                      let grouplink 
+                      if(isBotAdmins)
+                      {
+                        groupaddress = await XeonBotInc.groupInviteCode(m.chat)
+                        grouplink = `https://chat.whatsapp.com/${groupaddress}`
+                      }
+                      else 
+                      {grouplink =wagc}
                       let ping =`
                     👉 𝐂𝐇𝐄𝐄𝐌𝐒 𝐁𝐎𝐓 𝐕-𝟏𝟒 👈
 ✯────────────✯────────────✯        

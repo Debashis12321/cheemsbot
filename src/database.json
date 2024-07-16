@@ -312,7 +312,7 @@
       "badword": 0,
       "afkReason": "",
       "nick": "+1 520-226-8780",
-      "premium": "true",
+      "premium": false,
       "limit": 1000,
       "totalLimit": 0
     },
@@ -911,7 +911,7 @@
       }
     },
     "15202238877@s.whatsapp.net": {
-      "totalhit": 416,
+      "totalhit": 435,
       "totalError": 0,
       "online": false,
       "autosticker": false,
