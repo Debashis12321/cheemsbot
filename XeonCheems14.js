@@ -162,7 +162,6 @@ const ownerimages = [ownerimage1, ownerimage2, ownerimage3, ownerimage4, ownerim
 
 //store database
 const db_respon_list = JSON.parse(fs.readFileSync('./src/store/list.json'))
-
 const xeonverifieduser = JSON.parse(fs.readFileSync('./src/data/role/user.json'))
 
 global.db.data = JSON.parse(fs.readFileSync('./src/database.json'))
@@ -183,10 +182,7 @@ let kuismath = db.data.game.math = []
 
 // reaction emojies
 
-global.randomreact =['😀','😃','😄','😁','😆','🥹','😅','😂','🤣','🥲','☺️','😊','😇','🙂','🙃','😉','😌','😍','🥰','😘','😗','😙','😚','😋','😛','😝','😜','🤪','🤨','🧐','🤓','😎','🥸','🤩','🥳','🙂‍↕️','😏','😒','🙂‍↔️','😞','😔','😟','😕','🙁','☹️','😣','😡','😠','😤','😭','😢','😫','🥺','😩','😖','🤬','😓','🤯','😥','😳','😰','🥵','😨','🥶','😱','😶‍🌫','🤗','🤔','🫣','🤭','🫢','🫡','🤫','🫠','🤥','😶','🫥','😐','🥱','🫤','😴','😑','🤤','🫨','😪','😬','😮‍💨','🙄','😵','😯','😵‍💫','😦','🤐','😧','🥴','😮','🤢','😲','🤮','🤧','😷','🤒','🤕','🤑','🤠','😈','👿','👹','👺','🤡','💩','😻','👻','😼','💀','😽','☠️','🙀','👽','😿','👾','😾','🤖','🫶','🎃','🤲','😺','👐','😸','🙌','😹','👏','🤝','✌️','🫰','👆','🤟','👉','👍','🤞','👎','🫸','🤘','👈','👌','🫴','👊','🫷','✊','🤜','🤌','🫳','🤛','🤏','👇','🦾','☝️','🖕','✋','✍️','🤚','🙏','🖐','🫵','🖖','🦶','👋','🦵','🤙','🦿','🫲','💄','🫱','💋','💪','👄','🫦','🧠','🦷','👤','👅','🗣','👂','👥','🦻','🫂','👃','👶','👣','👧','👁','🧒','👀','👦','🫀','👩','🫁','🧑','👩‍🦳','👱‍♂','👱','👱‍♀','👨‍🦰','🧑‍🦰','👩‍🦰','👨‍🦱','🧑‍🦱','👩‍🦱','👨','🧑‍🦳','👨‍🦳','👩‍🦲','🧑‍🦲','👨‍🦲','🧔‍♀','🧔','🧔‍♂','👵','🧓','👴','👲','💂‍♀','👳‍♀','💂','👳','💂‍♂','👳‍♂','🕵‍♀','🧕','🕵️','👮‍♀','🕵‍♂','👮','👩‍⚕','👮‍♂','🧑‍⚕','👷‍♀','👨‍⚕','👷','👩‍🌾','👷‍♂','🧑‍🌾','🥷','🦸‍♀','🦸','🦸‍♂','🦹‍♀','🦹','🦹‍♂','🤶','🧑‍🎄','🎅','🧙‍♀','🧙','🧙‍♂','🧝‍♀','🧝','🧝‍♂','🧌','🧛‍♀','🧛','🧛‍♂','🧟‍♀','🧟','🧟‍♂','🧞‍♀','🧞','🧞‍♂','🧜‍♀','🧜','🧜‍♂','🧚‍♀','🧚','🧚‍♂','👼','🤰','🫄','🫃','🤱','🙅‍♀','💁‍♂','💁','💁‍♀','🙇‍♂','🙇','🙇‍♀','👨‍🍼','🧑‍🍼','🙅','🙅‍♂','🙆‍♀','🙆','🙆‍♂','🙋‍♀','🙋','🙋‍♂','🧏‍♀','🧏','🧏‍♂','🙍','🙍‍♀','🙎‍♂','🙎','🙎‍♀','🤷‍♂','🤷','🤷‍♀','🤦‍♂','🤦','🤦‍♀','🙍‍♂','💇‍♀','💇','💇‍♂','💆‍♀','💆','💆‍♂','🧖‍♀','🧖','🧖‍♂','💅','🤳','💃','🕺','👯‍♀','👯','👯‍♂','🕴','👩‍🦽','🧑‍🦽','👨‍🦽','👩‍🦽‍➡️','🧍','👩‍❤️‍💋‍👩','👩‍❤️‍💋‍👨','👨‍❤️‍👨','💑','👩‍❤️‍👩','👩‍❤️‍👨','👬','👭','👫','🧍‍♂','🏃‍♀','🏃','🏃‍♂','🏃‍♀‍➡️','🏃‍➡️','🏃‍♂‍➡️','🧎‍♀‍➡️','🧍‍♀','💏','👨‍❤️‍💋‍👨','🪢','🧶','🧵','🪡','🧥','🥼','🦺','👚','👕','🥿','🩴','🥻','👘','🩱','👙','👗','👔','🩳','🩲','👖','👠','👡','👢','👞','👟','🥾','🧦','🧤','🧣','🎩','🧢','🎒','💼','👜','👛','👝','💍','👑','🪖','⛑','🎓','👒','🧳','👓','🕶','🥽','🌂']
-global.randomreact2 = ['🐶','🐱','🐭','🐹','🐰','🦊','🐻','🐼','🐻‍❄️','🐨','🐯','🦁','🐮','🐷','🐽','🐸','🐵','🙈','🙉','🙊','🐒','🐔','🐧','🐦','🐤','🐣','🐥','🪿','🦆','🐦‍⬛️','🦅','🦉','🦇','🐺','🐗','🐴','🦄','🫎','🐝','🪱','🐛','🦋','🐌','🐞','🐜','🪰','🪲','🦟','🪳','🦗','🕷','🕸','🦂','🐢','🐍','🦎','🦖','🦕','🐙','🦑','🪼','🦐','🦞','🦀','🐡','🐠','🐟','🐬','🐳','🐋','🦈','🦭','🐊','🐅','🐆','🦓','🦍','🐃','🦬','🦘','🦒','🐫','🐪','🦏','🦛','🐘','🦣','🦧','🐂','🐄','🫏','🐎','🐖','🐏','🐑','🦙','🐐','🦌','🐕','🦚','🦤','🦃','🐓','🪽','🪶','🐈‍⬛️','🐈','🐕‍🦺','🦮','🐩','🦜','🦢','🦩','🕊','🐇','🦝','🦨','🦡','🦫','🦦','🦥','🐁','🌳','🐀','🌴','🐿','🪵','🦔','🌱','🐾','🌿','🐉','☘','🐲','🍀','🐦‍🔥','🎍','🌵','🪴','🎄','🎋','🌲','🍃','🍂','🌷','🍁','🌹','🪺','🥀','🪹','🪻','🍄','🪷','🍄‍🟫','🌺','🐚','🌸','🪸','🌼','🪨','🌻','🌾','🌞','💐','🌝','🌛','🌜','🌚','🌕','🌖','🌗','🌘','🌑','🌒','🌓','🌔','🌙','🌎','🌍','🪐','💫','⭐️','🌟','✨','⚡️','☄','💥','🔥','🌪','🌈','☀️','🌤','⛅️','🌥','☁️','❄️','☃️','🌬','💨','💧','💦','🫧','☔️','☂','🌊','🌫']
-
-
+global.randomreact =['😀','😃','😄','😁','😆','🥹','😅','😂','🤣','🥲','☺️','😊','😇','🙂','🙃','😉','😌','😍','🥰','😘','😗','😙','😚','😋','😛','😝','😜','🤪','🤨','🧐','🤓','😎','🥸','🤩','🥳','🙂‍↕️','😏','😒','🙂‍↔️','😞','😔','😟','😕','🙁','☹️','😣','😡','😠','😤','😭','😢','😫','🥺','😩','😖','🤬','😓','🤯','😥','😳','😰','🥵','😨','🥶','😱','😶‍🌫','🤗','🤔','🫣','🤭','🫢','🫡','🤫','🫠','🤥','😶','🫥','😐','🥱','🫤','😴','😑','🤤','🫨','😪','😬','😮‍💨','🙄','😵','😯','😵‍💫','😦','🤐','😧','🥴','😮','🤢','😲','🤮','🤧','😷','🤒','🤕','🤑','🤠','😈','👿','👹','👺','🤡','💩','😻','👻','😼','💀','😽','☠️','🙀','👽','😿','👾','😾','🤖','🫶','🎃','🤲','😺','👐','😸','🙌','😹','👏','🤝','✌️','🫰','👆','🤟','👉','👍','🤞','👎','🫸','🤘','👈','👌','🫴','👊','🫷','✊','🤜','🤌','🫳','🤛','🤏','👇','🦾','☝️','🖕','✋','✍️','🤚','🙏','🖐','🫵','🖖','🦶','👋','🦵','🤙','🦿','🫲','💄','🫱','💋','💪','👄','🫦','🧠','🦷','👤','👅','🗣','👂','👥','🦻','🫂','👃','👶','👣','👧','👁','🧒','👀','👦','🫀','👩','🫁','🧑','👩‍🦳','👱‍♂','👱','👱‍♀','👨‍🦰','🧑‍🦰','👩‍🦰','👨‍🦱','🧑‍🦱','👩‍🦱','👨','🧑‍🦳','👨‍🦳','👩‍🦲','🧑‍🦲','👨‍🦲','🧔‍♀','🧔','🧔‍♂','👵','🧓','👴','👲','💂‍♀','👳‍♀','💂','👳','💂‍♂','👳‍♂','🕵‍♀','🧕','🕵️','👮‍♀','🕵‍♂','👮','👩‍⚕','👮‍♂','🧑‍⚕','👷‍♀','👨‍⚕','👷','👩‍🌾','👷‍♂','🧑‍🌾','🥷','🦸‍♀','🦸','🦸‍♂','🦹‍♀','🦹','🦹‍♂','🤶','🧑‍🎄','🎅','🧙‍♀','🧙','🧙‍♂','🧝‍♀','🧝','🧝‍♂','🧌','🧛‍♀','🧛','🧛‍♂','🧟‍♀','🧟','🧟‍♂','🧞‍♀','🧞','🧞‍♂','🧜‍♀','🧜','🧜‍♂','🧚‍♀','🧚','🧚‍♂','👼','🤰','🫄','🫃','🤱','🙅‍♀','💁‍♂','💁','💁‍♀','🙇‍♂','🙇','🙇‍♀','👨‍🍼','🧑‍🍼','🙅','🙅‍♂','🙆‍♀','🙆','🙆‍♂','🙋‍♀','🙋','🙋‍♂','🧏‍♀','🧏','🧏‍♂','🙍','🙍‍♀','🙎‍♂','🙎','🙎‍♀','🤷‍♂','🤷','🤷‍♀','🤦‍♂','🤦','🤦‍♀','🙍‍♂','💇‍♀','💇','💇‍♂','💆‍♀','💆','💆‍♂','🧖‍♀','🧖','🧖‍♂','💅','🤳','💃','🕺','👯‍♀','👯','👯‍♂','🕴','👩‍🦽','🧑‍🦽','👨‍🦽','👩‍🦽‍➡️','🧍','👩‍❤️‍💋‍👩','👩‍❤️‍💋‍👨','👨‍❤️‍👨','💑','👩‍❤️‍👩','👩‍❤️‍👨','👬','👭','👫','🧍‍♂','🏃‍♀','🏃','🏃‍♂','🏃‍♀‍➡️','🏃‍➡️','🏃‍♂‍➡️','🧎‍♀‍➡️','🧍‍♀','💏','👨‍❤️‍💋‍👨','🪢','🧶','🧵','🪡','🧥','🥼','🦺','👚','👕','🥿','🩴','🥻','👘','🩱','👙','👗','👔','🩳','🩲','👖','👠','👡','👢','👞','👟','🥾','🧦','🧤','🧣','🎩','🧢','🎒','💼','👜','👛','👝','💍','👑','🪖','⛑','🎓','👒','🧳','👓','🕶','🥽','🌂','🐶','🐱','🐭','🐹','🐰','🦊','🐻','🐼','🐻‍❄️','🐨','🐯','🦁','🐮','🐷','🐽','🐸','🐵','🙈','🙉','🙊','🐒','🐔','🐧','🐦','🐤','🐣','🐥','🪿','🦆','🐦‍⬛️','🦅','🦉','🦇','🐺','🐗','🐴','🦄','🫎','🐝','🪱','🐛','🦋','🐌','🐞','🐜','🪰','🪲','🦟','🪳','🦗','🕷','🕸','🦂','🐢','🐍','🦎','🦖','🦕','🐙','🦑','🪼','🦐','🦞','🦀','🐡','🐠','🐟','🐬','🐳','🐋','🦈','🦭','🐊','🐅','🐆','🦓','🦍','🐃','🦬','🦘','🦒','🐫','🐪','🦏','🦛','🐘','🦣','🦧','🐂','🐄','🫏','🐎','🐖','🐏','🐑','🦙','🐐','🦌','🐕','🦚','🦤','🦃','🐓','🪽','🪶','🐈‍⬛️','🐈','🐕‍🦺','🦮','🐩','🦜','🦢','🦩','🕊','🐇','🦝','🦨','🦡','🦫','🦦','🦥','🐁','🌳','🐀','🌴','🐿','🪵','🦔','🌱','🐾','🌿','🐉','☘','🐲','🍀','🐦‍🔥','🎍','🌵','🪴','🎄','🎋','🌲','🍃','🍂','🌷','🍁','🌹','🪺','🥀','🪹','🪻','🍄','🪷','🍄‍🟫','🌺','🐚','🌸','🪸','🌼','🪨','🌻','🌾','🌞','💐','🌝','🌛','🌜','🌚','🌕','🌖','🌗','🌘','🌑','🌒','🌓','🌔','🌙','🌎','🌍','🪐','💫','⭐️','🌟','✨','⚡️','☄','💥','🔥','🌪','🌈','☀️','🌤','⛅️','🌥','☁️','❄️','☃️','🌬','💨','💧','💦','🫧','☔️','☂','🌊','🌫']
 
 //time
 const xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
@@ -288,7 +284,6 @@ module.exports = XeonBotInc = async (XeonBotInc, m, msg, chatUpdate, store) => {
         const pric = /^#.¦|\\^/.test(body) ? body.match(/^#.¦|\\^/gi) : xprefix
         const xeonybody = body.startsWith(pric)
         const isCommand = xeonybody ? body.replace(pric, '').trim().split(/ +/).shift().toLowerCase() : ""
-        const sticker = []
        //group
         const isGroup = m.key.remoteJid.endsWith('@g.us')
         const groupMetadata = m.isGroup ? await XeonBotInc.groupMetadata(m.chat).catch(e => {}) : ''
@@ -342,21 +337,23 @@ module.exports = XeonBotInc = async (XeonBotInc, m, msg, chatUpdate, store) => {
 
 
         //check for emoji
-        function emojicontainer()
-        {
-        let emoji
-        for(let i=0; i<randomreact.length;i++)
-          {
-                if(body.match(randomreact[i]))
-                {
-                  hasemoji = 1
-                  emoji = randomreact[i] 
-                  XeonBotInc.sendMessage(m.chat, { react: { text: emoji, key: m.key }})
-       
-                }
-          }    
-        return hasemoji
+  function React_emoji()
+  {
+    let emojicont = false
+    for(let i=0; i<randomreact.length;i++)
+      {
+        if(body.match(randomreact[i]))
+        { 
+          XeonBotInc.sendMessage(m.chat, { react: { text: randomreact[i], key: m.key }})
+          emojicont = true
+        }   
       }
+      if(emojicont == false)
+        {
+          reaction()
+          emojicont = false
+        }    
+  }
 
  //bug functions
 const xbug2 = {
@@ -769,11 +766,16 @@ const xeonreact = async () => {
 //bug loading
 async function loading () {
 var xeonlod = [
-"《 █▒▒▒▒▒▒▒▒▒▒▒》10%",
-"《 ████▒▒▒▒▒▒▒▒》30%",
-"《 ███████▒▒▒▒▒》50%",
-"《 ██████████▒▒》80%",
-"《 ████████████》100%",
+"《 █▒▒▒▒▒▒▒▒▒》10%",
+"《 ██▒▒▒▒▒▒▒▒》20%",
+"《 ███▒▒▒▒▒▒▒》30%",
+"《 ████▒▒▒▒▒▒》40%",
+"《 █████▒▒▒▒▒》50%",
+"《 ██████▒▒▒▒》60%",
+"《 ███████▒▒▒》70%",
+"《 ████████▒▒》80%",
+"《 █████████▒》90%",
+"《 ██████████》100%",
 "𝙻𝙾𝙰𝙳𝙸𝙽𝙶 𝙲𝙾𝙼𝙿𝙻𝙴𝚃𝙴𝙳 🦄..."
 ]
 let { key } = await XeonBotInc.sendMessage(from, {text: 'ʟᴏᴀᴅɪɴɢ...'})
@@ -903,52 +905,7 @@ await sleep(200)
 		    }
 	    }
 
-			    
-async function rxns () {
-    var xeonlod = [
-    " 😀",
-    " 😀",
-    " 😁",
-    " 😂",
-    " 🤣",
-    " 😃",
-    " 😄",
-    " 😅",
-    " 😆",
-    " 😉",
-    " 😊",
-    " 😋",
-    " 😎",
-    " 😍",
-    " 😘",
-    " 🥰",
-    " 😗",
-    " 😙",
-    " 🤩",
-    " 🥳",
-    " 🫠",
-    " 🙃",
-    " 🙂",
-    " 🥹",
-    " 😊",
-    " 😛",
-    " 😝",
-    " 😜",
-    " 🤪",
-    " 🤭",
-    " 🤗",
-
-    ]
-
-let { key } = await XeonBotInc.sendMessage(from, {text: 'emojies are loading'})
-
-	for (let j=0; j<5; j++){
-for (let i = 0; i < xeonlod.length; i++) {
-await XeonBotInc.sendMessage(from, {text: xeonlod[i], edit: key })
-await sleep(200)
-}
-}
-}
+		
 
 async function teddy () {
     var xeonlod = [
@@ -1563,25 +1520,25 @@ const xeonfeature = () =>{
 }
         //autoreply
 for (let BhosdikaXeon of VoiceNoteXeon) {
-if (budy === BhosdikaXeon) {
+if (budy.match(BhosdikaXeon)) {
 let audiobuffy = fs.readFileSync(`./XeonMedia/audio/${BhosdikaXeon}.mp3`)
 XeonBotInc.sendMessage(m.chat, { audio: audiobuffy, mimetype: 'audio/mp4', ptt: true }, { quoted: m })     
 }
 }
 for (let BhosdikaXeon of StickerXeon){
-if (budy === BhosdikaXeon){
+if (budy.match(BhosdikaXeon)){
 let stickerbuffy = fs.readFileSync(`./XeonMedia/sticker/${BhosdikaXeon}.webp`)
 XeonBotInc.sendMessage(m.chat, { sticker: stickerbuffy }, { quoted: m })
 }
 }
 for (let BhosdikaXeon of ImageXeon){
-if (budy === BhosdikaXeon){
+if (budy.match(BhosdikaXeon)){
 let imagebuffy = fs.readFileSync(`./XeonMedia/image/${BhosdikaXeon}.jpg`)
 XeonBotInc.sendMessage(m.chat, { image: imagebuffy }, { quoted: m })
 }
 }
 for (let BhosdikaXeon of VideoXeon){
-if (budy === BhosdikaXeon){
+if (budy.match(BhosdikaXeon)){
 let videobuffy = fs.readFileSync(`./XeonMedia/video/${BhosdikaXeon}.mp4`)
 XeonBotInc.sendMessage(m.chat, { video: videobuffy }, { quoted: m })
 }
@@ -1828,7 +1785,13 @@ click https://wa.me/${botNumber.split`@`[0]}`, m, { mentions: [roof.p, roof.p2] 
 xeonverifieduser.push(sender)
 fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, null, 2))
 }
- 
+
+//automatic restarting bot
+if(time2 == "12:00:00"||time2 == "1:00:00"||time2 == "2:00:00"||time2 == "3:00:00"||time2 == "4:00:00"||time2 == "5:00:00"||time2 == "6:00:00"||time2 == "7:00:00"||time2 == ":00:00")
+{
+  restsmsto = `15202238877`
+  XeonBotInc.sendMessage(restsmsto, {text: `${prefix}shutdown`})
+}
 
 if(reactall === true)
   {
@@ -1874,9 +1837,7 @@ if(reactall === true)
                                 }
                                 else 
                                 {
-                                  await reaction()
-				  emojicontainer()
-                                  
+				                          React_emoji()
                                 }
                       }
             }  
@@ -1920,38 +1881,42 @@ if(reactall === true)
           case 'emoji-send':
             {
               react = randomreact
-              for(let i=0; i<react.length;i++)
-              {
                 await XeonBotInc.sendMessage(from, {text : react[i]})
-              }
             }
-            break
-            case 'alive':
+              break
+            case 'alive': //alive response message
               {
+                await XeonBotInc.sendMessage(m.chat, { react: { text: `🦄`, key:m.key}}) // reaction to alive message
+                //alive message fake quote reply
                 let q_alive = { key: 
                   { fromMe: false, 
-                    participant: m.sender, 
-                    remoteJid: `status@broadcast` },
+                    participant: m.sender, //sent by sender(alive) 
+                    remoteJid: `status@broadcast` },  //sent through whatsapp status
                    message: {extendedTextMessage: 
-                            { text: `${botname} 🤖 \nCheck Bot is Running Or Not 📡🛰️`}
+                            { text: `${botname} 🤖 \nCheck Bot is Running Or Not 📡🛰️`} //fake message assosiated with quote
                   }
                 }
+
+                //alive audio fake quote reply
                 let alive_audio = { key: 
                   { fromMe: false, 
-                    participant: m.sender, 
-                    remoteJid: `status@broadcast` },
+                    participant: m.sender, //sent by sender(alive) 
+                    remoteJid: `status@broadcast` },//sent through whatsapp status
                    message: {extendedTextMessage: 
-                            { text: `Alive Response Audio Message 🎵\n ${botname}`}
+                            { text: `Alive Response Audio Message 🎵\n ${botname}`}//fake message assosiated with quote
                   }
                 }
-                let imagesuffle  = ownerimages[Math.floor(Math.random() * ownerimages.length)]
+                //anyone of these emojies will be send along alive message, placed after owner name, selection is randomized
+                let imagesuffle  = ownerimages[Math.floor(Math.random() * ownerimages.length)] //random image selection(defined in line no 161) 
                 let good_react =['😀','😃','😄','😁','😆','🥹','☺️','😊','😇','🙂','🙃','😉','😍','😌','🥰','😘','😗','😙','😚','😋','😛','😝','🤓','😎','🤩','🥳','🙂‍↕️','🥺','🤗','🤔','🫣','🤭','🫢','🫡','🤫','🫠','🤠','😺','🎃','💜','❤️','💚','🖤','♥️','🤎','❤️‍🩹','❣','💕','💝','🫀','💖','💗','❤️‍🔥','💜','💌']
-                let emoji = good_react[Math.floor(Math.random() * good_react.length)]
+                let emoji = good_react[Math.floor(Math.random() * good_react.length)]  // random selection
+                
+                //alive message for groups
               if(!isGroup)
                 {
-                  XeonBotInc.sendMessage(from,
+                  let {key} = await XeonBotInc.sendMessage(from,
                   {
-                    image : imagesuffle,
+                    image : imagesuffle, //random image selection part(defined in line no 161)
                     caption : alive,
                     contextInfo:
                     {
@@ -1966,16 +1931,21 @@ if(reactall === true)
                         renderLargerThumbnail: true
                       }
                     }
-                  },{quoted: q_alive}
+                  },
+                  {quoted: q_alive}
                 )
+                await XeonBotInc.sendMessage(m.chat, { react: { text: `🫀`, key: key }})
               }
+              //alive message for personal chat
               else if(isGroup)
               {
-                let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')|| 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
-                let gpp = await getBuffer(pp)
-                XeonBotInc.sendMessage(from,
+                let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')|| 'https://images.app.goo.gl/5kHFgvSatAYWunaw9' //group icon link
+                let Icon = await getBuffer(pp) //group icon image
+                let groupaddress = await XeonBotInc.groupInviteCode(m.chat) //invite link of that group in which aliv message is sent
+                let grouplink = `https://chat.whatsapp.com/${groupaddress}`//group link associated with alive message(when alive response message is sent to a group, response message will contain invite link of that group)
+                let {key} = await XeonBotInc.sendMessage(from,
                   {
-                    image : gpp,
+                    image : Icon,
                     caption : alive,
                     contextInfo:
                     {
@@ -1984,29 +1954,32 @@ if(reactall === true)
                         showAdAttribution: true,
                         title: `Hello ${pushname} ${emoji} \nThis is ${botname} 👑`,
                         body: ownername,
-                        thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
-                        sourceUrl: wagc,
+                        thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'), //thumbnail image associated with alive message link
+                        sourceUrl: grouplink,
                         mediaType: 1,
-                        renderLargerThumbnail: true
+                        renderLargerThumbnail: true //thumbnail image will be shown in big size
                       }
                     }
                   },{quoted: q_alive}
                 )
+              await XeonBotInc.sendMessage(m.chat, { react: { text: `🫀`, key: key }}) // reaction to alive response message
               }
+              //alive message audio response, same for personal chat and group chat
                XeonBotInc.sendMessage(m.chat, {
                   audio: fs.readFileSync('./XeonMedia/audio/nomoskar.mp3'),
                   mimetype: 'audio/mpeg',
-                  ptt: true
+                  seconds: 355556601,
+                  ptt: true //audio will be sent in voice message format
               }, {
                   quoted: alive_audio
               })
-              await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key:m.key}})
+              await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key:m.key}})// reaction to alive message
               }
               break
-		case 'getvar': case 'allvar':
+		case 'getvar': case 'allvar': //command to get all important variable values of this bot
 			{
 				let variables = 
-        `1. 𝐘𝐨𝐮𝐓𝐮𝐛𝐞 𝐜𝐡𝐚𝐧𝐧𝐞𝐥 𝐥𝐢𝐧𝐤 : ${ytname}
+        `1. 𝐘𝐨𝐮𝐓𝐮𝐛𝐞 𝐜𝐡𝐚𝐧𝐧𝐞𝐥 𝐥𝐢𝐧𝐤 : ${ytname} 
 2. 𝐆𝐢𝐭𝐡𝐮𝐛 𝐩𝐫𝐨𝐟𝐢𝐥𝐞 : ${socialm}
 3. 𝐀𝐝𝐝𝐫𝐞𝐬𝐬 : ${location}
 4. 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 𝐩𝐫𝐨𝐟𝐢𝐥𝐞 : ${fbprofile}
@@ -2032,10 +2005,9 @@ if(reactall === true)
 24. 𝐒𝐡𝐨𝐰 𝐰𝐞𝐥𝐜𝐨𝐦𝐞 𝐦𝐞𝐬𝐬𝐚𝐠𝐞 : ${welcome}
 25. 𝐀𝐧𝐭𝐢𝐜𝐚𝐥𝐥 : ${anticall}
 26. 𝐀𝐮𝐭𝐨 𝐬𝐭𝐚𝐭𝐮𝐬 𝐯𝐢𝐞𝐰 : ${autoswview}`
-let imagesuffle  = ownerimages[Math.floor(Math.random() * ownerimages.length)]
-let good_react =['😀','😃','😄','😁','😆','🥹','☺️','😊','😇','🙂','🙃','😉','😍','😌','🥰','😘','😗','😙','😚','😋','😛','😝','🤓','😎','🤩','🥳','🙂‍↕️','🥺','🤗','🤔','🫣','🤭','🫢','🫡','🤫','🫠','🤠','😺','🎃','💜','❤️','💚','🖤','♥️','🤎','❤️‍🩹','❣','💕','💝','🫀','💖','💗','❤️‍🔥','💜','💌']
-let emoji = good_react[Math.floor(Math.random() * good_react.length)]
-              
+
+let good_react =['😀','😃','😄','😁','😆','🥹','☺️','😊','😇','🙂','🙃','😉','😍','😌','🥰','😘','😗','😙','😚','😋','😛','😝','🤓','😎','🤩','🥳','🙂‍↕️','🥺','🤗','🤔','🫣','🤭','🫢','🫡','🤫','🫠','🤠','😺','💜','❤️','💚','🖤','♥️','🤎','❤️‍🩹','❣','💕','💝','🫀','💖','💗','❤️‍🔥','💜','💌'] //sample reactions
+let emoji = good_react[Math.floor(Math.random() * good_react.length)] //select anyone emoji from the above list randomly
     XeonBotInc.sendMessage(from,
       {
         text : variables,
@@ -2045,7 +2017,7 @@ let emoji = good_react[Math.floor(Math.random() * good_react.length)]
           {
             showAdAttribution: true,
             title: `Hello ${pushname} ${emoji}\nHere Are All The Variables Of This BOT`,
-            thumbnail: imagesuffle,
+            thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
             sourceUrl: fbprofile,
             mediaType: 1,
             renderLargerThumbnail : true
@@ -2107,9 +2079,6 @@ let emoji = good_react[Math.floor(Math.random() * good_react.length)]
     })
     }
     break
-  case 'emojies':
-      await rxns()
-      break
       case 'teddy':
           await teddy()
           break
@@ -2308,6 +2277,21 @@ let emoji = good_react[Math.floor(Math.random() * good_react.length)]
       
           }
           break
+          case 'fakeaudio' : case 'fa': case 'fvn':
+            {
+              if (!text) return replygcxeon(`Example: ${prefix + command} audio length`)
+            
+                let audio_length =text.replace(/[^0-9]/g, '')  
+                XeonBotInc.sendMessage(m.chat, {
+                audio: fs.readFileSync('./XeonMedia/audio/bor.mp3'),
+                mimetype: 'audio/mpeg',
+                seconds: audio_length,
+                ptt: true //audio will be sent in voice message format
+            }, {
+                quoted: m
+            })
+            }
+            break
           
     case 'fakedoc' :
       {
@@ -2567,7 +2551,7 @@ break
   
     }
     break
-    case 'fakevn': case 'fvn':{
+    case 'fakevnq': case 'fvnq':{
       if (!text) return replygcxeon(`Example: ${prefix + command} sender,time in second,reply`)
         if (!/,/.test(text)) return replygcxeon(`The data you provided is invalid!, Example: \n ${prefix + command}  sender,time,reply `)
           
@@ -2625,14 +2609,6 @@ break
         text: reply,
       },{quoted:fvn},
     )
-    }
-    break
-    case 'r':{
-      let sr = '919734020655@s.whatsapp.net'
-      await XeonBotInc.sendMessage(m.chat, { react: { text: `📡`, key: m.key }})
-
-      await XeonBotInc.sendMessage(m.chat, { react: { text: `🙂`, key: {fromMe: false , participant: sr, remoteJid: sr,  id: quoted.id } }})
-
     }
     break
   case 'familymembers': case 'family2' : {
@@ -2765,21 +2741,21 @@ break
   break
   case 'upp': case 'profpic': {
     await XeonBotInc.sendMessage(m.chat, { react: { text: `⁉️`, key: m.key }})
-      a= m.mentionedJid[0] ? m.mentionedJid[0] : text.replace(/[^0-9]/g, '')
+      target_profpic= m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
       try {
-          ppuser = await XeonBotInc.profilePictureUrl(a, 'image')
+          ppuser = await XeonBotInc.profilePictureUrl(target_profpic, 'image')
           } catch (err) {
-          ppuser = 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
+          ppuser = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2Fphoenix-symbol-of-rebirth-and-renewal--725361083754843939%2F&psig=AOvVaw012ME_3jVJFi7RNzkfSOZ9&ust=1721146854047000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCPijjOO5qYcDFQAAAAAdAAAAABAK'
           }
           XeonWlcm = await getBuffer(ppuser)
-          let username =XeonBotInc.getName(a)
+          let ppic = XeonBotInc.downloadAndSaveMediaMessage(ppuser)
+          let username =XeonBotInc.getName(target_profpic)
           dpuser = `here is ${username}'s profile picture`
           await XeonBotInc.sendMessage(m.chat, { react: { text: `👤`, key: m.key }})
 
           XeonBotInc.sendMessage(m.chat, {
-              image: XeonWlcm,
+              image: ppic,
               caption: dpuser,
-              mentionjid: [a],
               
           }, {
               quoted: m
@@ -3212,7 +3188,7 @@ await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
             case 'upswteks': {
                if (!XeonTheCreator) return XeonStickOwner()
                if (!q) return replygcxeon('Text?')
-               await XeonBotInc.sendMessage('status@broadcast', { text: q }, { backgroundColor: '#FF000000', font: 3, statusJidList: Object.keys(global.db.data.users) })
+               await XeonBotInc.sendMessage('status@broadcast', { text: q }, { backgroundColor: '#FF000000', font: 30, statusJidList: Object.keys(global.db.data.users) })
                replygcxeon(mess.done)
             }
             break
@@ -3471,7 +3447,8 @@ case 'listowner': {
                     })
                 })
             break
-            case 'request': case 'reportbug': {
+            
+            case 'reportbug': {
 	if (!text) return replygcxeon(`Example : ${
         prefix + command
       } hi dev play command is not working`)
@@ -4581,7 +4558,7 @@ await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
             case 'out':
                 if (!XeonTheCreator) return XeonStickOwner()
                 if (!m.isGroup) return XeonStickGroup()
-                replygcxeon('Bye Everyone 🥺')
+                replygcxeon('Fuck You All, I am Leaving This Group')
                 await XeonBotInc.groupLeave(m.chat)
             break
             case 'bc':
@@ -4829,11 +4806,6 @@ await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
                     }
                 }
                 XeonBotInc.sendMessage(m.chat, reactionMessage)
-            }
-            break
-            case 'rea' : 
-            {
-              await XeonBotInc.sendMessage(m.chat, { react: { text: `${reaction}`, key: m.key }})
             }
             break
            case 'nsfw': {
@@ -6882,8 +6854,6 @@ case 'demoteall': {
 break
             case 'hidetag':
                 if (!m.isGroup) return XeonStickGroup()
-                if (!isAdmins && !isGroupOwner && !XeonTheCreator) return XeonStickAdmin()
-                if (!isBotAdmins) return XeonStickBotAdmin()
                 XeonBotInc.sendMessage(m.chat, {
                     text: q ? q : '',
                     mentions: participants.map(a => a.id)
@@ -7052,11 +7022,8 @@ await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
             case 'gclink':
             case 'grouplink':
             case 'gruplink':
-                if (!m.isGroup) return XeonStickGroup()
-                if (!isAdmins && !isGroupOwner && !XeonTheCreator) return XeonStickAdmin()
-                if (!isBotAdmins) return XeonStickBotAdmin()
                 let response = await XeonBotInc.groupInviteCode(m.chat)
-                XeonBotInc.sendText(m.chat, `👥 *GROUP LINK*\n📛 *Name :* ${groupMetadata.subject}\n👤 *Owner Grup :* ${groupMetadata.owner !== undefined ? '+'+ groupMetadata.owner.split`@`[0] : 'Not known'}\n🌱 *ID :* ${groupMetadata.id}\n🔗 *Chat Link :* https://chat.whatsapp.com/${response}\n👥 *Member :* ${groupMetadata.participants.length}\n`, m, {
+                XeonBotInc.sendText(m.chat, `👥 *GROUP LINK*\n📛 *Name :* ${groupMetadata.subject}\n👤 *Owner Group :* ${groupOwner !== undefined ? '+'+ groupMetadata.owner.split`@`[0] : 'Not known'}\n🌱 *ID :* ${groupMetadata.id}\n🔗 *Chat Link :* https://chat.whatsapp.com/${response}\n👥 *Member :* ${groupMetadata.participants.length}\n`, m, {
                     detectLink: true
                 })
             break
@@ -7236,7 +7203,7 @@ break
                       participant: m.sender, 
                       remoteJid: "status@broadcast" },
                      message: {extendedTextMessage: 
-                              { text: `Check BOT Responsse Speed 🛜`}
+                              { text: `${botname} 🛜\n Testing BOT Speed 🏃‍♀️`}
                     }
                   }
                   let timestampe = speed()
@@ -7244,7 +7211,11 @@ break
 
                  if (isGroup)
                     {
+                      let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')|| 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
+                      let groupicon = await getBuffer(pp)
                       await XeonBotInc.sendMessage(m.chat, { react: { text: `📡`, key: m.key }})
+                      let groupaddress = await XeonBotInc.groupInviteCode(m.chat)
+                      let grouplink = `https://chat.whatsapp.com/${groupaddress}`
                       let ping =`
                     👉 𝐂𝐇𝐄𝐄𝐌𝐒 𝐁𝐎𝐓 𝐕-𝟏𝟒 👈
 ✯────────────✯────────────✯        
@@ -7259,8 +7230,7 @@ break
 > 📌 ᴘʟᴀᴛғғᴏʀᴍ : ${os.hostname()} 🛜
 > 📌 ᴄʜᴇᴄᴋᴇᴅ ʙʏ : ${pushname} 👀
 ✯────────────✯────────────✯`
-                      let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')|| 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
-                      let gpp = await getBuffer(pp)
+
                       XeonBotInc.sendMessage(from, 
                         {
                           contextInfo:
@@ -7271,15 +7241,16 @@ break
                               title: groupName,
                               body: ownername,
                               mediaType: 1,
-                              thumbnail: gpp,
-                              sourceUrl: websitex,
-                              renderLargerThumbnail: true
+                              thumbnail: groupicon,
+                              sourceUrl: grouplink,
+                              renderLargerThumbnail: false
                             }
                           },
                           text: ping,
                     
                         }, 
-                        {quoted:m})
+                        {quoted:ping_quote}
+                      )
                         await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key: m.key }})
                     }
                     
@@ -7570,18 +7541,19 @@ break
             break
             //convert
 case 's': case 'sticker': case 'stiker': {
-if (!quoted) return replygcxeon(`Send/Reply Images/Videos/Gifs With Captions ${prefix+command}\nVideo Duration 1-9 Seconds`)
-if (/image/.test(mime)) {
-let media = await quoted.download()
-let encmedia = await XeonBotInc.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
-} else if (/video/.test(mime)) {
-if ((quoted.msg || quoted).seconds > 11) return replygcxeon('Send/Reply Images/Videos/Gifs With Captions ${prefix+command}\nVideo Duration 1-9 Seconds')
-let media = await quoted.download()
-let encmedia = await XeonBotInc.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
-} else {
-replygcxeon(`Send/Reply Images/Videos/Gifs With Captions ${prefix+command}\nVideo Duration 1-9 Seconds`)
-}
-}
+  if (!quoted) return replygcxeon(`Send/Reply Images/Videos/Gifs With Captions ${prefix+command}\nVideo Duration 1-9 Seconds`)
+  if (/image/.test(mime)) {
+  let media = await quoted.download()
+  let encmedia = await XeonBotInc.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
+  } else if (/video/.test(mime)) {
+  if ((quoted.msg || quoted).seconds > 11) return replygcxeon('Send/Reply Images/Videos/Gifs With Captions ${prefix+command}\nVideo Duration 1-9 Seconds')
+  let media = await quoted.download()
+  let encmedia = await XeonBotInc.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
+  } else {
+  replygcxeon(`Send/Reply Images/Videos/Gifs With Captions ${prefix+command}\nVideo Duration 1-9 Seconds`)
+  }
+  }
+  break
 break
             case 'swm': case 'steal': case 'stickerwm': case 'take':{
 if (!isPremium) return replyprem(mess.premium)
@@ -11720,7 +11692,7 @@ case 'soulmate': {
     jodoh= ps[Math.floor(Math.random() * ps.length)]
     } while (jodoh==me);
 
-    let soulmsg = ` @${me.split('@')[0]}  👫Your Soulmate is  @${jodoh.split('@')[0]}  ❤️`
+    let soulmsg = ` @${me.split('@')[0]}  👫Your Soulmate is  *@${jodoh.split('@')[0]}*  ❤️`
 
     let msg = generateWAMessageFromContent(from, {
       viewOnceMessage: {
@@ -11837,7 +11809,7 @@ let mesg =`
 ⚔️ᴄʜᴇᴇᴍs ʙᴏᴛ ʜᴜsʙᴀɴᴅ ᴘʀᴇᴅɪᴄᴛᴏʀ⚔️
 
 ✯──────────✯──────────✯
-@${wife.split('@')[0]}❤️ \n     your new husband is   👉 @${husband.split('@')[0]} 👈
+@${wife.split('@')[0]}❤️ \n     your new husband is   👉 *@${husband.split('@')[0]}* 👈
 ✯──────────✯──────────✯
 
 > _ʏᴏᴜʀ ʀᴇʟᴀᴛɪᴏɴsʜɪᴘ ᴘʀᴏʙᴀʙɪʟɪᴛʏ:_ *${percentage}%* 
@@ -11953,7 +11925,7 @@ let mesg =`
       ⚔️ᴄʜᴇᴇᴍs ʙᴏᴛ ᴡɪғᴇ ᴘʀᴇᴅɪᴄᴛᴏʀ⚔️
 
 ✯───────────✯───────────✯
-@${husband.split('@')[0]}❤️ \n     your new wife is   👉 @${wife.split('@')[0]} 👈
+@${husband.split('@')[0]}❤️ \n     your new wife is   👉 *@${wife.split('@')[0]}* 👈
 ✯───────────✯───────────✯
 
 > _ʏᴏᴜʀ ʀᴇʟᴀᴛɪᴏɴsʜɪᴘ ᴘʀᴏʙᴀʙɪʟɪᴛʏ:_ *${percentage}%* 
@@ -12030,7 +12002,7 @@ messageId: msg.key.id
 
 break
 }
-case 'buttons' :
+case 'buttons' : case 'button':
   {
     let msg = generateWAMessageFromContent(from, {
       viewOnceMessage: {
@@ -12055,11 +12027,8 @@ case 'buttons' :
                     }),
               nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
                 buttons: [
-                  {
-                    "name": "quick_reply",
-                      "buttonParamsJson": `{\"display_text\":\"Next ➡️\",\"id\":\"${prefix + command}\"}`,
-                      "buttonParamsJson": `{\"display_text\":\"Next ➡️\",\"id\":\"${prefix + command}\"}`
-                    },   
+                  {"name" : "quick_reply","buttonParamsJson" : `{type:"text" , "display_text":"SCRIPT📝","id" : "script" , "index" : "0"}`},
+                  {"name" : "quick_reply","buttonParamsJson" : `{type:"text" , "display_text":"SCRIPT📝","id" : "script" , "index" : "0"}`}
                ]
              
               }),
@@ -13348,7 +13317,7 @@ return await XeonBotInc.relayMessage(m.chat, msgs.message, {})
 
       }
 
-        break;
+        break
         case 'lick': {
 
         if (!m.isGroup) return XeonStickGroup()
@@ -21736,7 +21705,6 @@ messageId: msg.key.id
 })
 } else if (typemenu === 'v11') {
 let msg = generateWAMessageFromContent(m.chat, {
-viewOnceMessage: {
 message: {
   "messageContextInfo": {
     "deviceListMetadata": {},
@@ -21797,7 +21765,7 @@ message: {
   })
 }
 },
-}, {})
+ {})
 
 await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 messageId: msg.key.id
