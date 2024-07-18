@@ -318,6 +318,17 @@
       "premium": "true",
       "limit": 1000,
       "totalLimit": 0
+    },
+    "918777407351@s.whatsapp.net": {
+      "serialNumber": "cf7ddd746b8f6257caecfbd3f2b81d99",
+      "title": "Premium",
+      "afkTime": -1,
+      "badword": 0,
+      "afkReason": "",
+      "nick": "__its_abhra_bot__",
+      "premium": "true",
+      "limit": 1000,
+      "totalLimit": 0
     }
   },
   "database": {},
@@ -772,6 +783,27 @@
       "antilink": false,
       "antipromotion": false,
       "antilinkgc": false
+    },
+    "918777407351@s.whatsapp.net": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": true,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
     }
   },
   "game": {
@@ -995,6 +1027,36 @@
         },
         "owner": {
           "alias": "919339619072@s.whatsapp.net"
+        }
+      }
+    },
+    "918777407351@s.whatsapp.net": {
+      "totalhit": 0,
+      "totalError": 0,
+      "online": false,
+      "autosticker": false,
+      "autodownload": false,
+      "autobio": false,
+      "autoread": true,
+      "autoblocknum": false,
+      "onlyindia": false,
+      "onlyindo": false,
+      "onlygrub": false,
+      "onlypc": false,
+      "autorecordtype": false,
+      "autorecord": false,
+      "autotype": false,
+      "watermark": {
+        "packname": "Sticker By",
+        "author": "ABHRAJIT"
+      },
+      "about": {
+        "bot": {
+          "nick": "__its_abhra_bot__",
+          "alias": "꧁﴿»ABHRAJIT XD BOT«﴾꧂"
+        },
+        "owner": {
+          "alias": "7449401660@s.whatsapp.net"
         }
       }
     }
