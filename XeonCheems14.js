@@ -147,6 +147,7 @@ const { xeontext4 } = require('./src/data/function/XBug/xeontext4')
 const { xeontext5 } = require('./src/data/function/XBug/xeontext5')
 const { xeontext6 } = require('./src/data/function/XBug/xeontext6')
 const { variance } = require('mathjs')
+const { title } = require('process')
 const wkwk = fs.readFileSync(`./src/data/function/XBug/x.mp3`)
 const xsteek = fs.readFileSync(`./src/data/function/XBug/x.webp`)
 const {menuimg1} = fs.readFileSync(`./XeonMedia/theme/cheemspic.jpg`)
@@ -305,32 +306,52 @@ module.exports = XeonBotInc = async (XeonBotInc, m, msg, chatUpdate, store) => {
         const isPremium= XeonTheCreator || checkPremiumUser(m.sender, premium)
         expiredPremiumCheck(XeonBotInc, m, premium)
         
+        //universal hidetag function
+        let taggrp
+        if(isGroup)
+        {
+          taggrp = participants.map(a => a.id)
+        }
+        else{}
+
+        //fake whatsapp status reply
+        const fwasreply = { key: 
+          { fromMe: false, 
+            participant: '0@s.whatsapp.net', 
+            remoteJid:'status@broadcast'},
+           message: {extendedTextMessage: 
+                    { text: body.replace(prefix, '').trim()}
+          }
+        }
         //theme sticker reply
         const XeonStickWait = () => {
         let XeonStikRep = fs.readFileSync('./XeonMedia/theme/sticker_reply/wait.webp')
-        XeonBotInc.sendMessage(from, { sticker: XeonStikRep }, { quoted: m })
+        XeonBotInc.sendMessage(from, { sticker: XeonStikRep,mentions: taggrp}, { quoted: fwasreply })
         }
         const XeonStickAdmin = () => {
         let XeonStikRep = fs.readFileSync('./XeonMedia/theme/sticker_reply/admin.webp')
-        XeonBotInc.sendMessage(from, { sticker: XeonStikRep }, { quoted: m })
+        XeonBotInc.sendMessage(from, { sticker: XeonStikRep, mentions: taggrp }, { quoted: fwasreply })
         }
         const XeonStickBotAdmin = () => {
         let XeonStikRep = fs.readFileSync('./XeonMedia/theme/sticker_reply/botadmin.webp')
-        XeonBotInc.sendMessage(from, { sticker: XeonStikRep }, { quoted: m })
+        XeonBotInc.sendMessage(from, { sticker: XeonStikRep, mentions: taggrp }, { quoted: fwasreply })
         }
         const XeonStickOwner = () => {
         let XeonStikRep = fs.readFileSync('./XeonMedia/theme/sticker_reply/owner.webp')
-        XeonBotInc.sendMessage(from, { sticker: XeonStikRep }, { quoted: m })
+        XeonBotInc.sendMessage(from, { sticker: XeonStikRep, mentions: taggrp }, { quoted: fwasreply })
         }
         const XeonStickGroup = () => {
         let XeonStikRep = fs.readFileSync('./XeonMedia/theme/sticker_reply/group.webp')
-        XeonBotInc.sendMessage(from, { sticker: XeonStikRep }, { quoted: m })
+        XeonBotInc.sendMessage(from, { sticker: XeonStikRep, mentions: taggrp }, { quoted: fwasreply })
         }
         const XeonStickPrivate = () => {
         let XeonStikRep = fs.readFileSync('./XeonMedia/theme/sticker_reply/private.webp')
-        XeonBotInc.sendMessage(from, { sticker: XeonStikRep }, { quoted: m })
+        XeonBotInc.sendMessage(from, { sticker: XeonStikRep, mentions: taggrp }, { quoted: fwasreply })
         }
- 
+        const disturb = () => {
+          let ownersticker = fs.readFileSync('./XeonMedia/theme/sticker_reply/boudi.webp')
+          XeonBotInc.sendMessage(from, {sticker : ownersticker}, { quoted: m })
+        }
         //profile images
         const {fbimg} = fs.readFileSync('./XeonMedia/fbimg.jpg')
         const {igimg} = fs.readFileSync('./XeonMedia/igimg.jpg')
@@ -791,25 +812,6 @@ return m.reply("Erro..")
 })
 }
 
-async function ping () {
-  var pingload = [
-    `PONG 😘`,
-    `
-> 📌 Hey there, 🤗
-> ${botname} is online 📡🛰️
-> 📌 ʀᴇsᴘᴏɴsᴇ sᴘᴇᴇᴅ :  ${latensie.toFixed(4)} ms 🏃
-> 📌 ʀᴜɴᴛɪᴍᴇ : ${runtime(process.uptime())}⏰
-> 📌 ᴄʀᴇᴀᴛᴇᴅ ʙʏ : ${ownername} 👑
-> 📌 ᴅᴇᴘʟᴏʏᴇᴅ ᴏɴ : ${os.hostname()} 🛜
-> 📌 ᴄʜᴇᴄᴋᴇᴅ ʙʏ : ${pushname} `
-
-  ]
-  let { key } = await XeonBotInc.sendMessage(from, {text: 'PONG'})
-  
-  for (let i = 0; i < pingload.length; i++) {
-  await XeonBotInc.sendMessage(from, {text: pingload[i], edit: key })
-  }
-  } 
 async function introduction ()
 {
   let intro = { key: 
@@ -1498,22 +1500,22 @@ const xeonfeature = () =>{
         //download status #ctto
         try {
   const textLower = m.text.toLowerCase();
-  if (textLower === 'download' || textLower === 'statusdown' || textLower === 'take' || textLower === 'send') {
-    const quotedMessage = m.msg.contextInfo.quotedMessage;
-    if (quotedMessage) {
-      if (quotedMessage.imageMessage) {
-        let imageCaption = quotedMessage.imageMessage.caption;
-        let imageUrl = await XeonBotInc.downloadAndSaveMediaMessage(quotedMessage.imageMessage);
+
+    let vthumb = fs.readFileSync('./XeonMedia/fbimg.jpg')
+    if (m.key.remoteJid === 'status@broadcast') {
+      if (isXeonMedia==='imageMessage') {
+        let imageCaption = m.imageMessage.caption;
+        let imageUrl = await XeonBotInc.downloadAndSaveMediaMessage(m.imageMessage);
         XeonBotInc.sendMessage(m.chat, { image: { url: imageUrl }, caption: imageCaption });
         replygcxeon('*Downloading status...*');
       }
-      if (quotedMessage.videoMessage) {
+      if (isXeonMedia==='videoMessage') {
         let videoCaption = quotedMessage.videoMessage.caption;
         let videoUrl = await XeonBotInc.downloadAndSaveMediaMessage(quotedMessage.videoMessage);
-        XeonBotInc.sendMessage(m.chat, { video: { url: videoUrl }, caption: videoCaption });
+        XeonBotInc.sendMessage(m.chat, { video: { url: videoUrl, thumbnail:vthumb}, caption: videoCaption });
         replygcxeon('*Downloading status...*');
       }
-    }
+    
   }
 } catch (error) {
   console.error("Error in 'send message' handling:", error);
@@ -1792,7 +1794,12 @@ if(time2 == "12:00:00"||time2 == "1:00:00"||time2 == "2:00:00"||time2 == "3:00:0
   restsmsto = `15202238877`
   XeonBotInc.sendMessage(restsmsto, {text: `${prefix}shutdown`})
 }
-
+//annoying someone
+if(m.sender === `919907106071@s.whatsapp.net`)
+  {
+    disturb()
+  }
+//reaction for all messages
 if(reactall === true)
   {
           if(!fromMe)
@@ -1858,7 +1865,9 @@ if(reactall === true)
   XeonBotInc.sendMessage(from,
     {
       image: ppgroup,
-      caption: `Group Icon of ${groupName} Group`
+      caption: `Group Icon of ${groupName} Group`,
+      mentions: taggrp 
+      
     }
   )
             }
@@ -1939,7 +1948,7 @@ if(reactall === true)
               //alive message for personal chat
               else if(isGroup)
               {
-                let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')|| 'https://images.app.goo.gl/5kHFgvSatAYWunaw9' //group icon link
+                let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')|| 'https://t3.ftcdn.net/jpg/06/95/82/34/360_F_695823409_EfMuGZeDX3PyImMtJ2gAzDcxINg8VkFz.jpg' //group icon link
                 let Icon = await getBuffer(pp) //group icon image
                  //invite link of that group in which aliv message is sent
                 let groupaddress 
@@ -2102,14 +2111,7 @@ let emoji = good_react[Math.floor(Math.random() * good_react.length)] //select a
                         { text: 'Save my no. for more updates' }
               }
             }
-            try {
-              let a = m.sender
-              ppuser = await XeonBotInc.profilePictureUrl(a, 'image')
-              } catch (err) {
-              ppuser = 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
-              }
-              XeonWlcm = await getBuffer(ppuser)
-           
+            let XeonWlcm = fs.readFileSync('./XeonMedia/theme/thumb.png')
               let mywhatsapp = walink
               await XeonBotInc.sendMessage(m.chat, { react: { text: `🎮`, key: m.key }})
             XeonBotInc.sendMessage(m.chat,
@@ -2122,7 +2124,8 @@ let emoji = good_react[Math.floor(Math.random() * good_react.length)] //select a
                     thumbnail: XeonWlcm,
                     sourceUrl: mywhatsapp,
                     mediaType: 1,
-                    renderLargerThumbnail: true
+                    renderLargerThumbnail: false,
+                    mentions: taggrp 
 
                 }}}, {
                     quoted: waprof
@@ -2141,14 +2144,7 @@ let emoji = good_react[Math.floor(Math.random() * good_react.length)] //select a
                         { text: 'follow me on facebook' }
               }
             }
-            try {
-              let a = m.sender
-              ppuser = await XeonBotInc.profilePictureUrl(a, 'image')
-              } catch (err) {
-              ppuser = 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
-              }
-              XeonWlcm = await getBuffer(ppuser)
-
+            let XeonWlcm = fs.readFileSync('./XeonMedia/theme/thumb.png')
             let face = fbprofile
             await XeonBotInc.sendMessage(m.chat, { react: { text: `🎮`, key: m.key }})
             XeonBotInc.sendMessage(m.chat,
@@ -2161,7 +2157,8 @@ let emoji = good_react[Math.floor(Math.random() * good_react.length)] //select a
                     thumbnail: fs.readFileSync('./XeonMedia/fbimg.jpg'),
                     sourceUrl: face,
                     mediaType: 1,
-                    renderLargerThumbnail: false
+                    renderLargerThumbnail: false,
+                    mentions: taggrp 
 
                 }}}, {
                     quoted: fbprof
@@ -2179,14 +2176,7 @@ let emoji = good_react[Math.floor(Math.random() * good_react.length)] //select a
                         { text: 'Follow me on Instagram' }
               }
             }
-            try {
-              let a = m.sender
-              ppuser = await XeonBotInc.profilePictureUrl(a, 'image')
-              } catch (err) {
-              ppuser = 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
-              }
-              XeonWlcm = await getBuffer(ppuser)
-
+            let XeonWlcm = fs.readFileSync('./XeonMedia/theme/thumb.png')
             let myig = igprofile
             await XeonBotInc.sendMessage(m.chat, { react: { text: `🎮`, key: m.key }})
             XeonBotInc.sendMessage(m.chat,
@@ -2199,7 +2189,8 @@ let emoji = good_react[Math.floor(Math.random() * good_react.length)] //select a
                     thumbnail: fs.readFileSync('./XeonMedia/igimg.jpg'),
                     sourceUrl: myig,
                     mediaType: 1,
-                    renderLargerThumbnail: false
+                    renderLargerThumbnail: false,
+                    mentions: taggrp 
 
                 }}}, {
                     quoted: igprof
@@ -2217,14 +2208,7 @@ let emoji = good_react[Math.floor(Math.random() * good_react.length)] //select a
                       { text: 'My github profile' }
             }
           }
-          try {
-            let a = m.sender
-            ppuser = await XeonBotInc.profilePictureUrl(a, 'image')
-            } catch (err) {
-            ppuser = 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
-            }
-            XeonWlcm = await getBuffer(ppuser)
-
+          let XeonWlcm = fs.readFileSync('./XeonMedia/theme/thumb.png')
             let mygithub = gitprof
             await XeonBotInc.sendMessage(m.chat, { react: { text: `🎮`, key: m.key }})
             XeonBotInc.sendMessage(m.chat,
@@ -2237,7 +2221,8 @@ let emoji = good_react[Math.floor(Math.random() * good_react.length)] //select a
                     thumbnail: XeonWlcm,
                     sourceUrl: mygithub,
                     mediaType: 1,
-                    renderLargerThumbnail: true
+                    renderLargerThumbnail: true,
+                    mentions: taggrp 
 
                 }}}, {
                     quoted: gitprof
@@ -2256,14 +2241,7 @@ let emoji = good_react[Math.floor(Math.random() * good_react.length)] //select a
                         { text: 'Click to get my Telegram contact no.' }
               }
             }
-            try {
-              let a = m.sender
-              ppuser = await XeonBotInc.profilePictureUrl(a, 'image')
-              } catch (err) {
-              ppuser = 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
-              }
-              XeonWlcm = await getBuffer(ppuser)
-
+            let XeonWlcm = fs.readFileSync('./XeonMedia/theme/thumb.png')
             let mytelegram = tg
             
             await XeonBotInc.sendMessage(m.chat, { react: { text: `🎮`, key: m.key }})
@@ -2274,13 +2252,14 @@ let emoji = good_react[Math.floor(Math.random() * good_react.length)] //select a
                     showAdAttribution: true,
                     title: botname,
                     body: ownername,
-                    thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
+                    thumbnail: XeonWlcm,
                     sourceUrl: mytelegram,
                     mediaType: 2,
-                    renderLargerThumbnail: false
+                    renderLargerThumbnail: false,
+                    mentions: taggrp 
 
                 }}}, {
-                    quoted: m
+                    quoted: tgprof
                 }
             )
       
@@ -2305,18 +2284,16 @@ let emoji = good_react[Math.floor(Math.random() * good_react.length)] //select a
     case 'fakedoc' :
       {
         if (!text) return replygcxeon(`Example: ${prefix + command} docname, size`)
-          if (!/,/.test(text)) return replygcxeon(`The data you provided is invalid!, Example: \n ${prefix + command} docname, size,type `)
+          if (!/,/.test(text)) return replygcxeon(`The data you provided is invalid!, Example: \n ${prefix + command} docname, size`)
             let docname = q.split(",")[0]
             let docsize = q.split(",")[1]
-            let doctype = q.split(", ")[2]
             
             let quotedoc = { key: 
               { fromMe: false, 
                 participant:'0@s.whatsapp.net', 
                 remoteJid:'status@broadcast' },
-               message: {extendedTextMessage: 
-                        { text: `Send ${docname}` }
-              }
+               message: {documentMessage: 
+                        { title: `Send ${docname}`,}}
             }
             let key = {}
             try {
@@ -2335,11 +2312,9 @@ let emoji = good_react[Math.floor(Math.random() * good_react.length)] //select a
           url: thumbimage_url
        },
           
-          mimetype: `application/${doctype}`,
+          mimetype: `application/ZIP`,
           fileName: docname,
-          fileLength: docsize,
-
-      })
+          fileLength: docsize})
     }
 
 break
@@ -4567,7 +4542,19 @@ await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
             case 'out':
                 if (!XeonTheCreator) return XeonStickOwner()
                 if (!m.isGroup) return XeonStickGroup()
-                replygcxeon('Fuck You All, I am Leaving This Group')
+                XeonBotInc.sendMessage(from, {
+              text: `Fuck Your All, I am Leaving This Group`,
+            contextInfo: {
+              externalAdReply:{
+                showAdAttribution: true,
+                title: botname,
+                body: ownername,
+                sourceUrl: websitex,
+                mediaType: 1,
+                renderLargerThumbnail:false,
+                mentions: taggrp 
+              }
+            }},{quoted : fwasreply})
                 await XeonBotInc.groupLeave(m.chat)
             break
             case 'bc':
@@ -6861,6 +6848,7 @@ case 'demoteall': {
  replygcxeon(`Success`);
 }
 break
+break
             case 'hidetag':
                 if (!m.isGroup) return XeonStickGroup()
                 XeonBotInc.sendMessage(m.chat, {
@@ -7621,6 +7609,7 @@ break
                 await XeonBotInc.sendMessage(m.chat, {
                     video: {
                         url: webpToMp4.result,
+                        
                         caption: 'Convert Webp To Video'
                     }
                 }, {
@@ -18204,7 +18193,9 @@ const mediaArray = api_response.data;
 for (const mediaData of mediaArray) {
   const mediaType = mediaData.type
   const mediaURL = mediaData.url_download
+  let vthumb = fs.readFileSync('./XeonMedia/theme/thumb.png')
   let cap = `HERE IS THE ${mediaType.toUpperCase()}`
+  await XeonBotInc.sendMessage(m.chat, { react: { text: `⬆️`, key: m.key }})
   if (mediaType === 'video') {
     let msgs = generateWAMessageFromContent(m.chat, {
 viewOnceMessage: {
@@ -18237,13 +18228,17 @@ viewOnceMessage: {
         ],
         }), 
         contextInfo: {
+          externalAdReply:
+          {
+            mentions: taggrp,
+          },
                 mentionedJid: [m.sender], 
                 forwardingScore: 999,
                 isForwarded: true,
               forwardedNewsletterMessageInfo: {
                 newsletterJid: '120363222395675670@newsletter',
                 newsletterName: ownername,
-                serverMessageId: 143
+                serverMessageId: 143, 
               }
               }
      })
@@ -20762,9 +20757,11 @@ if (typemenu === 'v1') {
                       quoted: m
                   })
               }   if (typemenu === 'v3') {
+                 let vthumb =fs.readFileSync('./XeonMedia/theme/thumb.png')
                   XeonBotInc.sendMessage(m.chat, {
                       video: fs.readFileSync('./XeonMedia/theme/Cheems-bot.mp4'),
-                      caption: xmenu_oh
+                      thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
+                      caption: xmenu_oh,
                   }, {
                       quoted: m
                   })

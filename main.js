@@ -30,6 +30,7 @@ const readline = require("readline")
 const { parsePhoneNumber } = require("libphonenumber-js")
 const makeWASocket = require("@whiskeysockets/baileys").default
 
+
 // premium users
 let premium = JSON.parse(fs.readFileSync('./src/data/role/premium.json'))
 
@@ -247,11 +248,18 @@ XeonLft = await getBuffer(ppuser)
                 if (anu.action == 'add') {
                 const xeonbuffer = await getBuffer(ppuser)
                 let xeonName = num
-                let pushname = xeonName.pushName 
                 const xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
 	            const xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
                 let bio = await XeonBotInc.fetchStatus(num)
                 let username =XeonBotInc.getName(num)
+                let joingrp = { key: 
+                  { fromMe: false, 
+                    participant: '0@s.whatsapp.net', 
+                    remoteJid:'status@broadcast'},
+                   message: {extendedTextMessage: 
+                            { text: `A new friend Has Joined Our Group 🥳🥳🥳`}
+                  }
+                }
 	            const xmembers = metadata.participants.length
                 xeonbody = `
 ┌────────❖ 𝕮𝖍𝖊𝖊𝖒𝖘 𝕭𝖔𝖙 ❖────────┐
@@ -260,8 +268,8 @@ XeonLft = await getBuffer(ppuser)
    │✑  𝖂𝖊𝖑𝖈𝖔𝖒𝖊 𝕿𝖔 : ${metadata.subject}
    │✑  𝕸𝖊𝖒𝖇𝖊𝖗 : ${xmembers}th
    │✑  𝕵𝖔𝖎𝖓𝖊𝖉 𝖔𝖓 : 
-   │                𝕯𝖆𝖙𝖊: ${xtime} 
-   │                𝕿𝖎𝖒𝖊: ${xdate} 
+   │                𝕯𝖆𝖙𝖊: ${xdate} 
+   │                𝕿𝖎𝖒𝖊: ${xtime} 
    │
     |✑ 𝕮𝖔𝖓𝖌𝖗𝖆𝖙𝖚𝖑𝖆𝖙𝖎𝖔𝖓𝖘
     |     @${xeonName.split("@")[0]} 𝘽𝙧𝙤/𝙎𝙞𝙨, 
@@ -300,10 +308,18 @@ let msgs = generateWAMessageFromContent(anu.id, {
             }],
           }),
           contextInfo: {
+            externalAdReply: {
+              showAdAttribution: true,
+              title: botname,
+              body: ownername,
+              previewType: "PHOTO",
+              thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
+              sourceUrl: websitex
+          },
                   mentionedJid: [num], 
                   forwardingScore: 999,
                   isForwarded: true,
-                forwardedNewsletterMessageInfo: {
+                  forwardedNewsletterMessageInfo: {
                   newsletterJid: '120363222395675670@newsletter',
                   newsletterName: ownername,
                   serverMessageId: 143
@@ -312,7 +328,9 @@ let msgs = generateWAMessageFromContent(anu.id, {
        })
     }
   }
-}, {})
+},{
+  quoted: joingrp,
+  })
 XeonBotInc.relayMessage(anu.id, msgs.message, {})
                 } else if (anu.action == 'remove') {
                 	const xeonbuffer = await getBuffer(ppuser)
@@ -321,8 +339,15 @@ XeonBotInc.relayMessage(anu.id, msgs.message, {})
                   let bio = await XeonBotInc.fetchStatus(num)
                   let username =XeonBotInc.getName(num)
                 	let xeonName = num
-                  let pushname = xeonName.pushName
-                    const xeonmembers = metadata.participants.length
+                  const xeonmembers = metadata.participants.length
+                  let joingrp = { key: 
+                      { fromMe: false, 
+                        participant: '0@s.whatsapp.net', 
+                        remoteJid:'status@broadcast'},
+                       message: {extendedTextMessage: 
+                                { text: `Good By Message`}
+                      }
+                    }
                     xeonbody = `
 ┌────────❖ 𝕮𝖍𝖊𝖊𝖒𝖘 𝕭𝖔𝖙 ❖────────┐
 │「 𝗚𝗼𝗼𝗱𝗯𝘆𝗲 👋 」
@@ -362,10 +387,18 @@ let msgs = generateWAMessageFromContent(anu.id, {
             }],
           }),
           contextInfo: {
+            externalAdReply: {
+              showAdAttribution: true,
+              title: botname,
+              body: ownername,
+              previewType: "PHOTO",
+              thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
+              sourceUrl: websitex
+          },
                   mentionedJid: [num], 
                   forwardingScore: 999,
                   isForwarded: true,
-                forwardedNewsletterMessageInfo: {
+                  forwardedNewsletterMessageInfo: {
                   newsletterJid: '120363222395675670@newsletter',
                   newsletterName: ownername,
                   serverMessageId: 143
@@ -374,8 +407,10 @@ let msgs = generateWAMessageFromContent(anu.id, {
        })
     }
   }
-}, {})
-XeonBotInc.relayMessage(anu.id, msgs.message, {})
+},{
+  quoted: joingrp,
+  })
+XeonBotInc.relayMessage(anu.id, msgs.message)
 }
 }
 } catch (err) {
@@ -383,6 +418,7 @@ console.log(err)
 }
 }
 })
+
 // Anti Call
     XeonBotInc.ev.on('call', async (XeonPapa) => {
     	if (global.anticall){
