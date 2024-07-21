@@ -74,6 +74,7 @@ global.autoswview = true //auto status/story view
 global.adminevent = true //show promote/demote message
 global.groupevent = true //show update messages in group chat
 global.reactall = true //send reaction to all messages
+global.disturbgirls = true
 //msg
 global.mess = {
 	limit: 'Your limit is up!',

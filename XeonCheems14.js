@@ -305,9 +305,9 @@ module.exports = XeonBotInc = async (XeonBotInc, m, msg, chatUpdate, store) => {
         const XeonTheCreator = [botNumber, ...owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
         const isPremium= XeonTheCreator || checkPremiumUser(m.sender, premium)
         expiredPremiumCheck(XeonBotInc, m, premium)
-        
+       //---------------------------------------------------------------------------------------------------------------------
         //universal hidetag function
-        let taggrp
+        let  taggrp
         if(isGroup)
         {
           taggrp = participants.map(a => a.id)
@@ -323,10 +323,26 @@ module.exports = XeonBotInc = async (XeonBotInc, m, msg, chatUpdate, store) => {
                     { text: body.replace(prefix, '').trim()}
           }
         }
+        let fdisturb
+        if(m.mtype === 'extendedTextMessage')
+        {
+          fdisturb ={key: 
+          {fromMe: false,
+          participant : m.sender,
+          remoteJid:'status@broadcast'},
+          message: {extendedTextMessage:
+            {text: body}
+          }
+        }
+      }
+      else {
+        fdisturb = m
+      }
+        //--------------------------------------------------------------------------------------------------------------------- 
         //theme sticker reply
         const XeonStickWait = () => {
         let XeonStikRep = fs.readFileSync('./XeonMedia/theme/sticker_reply/wait.webp')
-        XeonBotInc.sendMessage(from, { sticker: XeonStikRep,mentions: taggrp}, { quoted: fwasreply })
+        XeonBotInc.sendMessage(from, { sticker: XeonStikRep, mentions: taggrp}, { quoted: fwasreply })
         }
         const XeonStickAdmin = () => {
         let XeonStikRep = fs.readFileSync('./XeonMedia/theme/sticker_reply/admin.webp')
@@ -350,13 +366,13 @@ module.exports = XeonBotInc = async (XeonBotInc, m, msg, chatUpdate, store) => {
         }
         const disturb = () => {
           let ownersticker = fs.readFileSync('./XeonMedia/theme/sticker_reply/boudi.webp')
-          XeonBotInc.sendMessage(from, {sticker : ownersticker}, { quoted: m })
+          XeonBotInc.sendMessage(from, {sticker : ownersticker}, { quoted: fdisturb })
         }
         //profile images
         const {fbimg} = fs.readFileSync('./XeonMedia/fbimg.jpg')
         const {igimg} = fs.readFileSync('./XeonMedia/igimg.jpg')
 
-
+        //--------------------------------------------------------------------------------------------------------------------- 
         //check for emoji
   function React_emoji()
   {
@@ -375,7 +391,7 @@ module.exports = XeonBotInc = async (XeonBotInc, m, msg, chatUpdate, store) => {
           emojicont = false
         }    
   }
-
+        //--------------------------------------------------------------------------------------------------------------------- 
  //bug functions
 const xbug2 = {
 key: {
@@ -437,6 +453,7 @@ caption: `${dgxeon + xeontext1}`,
 
         //premium
 
+//--------------------------------------------------------------------------------------------------------------------- 
 //reactiom function
 
 async function reaction()
@@ -450,7 +467,7 @@ async function reaction_animal()
   let react = randomreact2[Math.floor(Math.random() * randomreact2.length)]
   await XeonBotInc.sendMessage(m.chat, { react: { text: `${react}`, key: m.key }})
 }
-
+//--------------------------------------------------------------------------------------------------------------------- 
         //reply
         async function replygcxeon(teks) {
             if (typereply === 'v1') {
@@ -498,7 +515,64 @@ async function reaction_animal()
                 replygcxeon2(teks)
             }
         }
-        
+ //--------------------------------------------------------------------------------------------------------------------- 
+ //my reply
+ async function replybot(teks){
+  let grouplink
+  let rquote = { key: 
+    { fromMe: false, 
+      participant: m.sender, 
+      remoteJid: 'status@broadcast' },
+     message: {extendedTextMessage: 
+              { text: body}
+    }
+  }
+  if(isGroup)
+  {
+    if(isBotAdmins)
+      {
+        groupaddress = await XeonBotInc.groupInviteCode(m.chat)
+        grouplink = `https://chat.whatsapp.com/${groupaddress}`
+      }
+      else 
+      {
+        grouplink =wagc
+      }
+
+  XeonBotInc.sendMessage(from, {
+    text: teks,
+    contextInfo:{
+      externalAdReply:{
+        showAdAttribution: true,
+        title: botname,
+        body: `Follow Me On Facebook`,
+        previewType: ` PHOTO`,
+        thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
+        sourceUrl: grouplink,
+        renderLargerThumbnail: false,
+      }
+    }
+  }, {quoted: rquote})
+}
+else if (!isGroup)
+  {
+    XeonBotInc.sendMessage(from, {
+      text: teks,
+      contextInfo:{
+        externalAdReply:{
+          showAdAttribution: true,
+          title: botname,
+          body: `Follow Me On Facebook`,
+          previewType: ` PHOTO`,
+          thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
+          sourceUrl: websitex,
+          renderLargerThumbnail: false,
+        }
+      }
+    }, {quoted: rquote})
+  }
+ }
+ //---------------------------------------------------------------------------------------------------------------------        
         //fake reply with channel link embedded
 async function replygcxeon2(txt) {
 const xeonnewrep = {      
@@ -1795,10 +1869,13 @@ if(time2 == "12:00:00"||time2 == "1:00:00"||time2 == "2:00:00"||time2 == "3:00:0
   XeonBotInc.sendMessage(restsmsto, {text: `${prefix}shutdown`})
 }
 //annoying someone
-if(m.sender === `919907106071@s.whatsapp.net`)
+if(disturbgirls == true)
+{
+if(m.sender === `919907106071@s.whatsapp.net`|| m.sender === `14437095780@s.whatsapp.net`)
   {
     disturb()
   }
+}
 //reaction for all messages
 if(reactall === true)
   {
@@ -1857,7 +1934,21 @@ if(reactall === true)
           //   }
           //   break
             
-        
+        case 'disturb':
+          {
+            if (!XeonTheCreator) return XeonStickOwner()
+              if(args[0] === `on`)
+              {
+                disturbgirls = true
+                replybot(`Disturbing is turned on 😜`)
+              }
+              else if (args[0] === `off`)
+              {
+                disturbgirls = false
+                replybot(`Disturbing is turned off `)
+              }
+          }
+          break
           case 'gpp':
             {
   let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')|| 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
@@ -1871,7 +1962,7 @@ if(reactall === true)
     }
   )
             }
-            break
+              break
           case 'global-reation':
             {
               if(!XeonTheCreator) return XeonStickOwner()
