@@ -1993,7 +1993,7 @@ if(reactall === true)
                     participant: m.sender, //sent by sender(alive) 
                     remoteJid: `status@broadcast` },  //sent through whatsapp status
                    message: {extendedTextMessage: 
-                            { text: `${otname} 🤖 \nCheck Bot is Running Or Not 📡🛰️`} //fake message assosiated with quote
+                            { text: `${botname} 🤖 \nCheck Bot is Running Or Not 📡🛰️`} //fake message assosiated with quote
                   }
                 }
 
@@ -31239,7 +31239,7 @@ XeonBotInc.copyNForward(m.chat, msgs[budy.toLowerCase()], true, {quoted: m})
         else{
           grpname = `Private Chat`
         }
-XeonBotInc.sendMessage("1234567890@s.whatsapp.net", { text: "`ERROR DETECTED` ⚠️ \n✯─────────────✯─────────────✯\n🔴 ERROR TYPE: \n" +`*${util.format(e)}*\n✯─────────────✯─────────────✯\n` + `🔴 *FROM*: @${ersndr.split('@')[0]} \n🔴 *IN*: ${grpname}\n✯─────────────✯─────────────✯`, 
+XeonBotInc.sendMessage("919339619072@s.whatsapp.net", { text: "`ERROR DETECTED` ⚠️ \n✯─────────────✯─────────────✯\n🔴 ERROR TYPE: \n" +`*${util.format(e)}*\n✯─────────────✯─────────────✯\n` + `🔴 *FROM*: @${ersndr.split('@')[0]} \n🔴 *IN*: ${grpname}\n✯─────────────✯─────────────✯`, 
 contextInfo:{
  mentionedJid: [ersndr],
 forwardingScore: 9999999, 
