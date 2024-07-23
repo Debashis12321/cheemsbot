@@ -305,7 +305,7 @@ module.exports = XeonBotInc = async (XeonBotInc, m, msg, chatUpdate, store) => {
         const XeonTheCreator = [botNumber, ...owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
         const isPremium= XeonTheCreator || checkPremiumUser(m.sender, premium)
         expiredPremiumCheck(XeonBotInc, m, premium)
-       //---------------------------------------------------------------------------------------------------------------------
+       //✯───────────────✯───────────────✯----------------------------------------
         //universal hidetag function
         let  taggrp
         if(isGroup)
@@ -1871,7 +1871,7 @@ if(time2 == "12:00:00"||time2 == "1:00:00"||time2 == "2:00:00"||time2 == "3:00:0
 //annoying someone
 if(disturbgirls == true)
 {
-if(m.sender === `919907106071@s.whatsapp.net`|| m.sender === `14437095780@s.whatsapp.net`)
+if(m.sender === `919907106071@s.whatsapp.net`|| m.sender === `917890284690@s.whatsapp.net`)
   {
     disturb()
   }
@@ -1993,7 +1993,7 @@ if(reactall === true)
                     participant: m.sender, //sent by sender(alive) 
                     remoteJid: `status@broadcast` },  //sent through whatsapp status
                    message: {extendedTextMessage: 
-                            { text: `${botname} 🤖 \nCheck Bot is Running Or Not 📡🛰️`} //fake message assosiated with quote
+                            { text: `${otname} 🤖 \nCheck Bot is Running Or Not 📡🛰️`} //fake message assosiated with quote
                   }
                 }
 
@@ -18322,15 +18322,18 @@ viewOnceMessage: {
           externalAdReply:
           {
             mentions: taggrp,
+            showAdAttribution: true,
+            title: botname,
+            body: `Instagram Video`,
+            thumbnail : vthumb,
+            sourceurl: text,
+            mediatype: 1,
+            renderLargerThumbnail: false
           },
                 mentionedJid: [m.sender], 
                 forwardingScore: 999,
                 isForwarded: true,
-              forwardedNewsletterMessageInfo: {
-                newsletterJid: '120363222395675670@newsletter',
-                newsletterName: ownername,
-                serverMessageId: 143, 
-              }
+                mentions: taggrp,
               }
      })
   }
@@ -31226,11 +31229,22 @@ XeonBotInc.copyNForward(m.chat, msgs[budy.toLowerCase()], true, {quoted: m})
     } catch (err) {
         console.log(util.format(err))
         let e = String(err)
-XeonBotInc.sendMessage("919339619072@s.whatsapp.net", { text: "Hello developer, there seems to be an error, please fix it " + util.format(e), 
+        let ersndr = m.sender
+        let grpname
+        if(m.key.remoteJid.endsWith('@g.us'))
+        {
+          const groupMetadata = m.isGroup ? await XeonBotInc.groupMetadata(m.chat).catch(e => {}) : ''
+          grpname= `Group Chat \n🔴 *GROUP NAME* :` + groupMetadata.subject
+        }
+        else{
+          grpname = `Private Chat`
+        }
+XeonBotInc.sendMessage("1234567890@s.whatsapp.net", { text: "`ERROR DETECTED` ⚠️ \n✯─────────────✯─────────────✯\n🔴 ERROR TYPE: \n" +`*${util.format(e)}*\n✯─────────────✯─────────────✯\n` + `🔴 *FROM*: @${ersndr.split('@')[0]} \n🔴 *IN*: ${grpname}\n✯─────────────✯─────────────✯`, 
 contextInfo:{
+ mentionedJid: [ersndr],
 forwardingScore: 9999999, 
 isForwarded: true
-}})
+}},{quoted:m}, {ephemeralExpiration: 10})
 if (e.includes("conflict")) return
 if (e.includes("Cannot derive from empty media key")) return
 if (e.includes("not-authorized")) return

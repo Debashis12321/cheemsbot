@@ -13,6 +13,7 @@ const fs = require('fs')
 const chalk = require('chalk')
 const { color } = require('./lib/color')
 const FileType = require('file-type')
+const speed = require('performance-now')
 const path = require('path')
 const axios = require('axios')
 const _ = require('lodash')
@@ -211,6 +212,23 @@ try{
 	          console.log(color(`${themeemoji} CREATED BY ${ownername}`,'magenta'))
             console.log(color(`${themeemoji} GITHUB: DebashisX3 `,'magenta'))
             console.log(color(`${themeemoji} OWNER : ${ownernumber}` ,'green'))
+
+            const xeonfeature = () =>{
+              var mytext = fs.readFileSync("./XeonCheems14.js").toString()
+              var numUpper = (mytext.match(/case '/g) || []).length
+              return numUpper
+          }
+          
+            let timestampe = speed()
+            let latensie = speed() - timestampe
+            let openmsg = `Hello User,
+${botname} Has Been Started
+Version : 14.0.0
+Latency : ${latensie.toFixed(4)} miliseconds
+Total Features : ${xeonfeature()}
+Menu Type : ${typemenu}
+Credit : ${ownername}`
+            XeonBotInc.sendMessage(ownernumber, { text : openmsg})
 		}
 	
 } catch (err) {

@@ -793,6 +793,27 @@
       "antilink": false,
       "antipromotion": false,
       "antilinkgc": false
+    },
+    "1234567890@s.whatsapp.net": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": true,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
     }
   },
   "game": {
@@ -960,7 +981,7 @@
       }
     },
     "15202268780@s.whatsapp.net": {
-      "totalhit": 471,
+      "totalhit": 517,
       "totalError": 0,
       "online": false,
       "autosticker": false,
