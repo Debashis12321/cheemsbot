@@ -53,9 +53,9 @@ case 'update':{
         `Contact Developer On WhatsApp`, // Body message
         botname, // Footer message
         'Visit', // Button display text
-        'https://Wa.me/919339619072', // Command (URL in this case)
+        'https://Wa.me/917449401660', // Command (URL in this case)
         'cta_url', // Button type
-        'https://Wa.me/919339619072' // URL (used in image generation)
+        'https://Wa.me/917449401660' // URL (used in image generation)
     ], 
 ];
 

@@ -4,7 +4,7 @@
 //Instagram: unicorn_xeon13
 //Telegram: t.me/xeonbotinc
 //GitHub: @DGXeon
-//WhatsApp: +919339619072
+//WhatsApp: +917449401660
 //want more free bot scripts? subscribe to my youtube channel: https://youtube.com/@DGXeon
 
 const fs = require('fs')
@@ -18,12 +18,12 @@ global.fbprofile = 'https://www.facebook.com/profile.php?id=100079784274234'
 global.igprofile = 'https://www.instagram.com/__its_abhra__/'
 global.gitprof = 'https://github.com/DebashisX3/'
 global.tg = 'https://t.me/abhrajit_sunny'
-global.walink = 'https://wa.me/7449401660'
+global.walink = 'https://wa.me/917449401660'
 global.thumbimage_url = fs.readFileSync('./XeonMedia/fbimg.jpg')
 //new
 global.botname = '꧁﴿»ABHRAJIT XD BOT«﴾꧂' //ur bot name
-global.ownernumber = '7449401660@s.whatsapp.net' //ur owner number
-global.botnumber = "7449401660@s.whatsapp.net"
+global.ownernumber = '917449401660@s.whatsapp.net' //ur owner number
+global.botnumber = "917449401660@s.whatsapp.net"
 global.ownername = '꧁﴿☬✞ ABHRAJIT ✞☬﴾꧂™' //ur owner name
 global.websitex = 'https://www.facebook.com/profile.php?id=100079784274234'
 global.wagc = "https://chat.whatsapp.com/C4NU6KefgoLL9W8vpbhbEY"
@@ -56,11 +56,11 @@ global.wm = "▂▃▅▇█▓▒░ ABHRAJIT XD BOT ░▒▓█▇▅▃▂ "
 global.botscript = 'https://github.com/DebashisX3/cheemsbot-md-v14' //script link
 global.packname = "Sticker By"
 global.author = "ABHRAJIT"
-global.creator = "7449401660@s.whatsapp.net"
+global.creator = "917449401660@s.whatsapp.net"
 global.xprefix = '.'
 global.isonline = false
 
-global.premium = ["7449401660"] // Premium User
+global.premium = ["917449401660"] // Premium User
 global.hituet = 0
 
 //bot sett
