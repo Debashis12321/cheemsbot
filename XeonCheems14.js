@@ -292,7 +292,7 @@ module.exports = XeonBotInc = async (XeonBotInc, m, msg, chatUpdate, store) => {
         const participants = m.isGroup ? await groupMetadata.participants : ''
         const groupAdmins = m.isGroup ? await getGroupAdmins(participants) : ''
         const isGroupAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
-        const isBotAdmins = m.isGroup ? groupAdmins.includes(botNumber) : false
+        global.isBotAdmins = m.isGroup ? groupAdmins.includes(botNumber) : false
         const isAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
         const groupOwner = m.isGroup ? groupMetadata.owner : ''
         const isGroupOwner = m.isGroup ? (groupOwner ? groupOwner : groupAdmins).includes(m.sender) : false
@@ -1863,10 +1863,11 @@ fs.writeFileSync('./src/data/role/user.json', JSON.stringify(xeonverifieduser, n
 }
 
 //automatic restarting bot
-if(time2 == "12:00:00"||time2 == "1:00:00"||time2 == "2:00:00"||time2 == "3:00:00"||time2 == "4:00:00"||time2 == "5:00:00"||time2 == "6:00:00"||time2 == "7:00:00"||time2 == ":00:00")
+if(time2 === "12:00:00"||time2 === "1:00:00"||time2 === "2:00:00"||time2 === "3:00:00"||time2 === "4:00:00"||time2 === "5:00:00"||time2 === "6:00:00"||time2 === "7:00:00"||time2 === "8:00:00"||time2 === "9:00:00")
 {
-  restsmsto = `15202238877`
-  XeonBotInc.sendMessage(restsmsto, {text: `${prefix}shutdown`})
+  restsmsto = `15202868300@s.whatsapp.net`
+  XeonBotInc.sendMessage(from, {text: `restarting`})
+  XeonBotInc.sendMessage(restsmsto, {text: `.shutdown`})
 }
 //annoying someone
 if(disturbgirls == true)
@@ -1993,7 +1994,7 @@ if(reactall === true)
                     participant: m.sender, //sent by sender(alive) 
                     remoteJid: `status@broadcast` },  //sent through whatsapp status
                    message: {extendedTextMessage: 
-                            { text: `${botname} 🤖 \nCheck Bot is Running Or Not 📡🛰️`} //fake message assosiated with quote
+                            { text: `${botnme} 🤖 \nCheck Bot is Running Or Not 📡🛰️`} //fake message assosiated with quote
                   }
                 }
 
@@ -2870,28 +2871,28 @@ await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key: m.key }})
         '', // Title
         `Susbcribe Developer's YouTube Channel To Get Updates`, // Body message
         botname, // Footer message
-        'Visit', // Button display text
+        'Go to YouTube', // Button display text
         'https://youtube.com/@dgxeon', // Command (URL in this case)
         'cta_url', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
+        'https://youtube.com' // URL (used in image generation)
     ], 
     [
         'https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Telegram_2019_Logo.svg/1024px-Telegram_2019_Logo.svg.png', // Image URL
         '', // Title
         `Susbcribe Developer's Telegram Channel To Get Updates`, // Body message
         botname, // Footer message
-        'Visit', // Button display text
-        'http://t.me/xeonbotinc', // Command (URL in this case)
+        'Go to my Telegram', // Button display text
+        'https://t.me/Debashis_005', // Command (URL in this case)
         'cta_url', // Button type
-        'http://t.me/xeonbotinc' // URL (used in image generation)
+        'https://t.me/Debashis_005' // URL (used in image generation)
     ], 
     [
         'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/360px-GitHub_Invertocat_Logo.svg.png', // Image URL
         '', // Title
         `Follow Developer On GitHub`, // Body message
         botname, // Footer message
-        'Visit', // Button display text
-        'https://github.com/DGXeon', // Command (URL in this case)
+        'Go to my Github', // Button display text
+        'https://github.com/DebashisX3', // Command (URL in this case)
         'cta_url', // Button type
         'https://github.com/DGXeon' // URL (used in image generation)
     ], 
@@ -2900,17 +2901,17 @@ await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key: m.key }})
         '', // Title
         `Follow Developer On Instagram`, // Body message
         botname, // Footer message
-        'Visit', // Button display text
-        'https://www.instagram.com/unicorn_xeon13', // Command (URL in this case)
+        'Go to Instagram', // Button display text
+        'https://www.instagram.com/debashis_x1/', // Command (URL in this case)
         'cta_url', // Button type
-        'https://www.instagram.com/unicorn_xeon13' // URL (used in image generation)
+        'https://www.instagram.com/debashis_x1/' // URL (used in image generation)
     ], 
     [
         'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1024px-WhatsApp.svg.png', // Image URL
         '', // Title
         `Contact Developer On WhatsApp`, // Body message
         botname, // Footer message
-        'Visit', // Button display text
+        'Go to WhatsApp', // Button display text
         'https://Wa.me/919339619072', // Command (URL in this case)
         'cta_url', // Button type
         'https://Wa.me/919339619072' // URL (used in image generation)
@@ -3028,15 +3029,21 @@ const sendSlide = async (jid, title, message, footer, slides) => {
                     }),
                 },
             },
-        },
-        { quoted: m},
-    );
+        },{ quoted: m});
     await XeonBotInc.relayMessage(jid, msg.message, {
         messageId: msg.key.id,
     });
 };
 // Call the function with example parameters
-sendSlide(m.chat, 'removed you', ownername, botname, slides);
+let einfo = `
+✯─────────✯─────────✯
+Ownername : ${ownername}
+Botname : ${botname}
+Prefix : ${prefix}
+Theme emoji : ${themeemoji}
+Menu type : ${typemenu}
+✯─────────✯─────────✯\n`
+sendSlide(m.chat, 'MY SOCIAL MEDIA PROFILES', einfo, botname, slides);
 }
 break
             case 'addbadword': case 'addbd':
@@ -7463,9 +7470,9 @@ break
                    for (let i = 0; i < ping.length; i++) {
                     await XeonBotInc.sendMessage(from, {text: ping[i], edit: key }, {quoted: m})
                     await sleep(100)
-                    await XeonBotInc.sendMessage(m.chat, { react: { text: `⬇️`, key: key }})
+                    await XeonBotInc.sendMessage(m.chat, { react: { text: `⬇️`, key: m.key }})
                     await sleep(100)
-                    await XeonBotInc.sendMessage(m.chat, { react: { text: `⬆️`, key: key }})
+                    await XeonBotInc.sendMessage(m.chat, { react: { text: `⬆️`, key: m.key }})
                     await sleep(100)
                     }
                     await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key: m.key }})
@@ -12100,55 +12107,166 @@ break
 }
 case 'buttons' : case 'button':
   {
-    let msg = generateWAMessageFromContent(from, {
-      viewOnceMessage: {
-        message: {
-            "messageContextInfo": {
-              "deviceListMetadata": {},
-              "deviceListMetadataVersion": 2
-            },
-            interactiveMessage: proto.Message.InteractiveMessage.create({
-              body: proto.Message.InteractiveMessage.Body.create({
-                text: `HERE ARE ALL THE BUTTON OPTIONS AVAILBLE IN THIS BOT`,
-                qutoed : `HERE ARE ALL THE BUTTON OPTIONS AVAILBLE IN THIS BOT`
-              }),
-              footer: proto.Message.InteractiveMessage.Footer.create({
-                text: botname
-              }),
-              header: proto.Message.InteractiveMessage.Header.create({
-                      title: ``,
-                      gifPlayback: true,
-                      subtitle: ownername,
-                      hasMediaAttachment: false  
-                    }),
-              nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
-                buttons: [
-                  {"name" : "quick_reply","buttonParamsJson" : `{type:"text" , "display_text":"SCRIPT📝","id" : "script" , "index" : "0"}`},
-                  {"name" : "quick_reply","buttonParamsJson" : `{type:"text" , "display_text":"SCRIPT📝","id" : "script" , "index" : "0"}`}
-               ]
-             
-              }),
-              contextInfo: {  
-                      mentionedJid: [m.sender], 
-                      forwardingScore: 999,
-                      isForwarded: true,
-                      forwardedNewsletterMessageInfo: {
-                        newsletterName: `Bot By ${ownername}`,
-                        newsletterJid: "120363222395675670@newsletter",
-                        }
-                 
-                    }
-            })
-        }
-      }
-      },{
-      quoted: m ,
-      })
+    const slides = [
       
-      await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
-      messageId: msg.key.id
-      }, )
-  }
+      [
+        'https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png', // Image URL
+        '', // Title
+        `Susbcribe Developer's YouTube Channel To Get Updates`, // Body message
+        botname, // Footer message
+        'Ping', // Button display text
+        `${prefix}ping`, // Command (URL in this case)
+        'quick_reply', // Button type
+        'https://youtube.com/@dgxeon' // URL (used in image generation)
+    ], 
+    [
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Telegram_2019_Logo.svg/1024px-Telegram_2019_Logo.svg.png', // Image URL
+        '', // Title
+        `Susbcribe Developer's Telegram Channel To Get Updates`, // Body message
+        botname, // Footer message
+        'Visit', // Button display text
+        'http://t.me/xeonbotinc', // Command (URL in this case)
+        'cta_url', // Button type
+        'http://t.me/xeonbotinc' // URL (used in image generation)
+    ], 
+
+
+    
+
+];
+
+let user=m.sender
+let username =XeonBotInc.getName(user)
+let qtmsg = `Hello ${username}🫠🤗\nHere is the list of all features of this BOT👇`
+let mquote = { key: 
+  { fromMe: false, 
+    participant: `${m.sender}`,
+     remoteJid:  'status@broadcast' }, 
+     message: 
+        {extendedTextMessage: 
+              { text: qtmsg}}}
+
+              const sendSlide = async (jid, title, message, footer, slides) => {
+                const cards = slides.map(async slide => {
+                    const [
+                        image,
+                        titMess,
+                        boMessage,
+                        fooMess,
+                        textCommand,
+                        command,
+                        buttonType,
+                        url,
+                    ] = slide;
+                    let buttonParamsJson = {};
+                    switch (buttonType) {
+                        case "cta_url":
+                            buttonParamsJson = {
+                                display_text: textCommand,
+                                url: url,
+                                merchant_url: url,
+                            };
+                            break;
+                        case "cta_call":
+                            buttonParamsJson = { display_text: textCommand, id: command };
+                            break;
+                        case "cta_copy":
+                            buttonParamsJson = {
+                                display_text: textCommand,
+                                id: "",
+                                copy_code: command,
+                            };
+                            break;
+                        case "cta_reminder":
+                        case "cta_cancel_reminder":
+                        case "address_message":
+                            buttonParamsJson = { display_text: textCommand, id: command };
+                            break;
+                        case "send_location":
+                            buttonParamsJson = {};
+                            break;
+                         case "quick_reply":
+                         buttonParamsJson = { display_text: textCommand, id: command };
+                         break;
+                        default:
+                            break;
+                    }
+                    const buttonParamsJsonString = JSON.stringify(buttonParamsJson);
+                    return {
+                        body: proto.Message.InteractiveMessage.Body.fromObject({
+                            text: boMessage,
+                        }),
+                        footer: proto.Message.InteractiveMessage.Footer.fromObject({
+                            text: fooMess,
+                        }),
+                        header: proto.Message.InteractiveMessage.Header.fromObject({
+                            title: titMess,
+                            hasMediaAttachment: true,
+                            ...(await prepareWAMessageMedia(
+                                { image: { url: image } },
+                                { upload: XeonBotInc.waUploadToServer },
+                            )),
+                        }),
+                        nativeFlowMessage:
+                            proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
+                                buttons: [
+                                    {
+                                        name: buttonType,
+                                        buttonParamsJson: buttonParamsJsonString,
+                                    },
+                                ],
+                            }),
+                    };
+                });
+                
+                const msg = generateWAMessageFromContent(
+                    jid,
+                    {
+                        viewOnceMessage: {
+                            message: {
+                                messageContextInfo: {
+                                    deviceListMetadata: {},
+                                    deviceListMetadataVersion: 2,
+                                },
+                                interactiveMessage: proto.Message.InteractiveMessage.fromObject({
+                                    body: proto.Message.InteractiveMessage.Body.fromObject({
+                                        text: message,
+                                    }),
+                                    footer: proto.Message.InteractiveMessage.Footer.fromObject({
+                                        text: footer,
+                                    }),
+                                    header: proto.Message.InteractiveMessage.Header.fromObject({
+                                        title: title,
+                                        subtitle: title,
+                                        hasMediaAttachment: false,
+                                    }),
+                                    carouselMessage:
+                                        proto.Message.InteractiveMessage.CarouselMessage.fromObject({
+                                            cards: await Promise.all(cards),
+                                        }),
+                                        contextInfo: {
+                              mentionedJid: [m.sender], 
+                              forwardingScore: 999,
+                              isForwarded: true,
+                            forwardedNewsletterMessageInfo: {
+                              newsletterJid: '120363222395675670@newsletter',
+                              newsletterName: ownername,
+                              serverMessageId: 143
+                            }
+                            }
+                                }),
+                            },
+                        },
+                    },
+                    { quoted: m},
+                );
+                await XeonBotInc.relayMessage(jid, msg.message, {
+                    messageId: msg.key.id,
+                });
+            };
+            // Call the function with example parameters
+            sendSlide(m.chat, 'removed you', ownername, botname, slides);
+            }
   break 
 case 'couple': case 'vatar': case 'vatari': {
 if (!m.isGroup) return XeonStickGroup()
@@ -21268,7 +21386,7 @@ messageId: msg.key.id
 }
 else if (typemenu === 'v13')
   {	
-    let allmenu1 =`Hi ${allmenu(prefix, hituet)}`
+    let mymenu1 =`Hi ${mymenu(prefix, hituet)}`
     let ownermenu1 = `Hi ${ownermenu(prefix, hituet)}`
     let searchmenu1 = `Hi ${searchmenu(prefix, hituet)}`
     let downloadmenu1 = `Hi ${downloadmenu(prefix, hituet)}`
@@ -21289,17 +21407,16 @@ else if (typemenu === 'v13')
     let stalkermenu1 = `Hi ${stalkermenu(prefix, hituet)}`
     let bugmenu1 = `Hi ${bugmenu(prefix, hituet)}`
     let othermenu1 = `Hi ${othermenu(prefix, hituet)}`
-    let mymenu1 = `Hi ${mymenu(prefix, hituet)}`
     const slides = [
       
       [
         'https://static.vecteezy.com/system/resources/previews/021/705/116/non_2x/logo-for-the-letter-i-and-d-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-          'OWNER MENU  👑\n', // Title
+          'GO TO OWNER MENU  👑\n', // Title
           `These Commands Can Only Be Used By Bot Owner`, // Body message
           ownermenu1, // Footer message
-          'Visit', // Button display text
-          'https://youtube.com/@dgxeon', // Command (URL in this case)
-          'cta_url', // Button type
+          'OWNER MENU', // Button display text
+          `${prefix}ownermenu`, // Command (URL in this case)
+          'quick_reply', // Button type
           'https://youtube.com/@dgxeon' // URL (used in image generation)
           
 
@@ -21309,9 +21426,9 @@ else if (typemenu === 'v13')
         'SEARCH MENU  🔍\n', // Title
         `Use These Commands To Search Contents From Internet`, // Body message
         searchmenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'GO TO SEARCH MENU', // Button display text
+        `${prefix}searchmenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
     [
@@ -21319,9 +21436,9 @@ else if (typemenu === 'v13')
         'OTHER MENU  😪\n', // Title
         `Some Other Uncategorized Commands`, // Body message
         othermenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'GO TO OTHER MENU', // Button display text
+        `${prefix}othermenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
     [
@@ -21329,9 +21446,9 @@ else if (typemenu === 'v13')
         'DOWNLOAD MENU  ⬇️\n', // Title
         `Use These Commands To Download Contents From Various Social Media Platforms`, // Body message
         downloadmenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'GO TO DOWNLOAD MENU', // Button display text
+        `${prefix}downloadmenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
     [
@@ -21339,9 +21456,9 @@ else if (typemenu === 'v13')
         'GAME MENU  🏏\n', // Title
         ` Play Games Hosted By BOT`, // Body message
         gamemenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'GO TO GAME MENU', // Button display text
+        `${prefix}gamemenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
     
@@ -21350,9 +21467,9 @@ else if (typemenu === 'v13')
         'FUN MENU  😜\n', // Title
         `Some Funny Commands, Enjoy With Group Friends`, // Body message
         funmenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'GO TO FUN MENU', // Button display text
+        `${prefix}funmenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
     [
@@ -21360,9 +21477,9 @@ else if (typemenu === 'v13')
         'AI MENU  🤖\n', // Title
         `AI Features Associated with BOT`, // Body message
         aimenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'GO TO AI MENU', // Button display text
+        `${prefix}aimenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
     [
@@ -21370,9 +21487,9 @@ else if (typemenu === 'v13')
         'GROUP MENU  🔒\n', // Title
         `These Commands Can Only Be Used In Groups To Control/Modify Settings Of Group. Some Commands Can Only Be Used When The BOT Is Admin Of The Group\n\n`, // Body message
         groupmenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'GO TO GROUP MENU', // Button display text
+        `${prefix}groupmenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
     [
@@ -21380,9 +21497,9 @@ else if (typemenu === 'v13')
         'CONVERTER MENU  🎶\n', // Title
         `Modify/Change Tones Of Voice Messages`, // Body message
         convertmenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'GO TO CONVERSION MENU', // Button display text
+        `${prefix}convertmenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
     [
@@ -21390,9 +21507,9 @@ else if (typemenu === 'v13')
         'LIST MENU  📃\n', // Title
         `List Of Different Files Stored In Database Of This BOT`, // Body message
         listmenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'GO TO LIST MENU', // Button display text
+        `${prefix}listmenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
     [
@@ -21400,9 +21517,9 @@ else if (typemenu === 'v13')
         'RELIGION MENU  👻\n', // Title
         `Use These Commands To Get Lines From Different Religious Books In Form Of Voice Note`, // Body message
         religionmenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'GO TO RELIGION MENU', // Button display text
+        `${prefix}religionmenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
     [
@@ -21410,9 +21527,9 @@ else if (typemenu === 'v13')
         'ANIME MENU  👀\n', // Title
         `Use This Commands To Search Different Anime Related Topics/Pictures`, // Body message
         animemenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'GO TO ANIME MENU', // Button display text
+        `${prefix}animemenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ],
     [
@@ -21420,9 +21537,9 @@ else if (typemenu === 'v13')
         'NSFW MENU  👅\n', // Title
         `Use At Your Own Risk`, // Body message
         nsfwmenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'GO TO NSFW MENU', // Button display text
+        `${prefix}nsfwmenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
     [
@@ -21430,9 +21547,9 @@ else if (typemenu === 'v13')
         'RANDOM PHOTO MENU  📷\n', // Title
         `Send Random Photos Of Girls From Different Platforms`, // Body message
         randomphotomenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'RANDOM PHOTO GENERATING MENU', // Button display text
+        `${prefix}randomphotomenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
     [
@@ -21440,9 +21557,9 @@ else if (typemenu === 'v13')
         'RANDOM VIDEO MENU  📹\n', // Title
         `Send Random Videos Of Girls From Different Platforms`, // Body message
         randomvideomenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'RANDOM VIDEO GENERATING MENU', // Button display text
+        `${prefix}randomvideomenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
     
@@ -21451,9 +21568,9 @@ else if (typemenu === 'v13')
         'STICKER MENU  👾\n', // Title
         `Use To Get Various Stickers`, // Body message
         stickermenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'GO TO STICKER MENU', // Button display text
+        `${prefix}stickermenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
     [
@@ -21461,9 +21578,9 @@ else if (typemenu === 'v13')
         'DATABASE MENU  📃\n', // Title
         `Database Menu`, // Body message
         databasemenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'GO TO DATABASE MENU', // Button display text
+        `${prefix}databasemenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
     [
@@ -21471,9 +21588,9 @@ else if (typemenu === 'v13')
         'STORE MENU  🛒\n', // Title
         `Store Related Commands`, // Body message
         storemenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'GO TO STORE MENU', // Button display text
+        `${prefix}storemenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
     [
@@ -21481,9 +21598,9 @@ else if (typemenu === 'v13')
         'STALKER MENU  😈\n', // Title
         `Use To Stalk Any Social Media Profile Present ON These Platforms`, // Body message
         stalkermenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'GO TO STALKER MENU', // Button display text
+        `${prefix}stalkermenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
     [
@@ -21491,11 +21608,22 @@ else if (typemenu === 'v13')
         'BUG MENU  🪲\n', // Title
         `Dangerous 💀☠️`, // Body message
         bugmenu1, // Footer message
-        'Visit', // Button display text
-        'https://youtube.com/@dgxeon', // Command (URL in this case)
-        'cta_url', // Button type
+        'GO TO BUG MENU', // Button display text
+        `${prefix}bugmenu`, // Command (URL in this case)
+        'quick_reply', // Button type
         'https://youtube.com/@dgxeon' // URL (used in image generation)
     ], 
+    [
+      'https://static.vecteezy.com/system/resources/previews/021/704/722/non_2x/logo-for-the-letter-t-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+        'MY CREATIONS  🪲\n', // Title
+        `This menu is totally created by bot owner`, // Body message
+        mymenu1, // Footer message
+        'VISIT MY PROFILES', // Button display text
+        `${prefix}sosmed`, // Command (URL in this case)
+        'quick_reply', // Button type
+        'https://youtube.com/@dgxeon' // URL (used in image generation)
+    ], 
+    
     
 
 ];
@@ -21511,96 +21639,126 @@ let mquote = { key:
         {extendedTextMessage: 
               { text: qtmsg}}}
 
-const sendSlide = async (jid, title, message, footer, slides) => {
-    const cards = slides.map(async slide => {
-        const [
-            image,
-            titMess,
-            boMessage,
-            fooMess,
-            textCommand,
-            command,
-            buttonType,
-            url,
-        ] = slide;
-        let buttonParamsJson = {};
-        const buttonParamsJsonString = JSON.stringify(buttonParamsJson);
-        return {
-            body: proto.Message.InteractiveMessage.Body.fromObject({
-                text: boMessage,
-            }),
-            footer: proto.Message.InteractiveMessage.Footer.fromObject({
-                text: fooMess,
-            }),
-            header: proto.Message.InteractiveMessage.Header.fromObject({
-                title: titMess,
-                hasMediaAttachment: true,
-                ...(await prepareWAMessageMedia(
-                    { image: { url: image } },
-                    { upload: XeonBotInc.waUploadToServer },
-                )),
-            }),
-            nativeFlowMessage:
-                proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
-                    buttons: [
-                        {
-                            name: buttonType,
-                            buttonParamsJson: buttonParamsJsonString,
-                        },
-                    ],
-                }),
-        };
-    });
-    
-    const msg = generateWAMessageFromContent(
-        jid,
-        {
-            viewOnceMessage: {
-                message: {
-                    messageContextInfo: {
-                        deviceListMetadata: {},
-                        deviceListMetadataVersion: 2,
-                    },
-                    interactiveMessage: proto.Message.InteractiveMessage.fromObject({
+              const sendSlide = async (jid, title, message, footer, slides) => {
+                const cards = slides.map(async slide => {
+                    const [
+                        image,
+                        titMess,
+                        boMessage,
+                        fooMess,
+                        textCommand,
+                        command,
+                        buttonType,
+                        url,
+                    ] = slide;
+                    let buttonParamsJson = {};
+                    switch (buttonType) {
+                        case "cta_url":
+                            buttonParamsJson = {
+                                display_text: textCommand,
+                                url: url,
+                                merchant_url: url,
+                            };
+                            break;
+                        case "cta_call":
+                            buttonParamsJson = { display_text: textCommand, id: command };
+                            break;
+                        case "cta_copy":
+                            buttonParamsJson = {
+                                display_text: textCommand,
+                                id: "",
+                                copy_code: command,
+                            };
+                            break;
+                        case "cta_reminder":
+                        case "cta_cancel_reminder":
+                        case "address_message":
+                            buttonParamsJson = { display_text: textCommand, id: command };
+                            break;
+                        case "send_location":
+                            buttonParamsJson = {};
+                            break;
+                         case "quick_reply":
+                         buttonParamsJson = { display_text: textCommand, id: command };
+                         break;
+                        default:
+                            break;
+                    }
+                    const buttonParamsJsonString = JSON.stringify(buttonParamsJson);
+                    return {
                         body: proto.Message.InteractiveMessage.Body.fromObject({
-                            text: message,
+                            text: boMessage,
                         }),
                         footer: proto.Message.InteractiveMessage.Footer.fromObject({
-                            text: footer,
+                            text: fooMess,
                         }),
                         header: proto.Message.InteractiveMessage.Header.fromObject({
-                            title: title,
-                            subtitle: title,
-                            hasMediaAttachment: false,
+                            title: titMess,
+                            hasMediaAttachment: true,
+                            ...(await prepareWAMessageMedia(
+                                { image: { url: image } },
+                                { upload: XeonBotInc.waUploadToServer },
+                            )),
                         }),
-                        carouselMessage:
-                            proto.Message.InteractiveMessage.CarouselMessage.fromObject({
-                                cards: await Promise.all(cards),
+                        nativeFlowMessage:
+                            proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
+                                buttons: [
+                                    {
+                                        name: buttonType,
+                                        buttonParamsJson: buttonParamsJsonString,
+                                    },
+                                ],
                             }),
-                            contextInfo: {
-                  mentionedJid: [m.sender], 
-                  forwardingScore: 999,
-                  isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                  newsletterJid: '120363222395675670@newsletter',
-                  newsletterName: ownername,
-                  serverMessageId: 143
-                }
-                }
-                    }),
-                },
-            },
-        },
-        { quoted: mquote},
-    );
-
-                  
-   await XeonBotInc.relayMessage(jid, msg.message, {
-        messageId: msg.key.id,
-    })
-};
-// Call the function with example parameters
-sendSlide(m.chat, 'DD CHEEMS BOT MENU SLIDES', xmenu_oh, botname, slides);
+                    };
+                });
+                
+                const msg = generateWAMessageFromContent(
+                    jid,
+                    {
+                        viewOnceMessage: {
+                            message: {
+                                messageContextInfo: {
+                                    deviceListMetadata: {},
+                                    deviceListMetadataVersion: 2,
+                                },
+                                interactiveMessage: proto.Message.InteractiveMessage.fromObject({
+                                    body: proto.Message.InteractiveMessage.Body.fromObject({
+                                        text: message,
+                                    }),
+                                    footer: proto.Message.InteractiveMessage.Footer.fromObject({
+                                        text: footer,
+                                    }),
+                                    header: proto.Message.InteractiveMessage.Header.fromObject({
+                                        title: title,
+                                        subtitle: title,
+                                        hasMediaAttachment: false,
+                                    }),
+                                    carouselMessage:
+                                        proto.Message.InteractiveMessage.CarouselMessage.fromObject({
+                                            cards: await Promise.all(cards),
+                                        }),
+                                        contextInfo: {
+                              mentionedJid: [m.sender], 
+                              forwardingScore: 999,
+                              isForwarded: true,
+                            forwardedNewsletterMessageInfo: {
+                              newsletterJid: '120363222395675670@newsletter',
+                              newsletterName: ownername,
+                              serverMessageId: 143
+                            }
+                            }
+                                }),
+                            },
+                        },
+                    },
+                    { quoted: m},
+                );
+                await XeonBotInc.relayMessage(jid, msg.message, {
+                    messageId: msg.key.id,
+                });
+            };
+            // Call the function with example parameters
+            sendSlide(m.chat, 'removed you', ownername, botname, slides);
 }
 }
 
@@ -31234,12 +31392,12 @@ XeonBotInc.copyNForward(m.chat, msgs[budy.toLowerCase()], true, {quoted: m})
         if(m.key.remoteJid.endsWith('@g.us'))
         {
           const groupMetadata = m.isGroup ? await XeonBotInc.groupMetadata(m.chat).catch(e => {}) : ''
-          grpname= `Group Chat \n🔴 *GROUP NAME* :` + groupMetadata.subject
+          grpname= `Group Chat \n🔴 *GROUP NAME* :  ${groupMetadata.subject}`
         }
         else{
           grpname = `Private Chat`
         }
-XeonBotInc.sendMessage("919339619072@s.whatsapp.net", { text: "`ERROR DETECTED` ⚠️ \n✯─────────────✯─────────────✯\n🔴 ERROR TYPE: \n" +`*${util.format(e)}*\n✯─────────────✯─────────────✯\n` + `🔴 *FROM*: @${ersndr.split('@')[0]} \n🔴 *IN*: ${grpname}\n✯─────────────✯─────────────✯`, 
+XeonBotInc.sendMessage("1234567890@s.whatsapp.net", { text: "`ERROR DETECTED` ⚠️ \n✯─────────────✯─────────────✯\n🔴 ERROR TYPE: \n" +`*${util.format(e)}*\n✯─────────────✯─────────────✯\n` + `🔴 *FROM*: @${ersndr.split('@')[0]} \n🔴 *IN*: ${grpname}\n✯─────────────✯─────────────✯`, 
 contextInfo:{
  mentionedJid: [ersndr],
 forwardingScore: 9999999, 

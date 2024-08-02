@@ -211,7 +211,7 @@ try{
             console.log(color(`< ================================================== >`, 'cyan'))
 	          console.log(color(`${themeemoji} CREATED BY ${ownername}`,'magenta'))
             console.log(color(`${themeemoji} GITHUB: DebashisX3 `,'magenta'))
-            console.log(color(`${themeemoji} OWNER : ${ownernumber}` ,'green'))
+            console.log(color(`${themeemoji} OWNER : ${ownernumber}` ,'magenta'))
 
             const xeonfeature = () =>{
               var mytext = fs.readFileSync("./XeonCheems14.js").toString()
@@ -238,6 +238,7 @@ Credit : ${ownername}`
 })
 XeonBotInc.ev.on('creds.update', saveCreds)
 XeonBotInc.ev.on("messages.upsert",  () => { })
+
 //------------------------------------------------------
 
 //farewell/welcome
@@ -267,27 +268,47 @@ XeonLft = await getBuffer(ppuser)
                 const xeonbuffer = await getBuffer(ppuser)
                 let xeonName = num
                 const xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
-	            const xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
-                let bio = await XeonBotInc.fetchStatus(num)
-                let username =XeonBotInc.getName(num)
+	              const xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+                let userabout = await XeonBotInc.fetchStatus(num) || `Bio Is Private`
+                let ibwelcm = `🙋🏻‍♂️ Hi Friend 👋,
+🎀 Welcome to our Group.💖
+🔰 Hope you will have a good time with our\n*${metadata.subject}* Family 🫂🤝
+
+🪀This is *${botname}*, and I welcome you to our group, 
+Thank you.
+
+> Regards : Group admins
+> Credit : ${ownername}`
+let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')|| 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
+let groupicon = await getBuffer(pp)
                 let joingrp = { key: 
                   { fromMe: false, 
                     participant: '0@s.whatsapp.net', 
                     remoteJid:'status@broadcast'},
-                   message: {extendedTextMessage: 
-                            { text: `A new friend Has Joined Our Group 🥳🥳🥳`}
+                    message: {imageMessage: 
+                            { image: groupicon,
+                              caption : `A new friend Has Joined Our Group 🥳🥳🥳`}
                   }
                 }
 	            const xmembers = metadata.participants.length
-                xeonbody = `
+              let adder 
+              
+              
+              let xeonbody
+              if (anu.author === '')
+              {
+                    adder = ''
+                    xeonbody = `
 ┌────────❖ 𝕮𝖍𝖊𝖊𝖒𝖘 𝕭𝖔𝖙 ❖────────┐
 │「 𝗛𝗶 👋 」
 └┬❖ 「  @${xeonName.split("@")[0]}  」
    │✑  𝖂𝖊𝖑𝖈𝖔𝖒𝖊 𝕿𝖔 : ${metadata.subject}
    │✑  𝕸𝖊𝖒𝖇𝖊𝖗 : ${xmembers}th
+   │✑  𝕬𝖇𝖔𝖚𝖙 : ${userabout} 
    │✑  𝕵𝖔𝖎𝖓𝖊𝖉 𝖔𝖓 : 
-   │                𝕯𝖆𝖙𝖊: ${xdate} 
-   │                𝕿𝖎𝖒𝖊: ${xtime} 
+   │                𝕯𝖆𝖙𝖊 : ${xdate} 
+   │                𝕿𝖎𝖒𝖊 : ${xtime} 
+   │                𝕵𝖔𝖎𝖓𝖊𝖉 𝖇𝖞 : Using Group Invite Link
    │
     |✑ 𝕮𝖔𝖓𝖌𝖗𝖆𝖙𝖚𝖑𝖆𝖙𝖎𝖔𝖓𝖘
     |     @${xeonName.split("@")[0]} 𝘽𝙧𝙤/𝙎𝙞𝙨, 
@@ -296,8 +317,34 @@ XeonLft = await getBuffer(ppuser)
     |
     |✑ 𝕲𝖗𝖔𝖚𝖕 𝕯𝖊𝖘𝖈𝖗𝖎𝖕𝖙𝖎𝖔𝖓:- 
     |  𝐑𝐄𝐀𝐃 𝐆𝐑𝐎𝐔𝐏 𝐃𝐄𝐒𝐂𝐑𝐈𝐏𝐓𝐈𝐎𝐍 𝐂𝐀𝐑𝐄𝐅𝐔𝐋𝐋𝐘 : 
-         *${metadata.desc}*
+           *${metadata.desc}*
    └────────────────────────┈ ⳹`
+              }
+              else 
+              {
+                    adder = anu.author
+                    xeonbody = `
+┌────────❖ 𝕮𝖍𝖊𝖊𝖒𝖘 𝕭𝖔𝖙 ❖────────┐
+│「 𝗛𝗶 👋 」
+└┬❖ 「  @${xeonName.split("@")[0]}  」
+   │✑  𝖂𝖊𝖑𝖈𝖔𝖒𝖊 𝕿𝖔 : ${metadata.subject}
+   │✑  𝕸𝖊𝖒𝖇𝖊𝖗 : ${xmembers}th
+   │✑  𝕬𝖇𝖔𝖚𝖙 : ${userabout} 
+   │✑  𝕵𝖔𝖎𝖓𝖊𝖉 𝖔𝖓 : 
+   │                𝕯𝖆𝖙𝖊 : ${xdate} 
+   │                𝕿𝖎𝖒𝖊 : ${xtime} 
+   │                𝕬𝖉𝖉𝖊𝖉 𝖇𝖞 : @${adder.split('@')[0]}
+   │
+    |✑ 𝕮𝖔𝖓𝖌𝖗𝖆𝖙𝖚𝖑𝖆𝖙𝖎𝖔𝖓𝖘
+    |     @${xeonName.split("@")[0]} 𝘽𝙧𝙤/𝙎𝙞𝙨, 
+    |                  𝙔𝙤𝙪 𝙖𝙧𝙚 𝙣𝙤𝙬 𝙖 𝙢𝙚𝙢𝙗𝙚𝙧 𝙤𝙛 𝙤𝙪𝙧
+    | ${metadata.subject} 𝙁𝙖𝙢𝙞𝙡𝙮❤️🤝
+    |
+    |✑ 𝕲𝖗𝖔𝖚𝖕 𝕯𝖊𝖘𝖈𝖗𝖎𝖕𝖙𝖎𝖔𝖓:- 
+    |  𝐑𝐄𝐀𝐃 𝐆𝐑𝐎𝐔𝐏 𝐃𝐄𝐒𝐂𝐑𝐈𝐏𝐓𝐈𝐎𝐍 𝐂𝐀𝐑𝐄𝐅𝐔𝐋𝐋𝐘 : 
+       *${metadata.desc}*
+   └────────────────────────┈ ⳹`
+              }
 let msgs = generateWAMessageFromContent(anu.id, {
   viewOnceMessage: {
     message: {
@@ -334,14 +381,9 @@ let msgs = generateWAMessageFromContent(anu.id, {
               thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
               sourceUrl: websitex
           },
-                  mentionedJid: [num], 
+                  mentionedJid: [num, adder], 
                   forwardingScore: 999,
-                  isForwarded: true,
-                  forwardedNewsletterMessageInfo: {
-                  newsletterJid: '120363222395675670@newsletter',
-                  newsletterName: ownername,
-                  serverMessageId: 143
-                }
+                  isForwarded: true
                 }
        })
     }
@@ -350,7 +392,24 @@ let msgs = generateWAMessageFromContent(anu.id, {
   quoted: joingrp,
   })
 XeonBotInc.relayMessage(anu.id, msgs.message, {})
-                } else if (anu.action == 'remove') {
+
+XeonBotInc.sendMessage(num, 
+  {text : ibwelcm,
+  contextInfo: {
+    externalAdReply:{
+      showAdAttribution: true,
+      title : botname,
+      body : `𝐆𝐫𝐨𝐮𝐩 𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐌𝐞𝐬𝐬𝐚𝐠𝐞`,
+      previewType : `PHOTO`,
+      thumbnail : fs.readFileSync('./XeonMedia/theme/thumb.png'),
+      sourceUrl: websitex,
+      renderLargerThumbnail: false,
+    }
+  }
+})            
+} 
+
+else if (anu.action == 'remove') {
                 	const xeonbuffer = await getBuffer(ppuser)
                   const xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
 	                const xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
