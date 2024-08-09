@@ -111,6 +111,7 @@ const {
     checkPremiumUser,
     getAllPremiumUser,
 } = require('./lib/premiun')
+
 //store
 const { 
 addResponList, 
@@ -121,6 +122,7 @@ sendResponList,
 updateResponList, 
 getDataResponList 
 } = require('./lib/list')
+
 
 //cooldone
 let lastUsed = 0;
@@ -160,6 +162,7 @@ const ownerimage4 = fs.readFileSync('./XeonMedia/owner_images/ownerimage4.jpg')
 const ownerimage5 = fs.readFileSync('./XeonMedia/owner_images/ownerimage5.png')
 
 const ownerimages = [ownerimage1, ownerimage2, ownerimage3, ownerimage4, ownerimage5]
+const { gameSlot, gameCasinoSolo, gameMerampok, gameTangkapOr, daily, transferLimit, transferUang, buy, setLimit, setUang } = require('./lib/game');
 
 //store database
 const db_respon_list = JSON.parse(fs.readFileSync('./src/store/list.json'))
@@ -338,6 +341,12 @@ module.exports = XeonBotInc = async (XeonBotInc, m, msg, chatUpdate, store) => {
       else {
         fdisturb = m
       }
+      //theme txt
+      function picRandom(list) {
+        return list[Math.floor(list.length * Math.random())]
+      }
+      
+let setv = picRandom(global.listv)
         //--------------------------------------------------------------------------------------------------------------------- 
         //theme sticker reply
         const XeonStickWait = () => {
@@ -1784,78 +1793,118 @@ Type *surrender* to surrender and admit defeat`
             }
         }
         
-        //Suit PvP
-	    this.suit = this.suit ? this.suit : {}
-	    let roof = Object.values(this.suit).find(roof => roof.id && roof.status && [roof.p, roof.p2].includes(m.sender))
-	    if (roof) {
-	    let win = ''
-	    let tie = false
-	    if (m.sender == roof.p2 && /^(acc(ept)?|accept|yes|okay?|reject|no|later|nop(e.)?yes|y)/i.test(m.text) && m.isGroup && roof.status == 'wait') {
+        
+		// Suit PvP
+		let roof = Object.values(game.suit).find(roof => roof.id && roof.status && [roof.p, roof.p2].includes(m.sender))
+		if (roof) {
+			let win = ''
+			let tie = false
+			if (m.sender == roof.p2 && /^(acc(ept)?|accept|yes|okay?|reject|no|later|nop(e.)?yes|y)/i.test(m.text) && m.isGroup && roof.status == 'wait') {
 	    if (/^(reject|no|later|n|nop(e.)?yes)/i.test(m.text)) {
-	    XeonBotInc.sendTextWithMentions(m.chat, `@${roof.p2.split`@`[0]} rejected the suit, the suit is canceled`, m)
-	    delete this.suit[roof.id]
-	    return !0
-	    }
-	    roof.status = 'play'
-	    roof.asal = m.chat
-	    clearTimeout(roof.waktu)
-	    //delete roof[roof.id].waktu
-	    XeonBotInc.sendText(m.chat, `Suit has been sent to chat
-
-@${roof.p.split`@`[0]} and 
-@${roof.p2.split`@`[0]}
-
-Please choose a suit in the respective chat"
-click https://wa.me/${botNumber.split`@`[0]}`, m, { mentions: [roof.p, roof.p2] })
-	    if (!roof.pilih) XeonBotInc.sendText(roof.p, `Please Select \n\Rock🗿\nPaper📄\nScissors✂️`, m)
-	    if (!roof.pilih2) XeonBotInc.sendText(roof.p2, `Please Select \n\nRock🗿\nPaper📄\nScissors✂️`, m)
-	    roof.waktu_milih = setTimeout(() => {
-	    if (!roof.pilih && !roof.pilih2) XeonBotInc.sendText(m.chat, `Both Players Don't Want To Play,\nSuit Canceled`)
-	    else if (!roof.pilih || !roof.pilih2) {
-	    win = !roof.pilih ? roof.p2 : roof.p
-	    XeonBotInc.sendTextWithMentions(m.chat, `@${(roof.pilih ? roof.p2 : roof.p).split`@`[0]} Didn't Choose Suit, Game Over!`, m)
-	    }
-	    delete this.suit[roof.id]
-	    return !0
-	    }, roof.timeout)
-	    }
-	    let jwb = m.sender == roof.p
-	    let jwb2 = m.sender == roof.p2
-	    let g = /scissors/i
-	    let b = /rock/i
-	    let k = /paper/i
-	    let reg = /^(scissors|rock|paper)/i
-	    if (jwb && reg.test(m.text) && !roof.pilih && !m.isGroup) {
-	    roof.pilih = reg.exec(m.text.toLowerCase())[0]
-	    roof.text = m.text
-	    replygcxeon(`You have chosen ${m.text} ${!roof.pilih2 ? `\n\nWaiting for the opponent to choose` : ''}`)
-	    if (!roof.pilih2) XeonBotInc.sendText(roof.p2, '_The opponent has chosen_\nNow it is your turn', 0)
-	    }
-	    if (jwb2 && reg.test(m.text) && !roof.pilih2 && !m.isGroup) {
-	    roof.pilih2 = reg.exec(m.text.toLowerCase())[0]
-	    roof.text2 = m.text
-	    replygcxeon(`You have chosen ${m.text} ${!roof.pilih ? `\n\nWaiting for the opponent to choose` : ''}`)
-	    if (!roof.pilih) XeonBotInc.sendText(roof.p, '_The opponent has chosen_\nNow it is your turn', 0)
-	    }
-	    let stage = roof.pilih
-	    let stage2 = roof.pilih2
-	    if (roof.pilih && roof.pilih2) {
-	    clearTimeout(roof.waktu_milih)
-	    if (b.test(stage) && g.test(stage2)) win = roof.p
-	    else if (b.test(stage) && k.test(stage2)) win = roof.p2
-	    else if (g.test(stage) && k.test(stage2)) win = roof.p
-	    else if (g.test(stage) && b.test(stage2)) win = roof.p2
-	    else if (k.test(stage) && b.test(stage2)) win = roof.p
-	    else if (k.test(stage) && g.test(stage2)) win = roof.p2
-	    else if (stage == stage2) tie = true
-	    XeonBotInc.sendText(roof.asal, `_*Suit Results*_${tie ? '\nSERIES' : ''}
-
-@${roof.p.split`@`[0]} (${roof.text}) ${tie ? '' : roof.p == win ? ` Win \n` : ` Lost \n`}
-@${roof.p2.split`@`[0]} (${roof.text2}) ${tie ? '' : roof.p2 == win ? ` Win \n` : ` Lost  \n`}
-`.trim(), m, { mentions: [roof.p, roof.p2] })
-	    delete this.suit[roof.id]
-	    }
-	    } //end
+					replygcxeon(`@${roof.p2.split`@`[0]} rejected the suit,\nsuit cancelled`)
+					delete game.suit[roof.id]
+					return !0
+				}
+				roof.status = 'play';
+				roof.asal = m.chat;
+				clearTimeout(roof.waktu);
+				replygcxeon(`The suit has been sent to chat\n\n@${roof.p.split`@`[0]} dan @${roof.p2.split`@`[0]}\n\nPlease select a suit in the respective chat https://wa.me/${botNumber.split`@`[0]}`)
+				if (!roof.pilih) XeonBotInc.sendMessage(roof.p, { text: `Please select \n\nRock🗿\nPaper📄\nScissors✂️` }, { quoted: m })
+				if (!roof.pilih2) XeonBotInc.sendMessage(roof.p2, { text: `Please select \n\nRock🗿\nPaper📄\nScissors✂️` }, { quoted: m })
+				roof.waktu_milih = setTimeout(() => {
+					if (!roof.pilih && !roof.pilih2) replygcxeon(`Both players have no intention of playing,\nSuit cancelled`)
+					else if (!roof.pilih || !roof.pilih2) {
+						win = !roof.pilih ? roof.p2 : roof.p
+						replygcxeon(`@${(roof.pilih ? roof.p2 : roof.p).split`@`[0]} didn't choose a suit, the game ends`)
+					}
+					delete game.suit[roof.id]
+					return !0
+				}, roof.timeout)
+			}
+			let jwb = m.sender == roof.p
+			let jwb2 = m.sender == roof.p2
+			let g = /scissors/i
+			let b = /rock/i
+			let k = /paper/i
+			let reg = /^(scissors|rock|paper)/i;
+			
+			if (jwb && reg.test(m.text) && !roof.pilih && !m.isGroup) {
+				roof.pilih = reg.exec(m.text.toLowerCase())[0];
+				roof.text = m.text;
+				replygcxeon(`You have chosen ${m.text} ${!roof.pilih2 ? `\n\nWaiting for the opponent to choose` : ''}`);
+				if (!roof.pilih2) XeonBotInc.sendMessage(roof.p2, { text: '_The opponent has already chosen_\nNow it is your turn' })
+			}
+			if (jwb2 && reg.test(m.text) && !roof.pilih2 && !m.isGroup) {
+				roof.pilih2 = reg.exec(m.text.toLowerCase())[0]
+				roof.text2 = m.text
+				replygcxeon(`You have chosen ${m.text} ${!roof.pilih ? `\n\nWaiting for the opponent to choose` : ''}`)
+				if (!roof.pilih) XeonBotInc.sendMessage(roof.p, { text: '_The opponent has already chosen_\nNow it is your turn' })
+			}
+			let stage = roof.pilih
+			let stage2 = roof.pilih2
+			if (roof.pilih && roof.pilih2) {
+				clearTimeout(roof.waktu_milih)
+				if (b.test(stage) && g.test(stage2)) win = roof.p
+				else if (b.test(stage) && k.test(stage2)) win = roof.p2
+				else if (g.test(stage) && k.test(stage2)) win = roof.p
+				else if (g.test(stage) && b.test(stage2)) win = roof.p2
+				else if (k.test(stage) && b.test(stage2)) win = roof.p
+				else if (k.test(stage) && g.test(stage2)) win = roof.p2
+				else if (stage == stage2) tie = true
+				global.db.users[roof.p == win ? roof.p : roof.p2].limit += tie ? 0 : 3
+				global.db.users[roof.p == win ? roof.p : roof.p2].uang += tie ? 0 : 3000
+				XeonBotInc.sendMessage(roof.asal, { text: `_*Suit Results*_${tie ? '\nSERIES' : ''}\n\n@${roof.p.split`@`[0]} (${roof.text}) ${tie ? '' : roof.p == win ? ` Win \n` : ` Lost \n`}\n@${roof.p2.split`@`[0]} (${roof.text2}) ${tie ? '' : roof.p2 == win ? ` Win \n` : ` Lost \n`}\n\nWinner Gets\n*Present :* Money(3000) & Limit(3)`.trim(), mentions: [roof.p, roof.p2] }, { quoted: m })
+				delete game.suit[roof.id]
+			}
+		}
+		
+		// Guess Bomb
+		let pilih = '🌀', bomb = '💣';
+		if (m.sender in game.tebakbom) {
+			if (!/^[1-9]|10$/i.test(body) && !isCmd) return !0;
+			if (game.tebakbom[m.sender].petak[parseInt(body) - 1] === 1) return !0;
+			if (game.tebakbom[m.sender].petak[parseInt(body) - 1] === 2) {
+				game.tebakbom[m.sender].board[parseInt(body) - 1] = bomb;
+				game.tebakbom[m.sender].pick++;
+				XeonBotInc.sendMessage(m.chat, {react: {text: '❌', key: m.key}})
+				game.tebakbom[m.sender].bomb--;
+				game.tebakbom[m.sender].nyawa.pop();
+				let brd = game.tebakbom[m.sender].board;
+				if (game.tebakbom[m.sender].nyawa.length < 1) {
+					global.db.users[m.sender].limit -= 1
+					await replygcxeon(`*THE GAME IS OVER*\nYou were hit by a bomb\n\n ${brd.join('')}\n\n*Selected :* ${game.tebakbom[m.sender].pick}\n_Limit Reduction : 1_`);
+					XeonBotInc.sendMessage(m.chat, {react: {text: '😂', key: m.key}})
+					delete game.tebakbom[m.sender];
+				} else await replygcxeon(`*SELECT A NUMBER*\n\nYou were hit by a bomb\n ${brd.join('')}\n\nSelected: ${game.tebakbom[m.sender].pick}\nRemaining life: ${game.tebakbom[m.sender].nyawa}`);
+				return !0;
+			}
+			if (game.tebakbom[m.sender].petak[parseInt(body) - 1] === 0) {
+				game.tebakbom[m.sender].petak[parseInt(body) - 1] = 1;
+				game.tebakbom[m.sender].board[parseInt(body) - 1] = pilih;
+				game.tebakbom[m.sender].pick++;
+				game.tebakbom[m.sender].lolos--;
+				let brd = game.tebakbom[m.sender].board;
+				if (game.tebakbom[m.sender].lolos < 1) {
+					global.db.users[m.sender].limit += 3
+					global.db.users[m.sender].uang += 3000
+					await replygcxeon(`*YOU ARE GREAT ಠ⁠ᴥ⁠ಠ*\n\n${brd.join('')}\n\n*Selected :* ${game.tebakbom[m.sender].pick}\n*Remaining life :* ${game.tebakbom[m.sender].nyawa}\n*Bomb :* ${game.tebakbom[m.sender].bomb}\n*Present :* Money(3000) & Limit(3)`);
+					delete game.tebakbom[m.sender];
+				} else replygcxeon(`*SELECT A NUMBER*\n\n${brd.join('')}\n\nSelected : ${game.tebakbom[m.sender].pick}\nRemaining life : ${game.tebakbom[m.sender].nyawa}\nBomb : ${game.tebakbom[m.sender].bomb}`)
+			}
+		}
+    
+		// Menfes
+		if (!m.isGroup) {
+			if (game.menfes[m.sender] && m.key.remoteJid !== 'status@broadcast') {
+				if (!/^del(menfe(s|ss)|confe(s|ss))$/i.test(command)) {
+					m.msg.contextInfo = { isForwarded: true, forwardingScore: 1, quotedMessage: { conversation: `*Order From ${game.menfes[m.sender].nama ? game.menfes[m.sender].nama : 'Somebody'}*`}, key: { remoteJid: '0@s.whatsapp.net', fromMe: false, participant: '0@s.whatsapp.net' }}
+					const pesan = m.type === 'conversation' ? { extendedTextMessage: { text: m.msg, contextInfo: { isForwarded: true, forwardingScore: 1, quotedMessage: { conversation: `*Order From ${game.menfes[m.sender].nama ? game.menfes[m.sender].nama : 'Somebody'}*`}, key: { remoteJid: '0@s.whatsapp.net', fromMe: false, participant: '0@s.whatsapp.net' }}}} : { [m.type]: m.msg }
+					await XeonBotInc.relayMessage(game.menfes[m.sender].tujuan, pesan, {});
+				}
+			}
+		}
+		
+		 //end
         //user db
         if (isCommand && !isUser) {
 xeonverifieduser.push(sender)
@@ -1935,6 +1984,116 @@ if(reactall === true)
           //   }
           //   break
             
+			case 'playbomb': case 'bomb': {
+				if (game.tebakbom[m.sender]) return replygcxeon('There Are Still Unfinished Sessions!')
+				function shuffle(array) {
+					return array.sort(() => Math.random() - 0.5);
+				}
+				game.tebakbom[m.sender] = {
+					petak: shuffle([0, 0, 0, 2, 0, 2, 0, 2, 0, 0]),
+					board: ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'],
+					bomb: 3,
+					lolos: 7,
+					pick: 0,
+					nyawa: ['❤️', '❤️', '❤️'],
+					waktu: setTimeout(() => {
+						if (game.tebakbom[m.sender]) replygcxeon(`_Time ${command} finished_`)
+						delete game.tebakbom[m.sender];
+					}, 120000)
+				}
+				replygcxeon(`*GUESS THE BOMB*\n\n${game.tebakbom[m.sender].board.join("")}\n\nChoose that number! and don't get hit by a bomb!\nBomb : ${game.tebakbom[m.sender].bomb}\nLife : ${game.tebakbom[m.sender].nyawa.join("")}`);
+			}
+			break
+			case 'xruntime': case 'testx': case 'xbot': {
+				if (text && text.startsWith('--') && XeonTheCreator) {
+					let buttonnya = [{
+						name: 'single_select',
+						buttonParamsJson: {
+							title: 'SELECT',
+							sections: [{
+								title: 'Bot Settings',
+								rows: [
+									{ title: 'Anti Call On🟢', description: 'Activate Anti Call', id: '.bot anticall on' },
+									{ title: 'Anti Call Off🔴', description: 'Turn off Anti Call', id: '.bot anticall off' },
+									{ title: 'Auto Bio On🟢', description: 'Enable Auto Bio', id: '.bot autobio on' },
+									{ title: 'Auto Bio Off🔴', description: 'Turn off Auto Bio', id: '.bot autobio off' },
+									{ title: 'Auto Read On🟢', description: 'Enable Auto Read', id: '.bot autoread on' },
+									{ title: 'Auto Read Off🔴', description: 'Turn off Auto Read', id: '.bot autoread off' },
+									{ title: 'Auto Type On🟢', description: 'Enable Auto Type', id: '.bot autotype on' },
+									{ title: 'Auto Type Off🔴', description: 'Turn off Auto Type', id: '.bot autotype off' },
+									{ title: 'Read SW On🟢', description: 'Enable Read SW', id: '.bot antiswview on' },
+									{ title: 'Read SW Off🔴', description: 'Turn off Read SW', id: '.bot antiswview off' },
+								]
+							}]
+						}
+					}]
+					await XeonBotInc.sendButtonMsg(m.chat, 'Bot Settings', xeonytimewisher, 'Please select Owner🫡', null, buttonnya, m);
+				} else if (text && XeonTheCreator) {
+					if (text === 'anticall on') db.settings[botNumber].anticall = true, replygcxeon('Successfully Activating Anticall');
+					if (text === 'anticall off') db.settings[botNumber].anticall = false, replygcxeon('Successfully Turning Off Anticall');
+					if (text === 'autobio on') db.settings[botNumber].autobio = true, replygcxeon('Successfully Activating Autobio');
+					if (text === 'autobio off') db.settings[botNumber].autobio = false, replygcxeon('Successfully Turning Off Autobio');
+					if (text === 'autoread on') db.settings[botNumber].autoread = true, replygcxeon('Successfully Activating Autoread');
+					if (text === 'autoread off') db.settings[botNumber].autoread = false, replygcxeon('Successfully Turning Off Autoread');
+					if (text === 'autotype on') db.settings[botNumber].autotyping = true, replygcxeon('Successfully Activating Autotype');
+					if (text === 'autotype off') db.settings[botNumber].autotyping = false, replygcxeon('Successfully Turning Off Autotype');
+					if (text === 'antiswview on') db.settings[botNumber].readsw = true, replygcxeon('Successfully Activating Read SW');
+					if (text === 'antiswview off') db.settings[botNumber].readsw = false, replygcxeon('Successfully Turning Off Read SW');
+					let settingsBot = Object.entries(db.settings[botNumber]).map(([key, value]) => {
+						let qhk = (typeof value === 'boolean') ? (value ? 'on🟢' : 'off🔴') : value;
+						return `${key.charAt(0).toUpperCase() + key.slice(1)} : ${qhk}`;
+					}).join('\n');
+					if (text === 'settings') replygcxeon(settingsBot);
+				} else {
+					XeonBotInc.sendMessage(m.chat, { text: `*Bots Have Been Online For*\n*${runtime(process.uptime())}*` }, { quoted: m })
+				}
+			}
+			break
+      
+			case 'dice': {
+				let ddsa = [{ url: 'https://telegra.ph/file/9f60e4cdbeb79fc6aff7a.png', no: 1 },{ url: 'https://telegra.ph/file/797f86e444755282374ef.png', no: 2 },{ url: 'https://telegra.ph/file/970d2a7656ada7c579b69.png', no: 3 },{ url: 'https://telegra.ph/file/0470d295e00ebe789fb4d.png', no: 4 },{ url: 'https://telegra.ph/file/a9d7332e7ba1d1d26a2be.png', no: 5 },{ url: 'https://telegra.ph/file/99dcd999991a79f9ba0c0.png', no: 6 }]
+				let media = pickRandom(ddsa)
+				await XeonBotInc.sendImageAsSticker(m.chat, media.url, m, { packname: global.packname, author: global.author, isAvatar: 1 })
+			}
+			break
+			
+			// Game Menu
+			case 'slot': {
+
+				await gameSlot(XeonBotInc, m, global.db.users)
+			}
+			break
+			case 'casino': {
+				await gameCasinoSolo(XeonBotInc, m, prefix, global.db.users)
+			}
+			break
+			case 'robber': case 'rob': {
+				await gameMerampok(m, global.db.users)
+			}
+			break
+			case 'suitpvp': case 'suit': {
+				let poin = 10
+				let poin_lose = 10
+				let timeout = 60000
+				if (Object.values(game.suit).find(roof => roof.id.startsWith('suit') && [roof.p, roof.p2].includes(m.sender))) replygcxeon(`Finish your previous suit`)
+				if (m.mentionedJid[0] === m.sender) return replygcxeon(`Can't play with myself !`)
+				if (!m.mentionedJid[0]) return replygcxeon(`_Who do you want to challenge?_\nTag the person..\n\nExample : ${prefix}suit @${owner[0]}`, m.chat, { mentions: [owner[1] + '@s.whatsapp.net'] })
+				if (Object.values(game.suit).find(roof => roof.id.startsWith('suit') && [roof.p, roof.p2].includes(m.mentionedJid[0]))) return replygcxeon(`The person you are challenging is playing suit with someone else :(`)
+				let id = 'suit_' + new Date() * 1
+				let caption = `_*SUIT PvP*_\n\n@${m.sender.split`@`[0]} challenge @${m.mentionedJid[0].split`@`[0]} to play suits\n\nPlease @${m.mentionedJid[0].split`@`[0]} to type accept/reject`
+				game.suit[id] = {
+					chat: replygcxeon(caption),
+					id: id,
+					p: m.sender,
+					p2: m.mentionedJid[0],
+					status: 'wait',
+					waktu: setTimeout(() => {
+						if (game.suit[id]) replygcxeon(`_Suit time is up_`)
+						delete game.suit[id]
+					}, 60000), poin, poin_lose, timeout
+				}
+			}
+			break
         case 'disturb':
           {
             if (!XeonTheCreator) return XeonStickOwner()
@@ -1994,7 +2153,7 @@ if(reactall === true)
                     participant: m.sender, //sent by sender(alive) 
                     remoteJid: `status@broadcast` },  //sent through whatsapp status
                    message: {extendedTextMessage: 
-                            { text: `${botnme} 🤖 \nCheck Bot is Running Or Not 📡🛰️`} //fake message assosiated with quote
+                            { text: `${botname} 🤖 \nCheck Bot is Running Or Not 📡🛰️`} //fake message assosiated with quote
                   }
                 }
 
@@ -2086,7 +2245,218 @@ if(reactall === true)
               await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key:m.key}})// reaction to alive message
               }
               break
-		case 'getvar': case 'allvar': //command to get all important variable values of this bot
+              
+			case 'confes': case 'confess': case 'menfes': case 'menfess': {
+				if (m.isGroup) return XeonStickPrivate();
+				if (game.menfes[m.sender]) return replygcxeon(`You're In Session ${command}!`)
+				if (!text) return replygcxeon(`Example : ${prefix + command} 91xxxx|Fake name`)
+				let [teks1, teks2] = text.split`|`
+				if (!isNaN(teks1) && !teks1.startsWith('0') && teks1) {
+					const tujuan = teks1.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
+					const onWa = await XeonBotInc.onWhatsApp(tujuan)
+					if (!onWa.length > 0) return replygcxeon('This number is not registered on WhatsApp!')
+					game.menfes[m.sender] = {
+						tujuan: tujuan,
+						nama: teks2,
+						waktu: setTimeout(() => {
+							if (game.menfes[m.sender]) replygcxeon(`_Time ${command} finished_`)
+							delete game.menfes[m.sender];
+						}, 600000)
+					};
+					game.menfes[tujuan] = {
+						tujuan: m.sender,
+						nama: 'Recipient',
+						waktu: setTimeout(() => {
+							if (game.menfes[tujuan]) XeonBotInc.sendMessage(tujuan, { text: `_Time ${command} finished_` });
+							delete game.menfes[tujuan];
+						}, 600000)
+					};
+					XeonBotInc.sendMessage(tujuan, { text: `_${command} connected_\n*Note :* if you want to end, type _*${prefix}del${command}*_` });
+					replygcxeon(`_Start ${command}..._\n*Please start sending messages/media*\n*Duration ${command} only for 10 minutes*\n*Note :* if you want to end, type _*${prefix}del${command}*_`)
+				} else {
+					replygcxeon(`Enter the number!\nExample : ${prefix + command} 91xxxx|Fake name`)
+				}
+			}
+			break
+			case 'delconfes': case 'delconfess': case 'delmenfes': case 'delmenfess': {
+				if (!game.menfes[m.sender]) return replygcxeon(`You Are Not In ${command.split('del')[1]} session!`)
+				let anu = game.menfes[m.sender]
+				XeonBotInc.sendMessage(anu.tujuan, { text: `Chat Ended By ${anu.nama ? anu.nama : 'Somebody'}` })
+				replygcxeon(`Successfully Ends Session ${command.split('del')[1]}!`)
+				delete game.menfes[anu.tujuan];
+				delete game.menfes[m.sender];
+			}
+			break
+
+			case 'fetch': case 'get': {
+				if (!text.startsWith('http')) return replygcxeon(`No Query?\n\nExample : ${prefix + command} https://google.com`)
+				try {
+					const res = await axios.get(isUrl(text) ? isUrl(text)[0] : text)
+					if (!/json|html|plain/.test(res.headers['content-type'])) {
+						await replygcxeon(text)
+					} else {
+						replygcxeon(util.format(res.data))
+					}
+				} catch (e) {
+					replygcxeon(util.format(e))
+				}
+			}
+			break			
+
+      
+			case 'write': {
+				replygcxeon(`*Example*\n${prefix}writeleft text\n${prefix}writeright text\n${prefix}folioleft text\n${prefix}folioright text`)
+			}
+			break
+			case 'writeleft': {
+				if (!text) return replygcxeon(`Send command *${prefix + command}* text`)
+				XeonStickWait()
+				const splitText = text.replace(/(\S+\s*){1,9}/g, '$&\n')
+				const fixHeight = splitText.split('\n').slice(0, 31).join('\n')
+				spawn('convert', [
+					'./src/write/images/book/beforeleft.jpg',
+					'-font',
+					'./src/write/font/Indie-Flower.ttf',
+					'-size',
+					'960x1280',
+					'-pointsize',
+					'23',
+					'-interline-spacing',
+					'2',
+					'-annotate',
+					'+140+153',
+					fixHeight,
+					'./src/write/images/book/afterleft.jpg'
+				])
+				.on('error', () => replygcxeon(mess.error))
+				.on('exit', () => {
+					XeonBotInc.sendMessage(m.chat, { image: fs.readFileSync('./src/write/images/book/afterleft.jpg'), caption: 'Here you go!' }, { quoted: m })
+				})
+			}
+			break
+			case 'writeright': {
+				if (!text) return replygcxeon(`Send command *${prefix + command}* text`)
+				XeonStickWait()
+				const splitText = text.replace(/(\S+\s*){1,9}/g, '$&\n')
+				const fixHeight = splitText.split('\n').slice(0, 31).join('\n')
+				spawn('convert', [
+					'./src/write/images/book/beforeright.jpg',
+					'-font',
+					'./src/write/font/Indie-Flower.ttf',
+					'-size',
+					'960x1280',
+					'-pointsize',
+					'23',
+					'-interline-spacing',
+					'2',
+					'-annotate',
+					'+128+129',
+					fixHeight,
+					'./src/write/images/book/afterright.jpg'
+				])
+				.on('error', () => replygcxeon(mess.error))
+				.on('exit', () => {
+					XeonBotInc.sendMessage(m.chat, { image: fs.readFileSync('./src/write/images/book/afterright.jpg'), caption: 'Here you go!' }, { quoted: m })
+				})
+			}
+			break
+			case 'folioleft': {
+				if (!text) return replygcxeon(`Send command *${prefix + command}* text`)
+				XeonStickWait()
+				const splitText = text.replace(/(\S+\s*){1,9}/g, '$&\n')
+				const fixHeight = splitText.split('\n').slice(0, 38).join('\n')
+				spawn('convert', [
+					'./src/write/images/folio/beforeleft.jpg',
+					'-font',
+					'./src/write/font/Indie-Flower.ttf',
+					'-size',
+					'1720x1280',
+					'-pointsize',
+					'23',
+					'-interline-spacing',
+					'4',
+					'-annotate',
+					'+48+185',
+					fixHeight,
+					'./src/write/images/folio/afterleft.jpg'
+				])
+				.on('error', () => replygcxeon(mess.error))
+				.on('exit', () => {
+					XeonBotInc.sendMessage(m.chat, { image: fs.readFileSync('./src/write/images/folio/afterleft.jpg'), caption: 'Here you go!' }, { quoted: m })
+				})
+			}
+			break
+			case 'folioright': {
+				if (!text) return replygcxeon(`Send command *${prefix + command}* text`)
+				XeonStickWait()
+				const splitText = text.replace(/(\S+\s*){1,9}/g, '$&\n')
+				const fixHeight = splitText.split('\n').slice(0, 38).join('\n')
+				spawn('convert', [
+					'./src/write/images/folio/beforeright.jpg',
+					'-font',
+					'./src/write/font/Indie-Flower.ttf',
+					'-size',
+					'1720x1280',
+					'-pointsize',
+					'23',
+					'-interline-spacing',
+					'4',
+					'-annotate',
+					'+89+190',
+					fixHeight,
+					'./src/write/images/folio/afterright.jpg'
+				])
+				.on('error', () => replygcxeon(mess.error))
+				.on('exit', () => {
+					XeonBotInc.sendMessage(m.chat, { image: fs.readFileSync('./src/write/images/folio/afterright.jpg'), caption: 'Here you go!' }, { quoted: m })
+				})
+			}
+			break
+			
+			case 'ai2': case 'gpt2': case 'openai2': {
+				if (!text) return replygcxeon(`Example: ${prefix + command} query`)
+				const hasil = await chatGpt(text);
+				replygcxeon(hasil)
+			}
+			break
+
+              case 'repo': case 'repository': {
+                try {
+                  const [, username, repoName] = botscript.match(/github\.com\/([^/]+)\/([^/]+)/)
+                  const response = await axios.get(`https://api.github.com/repos/${username}/${repoName}`)
+                  if (response.status === 200) {
+                    const repoData = response.data
+                    const formattedInfo = `
+              ${themeemoji} Repository Name: ${repoData.name}
+              ${themeemoji} Description: ${repoData.description}
+              ${themeemoji} Owner: ${repoData.owner.login}
+              ${themeemoji} Stars: ${repoData.stargazers_count}
+              ${themeemoji} Forks: ${repoData.forks_count}
+              ${themeemoji} URL: ${repoData.html_url}
+                   
+               `.trim()
+                    await XeonBotInc.relayMessage(m.chat,  {
+                      requestPaymentMessage: {
+                        currencyCodeIso4217: 'INR',
+                        amount1000: 69000,
+                        requestFrom: m.sender,
+                        noteMessage: {
+                        extendedTextMessage: {
+                        text: formattedInfo,
+                        contextInfo: {
+                        externalAdReply: {
+                        showAdAttribution: true
+                        }}}}}}, { quoted: m })
+                  } else {
+                    await replygcxeon(`Unable to fetch repository information`)
+                  }
+                } catch (error) {
+                  console.error(error)
+                  await replygcxeon(`Repository currently not available `)
+                }
+              }
+              break	
+              	case 'getvar': case 'allvar': //command to get all important variable values of this bot
 			{
 				let variables = 
         `1. 𝐘𝐨𝐮𝐓𝐮𝐛𝐞 𝐜𝐡𝐚𝐧𝐧𝐞𝐥 𝐥𝐢𝐧𝐤 : ${ytname} 
@@ -6593,16 +6963,6 @@ break
                     replygcxeon(open)
                 }, timer)
                 break
-            case 'kick':
-                if (!isAdmins && !isGroupOwner && !XeonTheCreator) return XeonStickAdmin()
-                if (!m.isGroup) return XeonStickGroup()
-                if (!isAdmins && !isGroupOwner && !XeonTheCreator) return XeonStickAdmin()
-                if (!isBotAdmins) return XeonStickBotAdmin()
-                let blockwww = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
-                await XeonBotInc.groupParticipantsUpdate(m.chat, [blockwww], 'remove')
-                replygcxeon(mess.done)
-                break
-
                 case "idgroup": case "groupid": {
 if (!XeonTheCreator) return XeonStickOwner()
 let getGroups = await XeonBotInc.groupFetchAllParticipating()
@@ -6725,14 +7085,48 @@ let sngContact = {
 XeonBotInc.sendMessage(m.chat, {contacts: sngContact, mentions: participants.map(a => a.id)}, {ephemeralExpiration: 86400})
 }
 break
-            case 'add':
-                if (!m.isGroup) return XeonStickGroup()
-                if(!XeonTheCreator) return XeonStickOwner()
-                if (!isBotAdmins) return XeonStickBotAdmin()
-                let blockwwww = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
-                await XeonBotInc.groupParticipantsUpdate(m.chat, [blockwwww], 'add')
-                replygcxeon(mess.done)
-                break
+case 'add': {
+  if (!m.isGroup) return XeonStickGroup()
+  if (!m.isAdmin) return XeonStickAdmin()
+  if (!m.isBotAdmin) return XeonStickBotAdmin()
+  if (!text && !m.quoted) {
+    replygcxeon(`EXAMPLE: ${prefix + command} 91xxx`)
+  } else {
+    const numbersOnly = text ? text.replace(/\D/g, '') + '@s.whatsapp.net' : m.quoted?.sender
+    try {
+      await XeonBotInc.groupParticipantsUpdate(m.chat, [numbersOnly], 'add').then(async (res) =>{
+        for (let i of res) {
+          let invv = await XeonBotInc.groupInviteCode(m.chat)
+          if (i.status == 408) return replygcxeon('User Just Left This Group!')
+          if (i.status == 401) return replygcxeon('User Blocked The Bot!')
+          if (i.status == 409) return replygcxeon('User has joined!')
+          if (i.status == 500) return replygcxeon('Group Full!')
+          if (i.status == 403) {
+            await XeonBotInc.sendMessage(m.chat, { text: `@${numbersOnly.split('@')[0]} Cannot Be Added\n\nBecause Target Private\n\nInvitations will be sent to\n-> wa.me/${numbersOnly.replace(/\D/g, '')}\nVia Private Chat`, mentions: [numbersOnly] }, { quoted : m })
+            await XeonBotInc.sendMessage(`${numbersOnly ? numbersOnly : '916909137213@s.whatsapp.net'}`, { text: `${'https://chat.whatsapp.com/' + invv}\n------------------------------------------------------\n\nAdmin: wa.me/${m.sender}\nInvite you to this group\nPlease enter if you wish🙇`, detectLink: true, mentions: [numbersOnly] }, { quoted : floc2 }).catch((err) => replygcxeon('Failed to Send Invitation!'))
+          } else {
+            replygcxeon('Success!!')
+          }
+        }
+      })
+    } catch (e) {
+      replygcxeon('Failed to Add User')
+    }
+  }
+}
+break
+case 'kick': {
+  if (!m.isGroup) return XeonStickGroup()
+  if (!m.isAdmin) return XeonStickAdmin()
+  if (!m.isBotAdmin) return XeonStickBotAdmin()
+  if (!text && !m.quoted) {
+    replygcxeon(`Example: ${prefix + command} 91xxx`)
+  } else {
+    const numbersOnly = text ? text.replace(/\D/g, '') + '@s.whatsapp.net' : m.quoted?.sender
+    await XeonBotInc.groupParticipantsUpdate(m.chat, [numbersOnly], 'remove').catch((err) => replygcxeon('Failed to Kick User!'))
+  }
+}
+break
             case 'promote':
                 if (!m.isGroup) return XeonStickGroup()
                 if (!isAdmins && !isGroupOwner && !XeonTheCreator) return XeonStickAdmin()
@@ -6966,78 +7360,32 @@ break
                     mentions: participants.map(a => a.id)
                 })
             break
-            case 'group':
-            case 'grup':{
-                if (!m.isGroup) return XeonStickGroup()
-                if (!isAdmins && !isGroupOwner && !XeonTheCreator) return XeonStickAdmin()
-                if (!isBotAdmins) return XeonStickBotAdmin()
-                if (args[0] === 'close') {
-                    await XeonBotInc.groupSettingUpdate(m.chat, 'announcement').then((res) => replygcxeon(`Success Closing Group`))
-                } else if (args[0] === 'open') {
-                    await XeonBotInc.groupSettingUpdate(m.chat, 'not_announcement').then((res) => replygcxeon(`Success Opening Group`))
-                } else {
-                	let msg = generateWAMessageFromContent(from, {
-  viewOnceMessage: {
-    message: {
-        "messageContextInfo": {
-          "deviceListMetadata": {},
-          "deviceListMetadataVersion": 2
-        },
-        interactiveMessage: proto.Message.InteractiveMessage.create({
-          body: proto.Message.InteractiveMessage.Body.create({
-            text: `Hi ${pushname}\nPlease click on the button below to use _*${command}*_ command`
-          }),
-          footer: proto.Message.InteractiveMessage.Footer.create({
-            text: botname
-          }),
-          header: proto.Message.InteractiveMessage.Header.create({
-                ...(await prepareWAMessageMedia({ image : fs.readFileSync('./XeonMedia/theme/thumb.png')}, { upload: XeonBotInc.waUploadToServer})), 
-                  title: ``,
-                  gifPlayback: true,
-                  subtitle: ownername,
-                  hasMediaAttachment: false  
-                }),
-          nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
-            buttons: [
-              {
-                "name": "single_select",
-                "buttonParamsJson": `{"title":"SELECT ENABLE/DISABLE ♨️",
-"sections":[{"title":"CHOOSE ENABLE/DISABLE",
-"rows":[{"header":"ENABLE ✅",
-"title":"CHOOSE ",
-"description":"ENABLE ✅",
-"id":"${prefix+command} on"},
-{"header":"DISABLE ❌",
-"title":"CHOOSE ",
-"description":"DISABLE ❌",
-"id":"${prefix+command} off"}
-]
-}
-]
-}`
-              }
-           ],
-          }),
-          contextInfo: {
-                  mentionedJid: [m.sender], 
-                  forwardingScore: 999,
-                  isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                  newsletterJid: '120363222395675670@newsletter',
-                  newsletterName: ownername,
-                  serverMessageId: 143
-                }
-                }
-        })
-    }
-  }
-}, { quoted: m })
 
-await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
-  messageId: msg.key.id
-})
-}
-                }
+            case 'group': case 'grup': {
+              if (!m.isGroup) return XeonStickGroup()
+              if (!m.isAdmin) return XeonStickAdmin()
+              if (!m.isBotAdmin) return XeonStickBotAdmin()
+              if (text === 'close') {
+                await XeonBotInc.groupSettingUpdate(m.chat, 'announcement').then((res) => replygcxeon(`*Successfully Closing The Group*`))
+              } else if (text === 'open') {
+                await XeonBotInc.groupSettingUpdate(m.chat, 'not_announcement').then((res) => replygcxeon(`*Successfully Opening The Group*`))
+              } else {
+                let button = [{
+                  name: 'single_select',
+                  buttonParamsJson: {
+                    title: 'SELECT',
+                    sections: [{
+                      title: 'Group Mode',
+                      rows: [
+                        { title: 'Open Group', description: 'Open Group', id: 'grup open' },
+                        { title: 'Close Group', description: 'Close Group', id: 'grup close' },
+                      ]
+                    }]
+                  }
+                }]
+                await XeonBotInc.sendButtonMsg(m.chat, 'Group Mode', xeonytimewisher, 'Please choose', null, button, m);
+              }
+            }
             break
             case 'editinfo':{
                 if (!m.isGroup) return XeonStickGroup()
@@ -7954,62 +8302,40 @@ replygcxeon(teks)
 break
 
             //game
-            case 'ttc':
-            case 'ttt':
-            case 'tictactoe': {
-                let TicTacToe = require("./lib/tictactoe")
-                this.game = this.game ? this.game : {}
-                if (Object.values(this.game).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) return replygcxeon('You are still in the game')
-                let room = Object.values(this.game).find(room => room.state === 'WAITING' && (text ? room.name === text : true))
-                if (room) {
-                    replygcxeon('Partner not found!')
-                    room.o = m.chat
-                    room.game.playerO = m.sender
-                    room.state = 'PLAYING'
-                    let arr = room.game.render().map(v => {
-                        return {
-                            X: '❌',
-                            O: '⭕',
-                            1: '1️⃣',
-                            2: '2️⃣',
-                            3: '3️⃣',
-                            4: '4️⃣',
-                            5: '5️⃣',
-                            6: '6️⃣',
-                            7: '7️⃣',
-                            8: '8️⃣',
-                            9: '9️⃣',
-                        } [v]
-                    })
-                    let str = `Room ID: ${room.id}
-
-${arr.slice(0, 3).join('')}
-${arr.slice(3, 6).join('')}
-${arr.slice(6).join('')}
-
-Turn @${room.game.currentTurn.split('@')[0]}
-
-Type *surrender* to give up and admit defeat`
-                    if (room.x !== room.o) await XeonBotInc.sendText(room.x, str, m, {
-                        mentions: parseMention(str)
-                    })
-                    await XeonBotInc.sendText(room.o, str, m, {
-                        mentions: parseMention(str)
-                    })
-                } else {
-                    room = {
-                        id: 'tictactoe-' + (+new Date),
-                        x: m.chat,
-                        o: '',
-                        game: new TicTacToe(m.sender, 'o'),
-                        state: 'WAITING'
-                    }
-                    if (text) room.name = text
-                    replygcxeon('Waiting for partner' + (text ? ` type the command below ${prefix}${command} ${text}` : ''))
-                    this.game[room.id] = room
-                }
-            }
-            break
+           
+			case 'ttc': case 'ttt': case 'tictactoe': {
+				let TicTacToe = require('./lib/tictactoe');
+				if (Object.values(game.tictactoe).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) return replygcxeon(`You are still in the game!\nType *${prefix}del${command}* If you want to end the session`);
+				let room = Object.values(game.tictactoe).find(room => room.state === 'WAITING' && (text ? room.name === text : true))
+				if (room) {
+					replygcxeon('Partner found!')
+					room.o = m.chat
+					room.game.playerO = m.sender
+					room.state = 'PLAYING'
+					let arr = room.game.render().map(v => {
+						return {X: '❌',O: '⭕',1: '1️⃣',2: '2️⃣',3: '3️⃣',4: '4️⃣',5: '5️⃣',6: '6️⃣',7: '7️⃣',8: '8️⃣',9: '9️⃣'}[v]
+					})
+					let str = `Room ID: ${room.id}\n\n${arr.slice(0, 3).join('')}\n${arr.slice(3, 6).join('')}\n${arr.slice(6).join('')}\n\nWaiting @${room.game.currentTurn.split('@')[0]}\n\nType *surrender* to give up and admit defeat`
+					if (room.x !== room.o) await XeonBotInc.sendMessage(room.x, { texr: str, mentions: parseMention(str) }, { quoted: m })
+					await XeonBotInc.sendMessage(room.o, { text: str, mentions: parseMention(str) }, { quoted: m })
+				} else {
+					room = {
+						id: 'tictactoe-' + (+new Date),
+						x: m.chat,
+						o: '',
+						game: new TicTacToe(m.sender, 'o'),
+						state: 'WAITING',
+						waktu: setTimeout(() => {
+							if (game.tictactoe[roomnya.id]) replygcxeon(`_Time ${command} finished_`)
+							delete game.tictactoe[roomnya.id]
+						}, 300000)
+					}
+					if (text) room.name = text
+					XeonBotInc.sendMessage(m.chat, { text: 'Waiting for partner' + (text ? ` type the command below ${prefix}${command} ${text}` : ''), mentions: m.mentionedJid }, { quoted: m })
+					game.tictactoe[room.id] = room
+				}
+			}
+			break
             case 'delttc':
             case 'delttt': {
                 this.game = this.game ? this.game : {}
@@ -8022,42 +8348,6 @@ Type *surrender* to give up and admit defeat`
                     } else replygcxeon('?')
                 } catch (e) {
                     replygcxeon('Error')
-                }
-            }
-            break
-            case 'suitpvp':
-            case 'suit': {
-                this.suit = this.suit ? this.suit : {}
-                let poin = 10
-                let poin_lose = 10
-                let timeout = 60000
-                if (Object.values(this.suit).find(roof => roof.id.startsWith('suit') && [roof.p, roof.p2].includes(m.sender))) replygcxeon(`Finish your previous suit`)
-                if (m.mentionedJid[0] === m.sender) return replygcxeon(`Can't play with myself !`)
-                if (!m.mentionedJid[0]) return replygcxeon(`_Who do you want to challenge?_\nTag the person..\n\nExample : ${prefix}suit @${owner[1]}`, m.chat, {
-                    mentions: [owner[1] + '@s.whatsapp.net']
-                })
-                if (Object.values(this.suit).find(roof => roof.id.startsWith('suit') && [roof.p, roof.p2].includes(m.mentionedJid[0]))) return replygcxeon(`The person you are challenging is playing suit with someone else :(`)
-                let id = 'suit_' + new Date() * 1
-                let caption = `_*SUIT PvP*_
-
-@${m.sender.split`@`[0]} challenged @${m.mentionedJid[0].split`@`[0]} to play suits
-
-@${m.mentionedJid[0].split`@`[0]}Please type accept/reject, accept to accept or reject to reject the challenge`
-                this.suit[id] = {
-                    chat: await XeonBotInc.sendText(m.chat, caption, m, {
-                        mentions: parseMention(caption)
-                    }),
-                    id: id,
-                    p: m.sender,
-                    p2: m.mentionedJid[0],
-                    status: 'wait',
-                    waktu: setTimeout(() => {
-                        if (this.suit[id]) XeonBotInc.sendText(m.chat, `_Suit time is up_`, m)
-                        delete this.suit[id]
-                    }, 60000),
-                    poin,
-                    poin_lose,
-                    timeout
                 }
             }
             break
@@ -8923,32 +9213,54 @@ let yts = require("yt-search")
   }
 }
 break
-            case 'play':  case 'song': {
-if (!text) return replygcxeon(`Example : ${prefix + command} anime whatsapp status`)
-const xeonplaymp3 = require('./lib/ytdl')
-let yts = require("youtube-yts")
-        let search = await yts(text)
-        let anup3k = search.videos[0]
-const pl= await xeonplaymp3.mp3(anup3k.url)
-await XeonBotInc.sendMessage(m.chat,{
-    audio: fs.readFileSync(pl.path),
-    fileName: anup3k.title + '.mp3',
-    mimetype: 'audio/mp4', ptt: true,
-    contextInfo:{
-        externalAdReply:{
-            title:anup3k.title,
-            body: botname,
-            thumbnail: await fetchBuffer(pl.meta.image),
-            sourceUrl: websitex,
-            mediaType:2,
-            mediaUrl:anup3k.url,
-        }
+case 'play':  case 'song': {
+  if (!text) return replygcxeon(`Example : ${prefix + command} anime whatsapp status`)
+  try {
+  const xeonplaymp3 = require('./lib/ytdl')
+  let yts = require("youtube-yts")
+          let search = await yts(text)
+          let anup3k = search.videos[0]
+  const pl= await xeonplaymp3.mp3(anup3k.url)
+  await XeonBotInc.sendMessage(m.chat,{
+      audio: fs.readFileSync(pl.path),
+      fileName: anup3k.title + '.mp3',
+      mimetype: 'audio/mp4', ptt: true,
+      contextInfo:{
+          externalAdReply:{
+              title:anup3k.title,
+              body: botname,
+              thumbnail: await fetchBuffer(pl.meta.image),
+              sourceUrl: websitex,
+              mediaType:2,
+              mediaUrl:anup3k.url,
+          }
+  
+      },
+  },{quoted:m})
+  await fs.unlinkSync(pl.path)
+  }catch{
+    replygcxeon(`Music not found.`)
+    }
+  }
+  break
+  
+  case 'pixiv': {
+    if (!text) return replygcxeon(`Example: ${prefix + command} hello`)
+    try {
+      let { pixivdl } = require('./lib/pixiv')
+      let res = await pixivdl(text)
+      XeonStickWait()
+      for (let i = 0; i < res.media.length; i++) {
+        let caption = i == 0 ? `${res.caption}\n\n*By:* ${res.artist}\n*Tags:* ${res.tags.join(', ')}` : ''
+        let mime = (await FileType.fromBuffer(res.media[i])).mime 
+        await XeonBotInc.sendMessage(m.chat, { [mime.split('/')[0]]: res.media[i], caption, mimetype: mime }, { quoted: m })
+      }
+    } catch (e) {
+      replygcxeon('Search Not found!')
+    }
+  }
+  break
 
-    },
-},{quoted:m})
-await fs.unlinkSync(pl.path)
-}
-break
 case 'ytmp3': case 'ytaudio':
 let xeonaudp3 = require('./lib/ytdl')
 if (args.length < 1 || !isUrl(text) || !xeonaudp3.isYTUrl(text)) return replygcxeon(`Where's the yt link?\nExample: ${prefix + command} https://youtube.com/shorts/YQf-vMjDuKY?feature=share`)
@@ -9096,18 +9408,14 @@ break
            case 'fb':
            case 'facebook':
 case 'facebookvid':  case 'fbvid':{
+           
            if (!args[0]) {
     return replygcxeon(`Please send the link of a Facebook video\n\nEXAMPLE :\n*${prefix + command}* https://fb.watch/pLLTM4AFrO/?mibextid=Nif5oz`)
-   
   }
-  
   const urlRegex = /^(?:https?:\/\/)?(?:www\.)?(?:facebook\.com|fb\.watch)\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/i;
   if (!urlRegex.test(args[0])) {
     return replygcxeon('Url invalid')
-
   }
-  await XeonBotInc.sendMessage(m.chat, { react: { text: `⬇️`, key: m.key }})
-
   try {
     const result = await fg.fbdl(args[0]);
     const tex = `
@@ -9116,12 +9424,9 @@ ${themeemoji} Title: ${result.title}`;
     const response = await fetch(result.videoUrl)
     const arrayBuffer = await response.arrayBuffer()
     const videoBuffer = Buffer.from(arrayBuffer)
-
-    XeonBotInc.sendMessage(m.chat, {video: videoBuffer, caption: tex, mentions: participants.map(a => a.id)}, {quoted: m})
-    await XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key: m.key }})
+    XeonBotInc.sendMessage(m.chat, {video: videoBuffer, caption: tex}, {quoted: m})
   } catch (error) {
-    replygcxeon('Error In Fetching Video')
-    await XeonBotInc.sendMessage(m.chat, { react: { text: `❌`, key: m.key }})
+    replygcxeon('Maybe private video!')
   }
   }
   break
@@ -20842,7 +21147,8 @@ break
           let latensie = speed() - timestampe
           let a = db.data.users[sender]
           let me = m.sender
-          let xmenu_oh2 = `┌─────❖
+          let xmenu_oh2 = `
+┌─────❖
 │ Hi 👋 
 └┬❖  ${pushname} 
 ┌┤✑  ${xeonytimewisher} 😄

@@ -83,6 +83,40 @@ global.mess = {
     error: 'Error!',
     success: 'Here you go!'
 }
+
+global.listv = ['•','●','■','✿','▲','➩','➢','➣','➤','✦','✧','△','❀','○','□','♤','♡','◇','♧','々','〆']
+global.tempatDB = 'database.json'
+
+global.limit = {
+	free: 100,
+	premium: 999,
+	vip: 'VIP'
+}
+
+global.uang = {
+	free: 10000,
+	premium: 1000000,
+	vip: 10000000
+}
+
+global.mess = {
+	error: 'Error!',
+	nsfw: 'Nsfw is disabled in this group, Please tell the admin to enable',
+	done: 'Done'
+}
+
+global.bot = {
+	limit: 0,
+	uang: 0
+}
+
+global.game = {
+	suit: {},
+	menfes: {},
+	tictactoe: {},
+	kuismath: {},
+	tebakbom: {},
+}
 //thumbnail
 global.thumb = fs.readFileSync('./XeonMedia/theme/cheemspic.jpg')
 
