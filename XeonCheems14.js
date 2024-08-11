@@ -163,6 +163,7 @@ const ownerimage5 = fs.readFileSync('./XeonMedia/owner_images/ownerimage5.png')
 
 const ownerimages = [ownerimage1, ownerimage2, ownerimage3, ownerimage4, ownerimage5]
 const { gameSlot, gameCasinoSolo, gameMerampok, gameTangkapOr, daily, transferLimit, transferUang, buy, setLimit, setUang } = require('./lib/game');
+const { toLower } = require('lodash')
 
 //store database
 const db_respon_list = JSON.parse(fs.readFileSync('./src/store/list.json'))
@@ -275,7 +276,7 @@ module.exports = XeonBotInc = async (XeonBotInc, m, msg, chatUpdate, store) => {
         const isContact = (type == 'contactMessage')
         const isSticker = (type == 'stickerMessage')
         const isText = (type == 'textMessage')
-        const isEmoji = type === 'textmessage' && content.includes(randomreact)
+        const isEmoji = type === 'textmessage' && content.match(randomreact)
         const isQuotedText = type === 'extendexTextMessage' && content.includes('textMessage')
         const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
         const isQuotedLocation = type === 'extendedTextMessage' && content.includes('locationMessage')
@@ -1605,8 +1606,9 @@ const xeonfeature = () =>{
 }
         //autoreply
 for (let BhosdikaXeon of VoiceNoteXeon) {
-if (budy === BhosdikaXeon) {
-let audiobuffy = fs.readFileSync(`./XeonMedia/audio/${BhosdikaXeon}.mp3`)
+if (!fromMe && budy.match(BhosdikaXeon)) {
+  let vnote = BhosdikaXeon.toLowerCase()
+  let audiobuffy = fs.readFileSync(`./XeonMedia/audio/${vnote}.mp3`)
 XeonBotInc.sendMessage(m.chat, { audio: audiobuffy, mimetype: 'audio/mp4', ptt: true }, { quoted: m })     
 }
 }
@@ -1984,6 +1986,75 @@ if(reactall === true)
           //   }
           //   break
             
+          case 'ginfo' : case 'groupinfo': 
+          {
+            if(!isGroup) return XeonStickGroup()
+            let groupAdmins = participants.filter(p => p.admin)
+            let listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\n')
+            let admincount = groupAdmins.length
+            let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')        
+            let groupicon = await getBuffer(pp)
+            let msg = `
+❑━────━▒ ╭──╯ ۞ ╰──╮ ▒━────━❑
+     *꧁༒༻☬ད 𝙂𝙍𝙊𝙐𝙋 𝙄𝙉𝙁𝙊 ཌ☬༺༒꧂*
+❑━────━▒ ╰──╮ ۞ ╭──╯ ▒━────━❑ 
+
+
+          _░▒▓█►─═ 𝐁𝐀𝐒𝐈𝐂 𝐈𝐍𝐅𝐎 ═─◄█▓▒░_
+❑━➩ *GROUP NAME* : ${groupMetadata.subject}
+❑━➩ *NO OF PARTICIPANTS* : ${groupMetadata.participants.length}
+❑━➩ *NO OF ADMINS* : ${admincount}
+❑━➩ *ADMINS* : 
+${listAdmin}
+❑━➩ *IS BOT ADMIN* : ${isBotAdmins? 'YES ✅' : 'NO ❎'}
+❑━➩ *WELCOME MESSAGE* : ${welcome? 'ON ✅' : 'OFF ❎'}
+❑━➩ *ID* : ${groupMetadata.id}
+❑━➩ *GROUP DESCRIPTION* : ${groupMetadata.desc}
+❑━➩ *GROUP CREATOR* : @${groupOwner.split("@")[0]}
+
+
+_▒▓█►─═𝐆𝐑𝐎𝐔𝐏 𝐂𝐎𝐍𝐅𝐈𝐆𝐔𝐑𝐀𝐓𝐈𝐎𝐍𝐒═─◄█▓▒_  
+❑━➩ 𝐀𝐍𝐓𝐈 𝐁𝐀𝐃 𝐖𝐎𝐑𝐃 : ${db.data.chats[from].badword? 'on ✅': 'off ❎'}
+❑━➩ 𝐀𝐍𝐓𝐈 𝐅𝐎𝐑𝐄𝐈𝐆𝐍 𝐍𝐔𝐌𝐁𝐄𝐑 : ${db.data.chats[from].antiforeignnum? 'on ✅': 'off ❎'}
+❑━➩ 𝐀𝐍𝐓𝐈 𝐁𝐎𝐓 : ${db.data.chats[from].antibot? 'on ✅': 'off ❎'}
+❑━➩ 𝐀𝐍𝐓𝐈 𝐕𝐈𝐄𝐖 𝐎𝐍𝐂𝐄 : ${db.data.chats[from].antiviewonce? 'on ✅': 'off ❎'}
+❑━➩ 𝐀𝐍𝐓𝐈 𝐒𝐏𝐀𝐌 : ${db.data.chats[from].antispam? 'on ✅': 'off ❎'}
+❑━➩ 𝐀𝐍𝐓𝐈 𝐕𝐄𝐑𝐓𝐄𝐗 : ${db.data.chats[from].antivirtex? 'on ✅': 'off ❎'}
+❑━➩ 𝐀𝐍𝐓𝐈 𝐌𝐄𝐃𝐈𝐀 : ${db.data.chats[from].antimedia? 'on ✅': 'off ❎'}
+❑━➩ 𝐀𝐍𝐓𝐈 𝐈𝐌𝐀𝐆𝐄 : ${db.data.chats[from].antiimage? 'on ✅': 'off ❎'}
+❑━➩ 𝐀𝐍𝐓𝐈 𝐕𝐈𝐃𝐄𝐎 : ${db.data.chats[from].antivideo? 'on ✅': 'off ❎'}
+❑━➩ 𝐀𝐍𝐓𝐈 𝐀𝐔𝐃𝐈𝐎 : ${db.data.chats[from].antiaudio? 'on ✅': 'off ❎'}
+❑━➩ 𝐀𝐍𝐓𝐈 𝐏𝐎𝐋𝐋 : ${db.data.chats[from].antipoll? 'on ✅': 'off ❎'}
+❑━➩ 𝐀𝐍𝐓𝐈 𝐒𝐓𝐈𝐂𝐊𝐄𝐑 : ${db.data.chats[from].antisticker? 'on ✅': 'off ❎'}
+❑━➩ 𝐀𝐍𝐓𝐈 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 : ${db.data.chats[from].antilocation? 'on ✅': 'off ❎'}
+❑━➩ 𝐀𝐍𝐓𝐈 𝐃𝐎𝐂𝐔𝐌𝐄𝐍𝐓 : ${db.data.chats[from].antidocument? 'on ✅': 'off ❎'}
+❑━➩ 𝐀𝐍𝐓𝐈 𝐂𝐎𝐍𝐓𝐀𝐂𝐓 : ${db.data.chats[from].anticontact? 'on ✅': 'off ❎'}
+❑━➩ 𝐀𝐍𝐓𝐈 𝐋𝐈𝐍𝐊𝐒 : ${db.data.chats[from].antilink? 'on ✅': 'off ❎'}
+❑━➩ 𝐀𝐍𝐓𝐈 𝐆𝐑𝐎𝐔𝐏 𝐋𝐈𝐍𝐊 : ${db.data.chats[from].antilinkgc? 'on ✅': 'off ❎'}`
+            
+XeonBotInc.sendMessage(from,
+  {image : groupicon, caption : `_GROUP ICON_`},{quoted:m})
+await sleep(1000)
+XeonBotInc.sendMessage(from,
+  {
+    text : msg,
+    contextInfo:{
+      mentionedJid: [...groupAdmins.map(v => v.id), owner,groupOwner],
+      externalAdReply:{
+        showAdAttribution: true,
+                        title: `Hello ${pushname} \nThis is ${botname} 👑`,
+                        body: ownername,
+                        thumbnail: groupicon,
+                        sourceUrl: websitex,
+                        mediaType: 1,
+                        renderLargerThumbnail: true
+      }
+    }
+  }, {quoted:m})
+  
+
+          }
+          break
 			case 'playbomb': case 'bomb': {
 				if (game.tebakbom[m.sender]) return replygcxeon('There Are Still Unfinished Sessions!')
 				function shuffle(array) {
@@ -7654,7 +7725,14 @@ break
 
                  if (isGroup)
                     {
-                      let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')|| 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
+                      let pp 
+                      try {
+                        pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')
+                      }
+                      catch(error)
+                      {
+                        pp = fs.readFileSync('./XeonMedia/igimg.jpg')
+                      }
                       let groupicon = await getBuffer(pp)
                       await XeonBotInc.sendMessage(m.chat, { react: { text: `📡`, key: m.key }})
                       let groupaddress 
