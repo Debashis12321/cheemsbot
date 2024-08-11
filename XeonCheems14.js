@@ -178,7 +178,6 @@ others: {},
 users: {},
 chats: {},
 settings: {},
-antipromote: {},
 ...(global.db.data || {})
 }
 
@@ -727,7 +726,7 @@ return arr[Math.floor(Math.random() * arr.length)]
                   antiforeignnum: false,
                   antibot: false,
                   antiviewonce: true,
-                  antipromote: true,
+                  antipromote: false,
                   antispam: false,
                   antivirtex: false,
                   antimedia: false,
@@ -1606,7 +1605,7 @@ const xeonfeature = () =>{
 }
         //autoreply
 for (let BhosdikaXeon of VoiceNoteXeon) {
-if (!fromMe && budy.match(BhosdikaXeon)) {
+if (budy === BhosdikaXeon) {
   let vnote = BhosdikaXeon.toLowerCase()
   let audiobuffy = fs.readFileSync(`./XeonMedia/audio/${vnote}.mp3`)
 XeonBotInc.sendMessage(m.chat, { audio: audiobuffy, mimetype: 'audio/mp4', ptt: true }, { quoted: m })     
@@ -1986,6 +1985,22 @@ if(reactall === true)
           //   }
           //   break
             
+          case 'antipromote':
+            {
+              if(!m.isGroup) return XeonStickGroup()
+              if(!XeonTheCreator) return XeonStickOwner()
+                if(args[0] === 'on')
+                  {
+                    db.data.chats[from].antipromote = true
+                    replygcxeon(`${command} is enabled`)
+                  }
+                else if(args[0] === 'off')
+                  {
+                    db.data.chats[from].antipromote = false
+                    replygcxeon(`${command} is disabled`)
+                  }
+            }
+            break
           case 'ginfo' : case 'groupinfo': 
           {
             if(!isGroup) return XeonStickGroup()
@@ -1994,43 +2009,55 @@ if(reactall === true)
             let admincount = groupAdmins.length
             let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')        
             let groupicon = await getBuffer(pp)
+            let ginfoquote = { key: 
+              { fromMe: false, 
+                participant: m.sender, 
+                remoteJid: from },
+               message: {extendedTextMessage: 
+                        { text: `Group Info : ${groupName}\n${botname}`}
+              }
+            }
+            let groupcreater =groupOwner || `owner_not_found@null`
             let msg = `
 ❑━────━▒ ╭──╯ ۞ ╰──╮ ▒━────━❑
      *꧁༒༻☬ད 𝙂𝙍𝙊𝙐𝙋 𝙄𝙉𝙁𝙊 ཌ☬༺༒꧂*
 ❑━────━▒ ╰──╮ ۞ ╭──╯ ▒━────━❑ 
 
 
-          _░▒▓█►─═ 𝐁𝐀𝐒𝐈𝐂 𝐈𝐍𝐅𝐎 ═─◄█▓▒░_
-❑━➩ *GROUP NAME* : ${groupMetadata.subject}
-❑━➩ *NO OF PARTICIPANTS* : ${groupMetadata.participants.length}
-❑━➩ *NO OF ADMINS* : ${admincount}
-❑━➩ *ADMINS* : 
+                 _░▒▓█►─═ 𝐁𝐀𝐒𝐈𝐂 𝐈𝐍𝐅𝐎 ═─◄█▓▒░_
+          ✯────────────✯────────────✯
+📌 ➩ *GROUP NAME* : ${groupMetadata.subject}
+📌 ➩ *NO OF PARTICIPANTS* : ${groupMetadata.participants.length}
+📌 ➩ *NO OF ADMINS* : ${admincount}
+📌 ➩ *ADMINS* : 
 ${listAdmin}
-❑━➩ *IS BOT ADMIN* : ${isBotAdmins? 'YES ✅' : 'NO ❎'}
-❑━➩ *WELCOME MESSAGE* : ${welcome? 'ON ✅' : 'OFF ❎'}
-❑━➩ *ID* : ${groupMetadata.id}
-❑━➩ *GROUP DESCRIPTION* : ${groupMetadata.desc}
-❑━➩ *GROUP CREATOR* : @${groupOwner.split("@")[0]}
+📌 ➩ *IS BOT ADMIN* : ${isBotAdmins? 'YES ✅' : 'NO ❎'}
+📌 ➩ *WELCOME MESSAGE* : ${welcome? 'ON ✅' : 'OFF ❎'}
+📌 ➩ *ID* : ${groupMetadata.id}
+📌 ➩ *GROUP DESCRIPTION* : ${groupMetadata.desc}
+📌 ➩ *GROUP CREATOR* : @${groupcreater.split("@")[0]}
 
 
-_▒▓█►─═𝐆𝐑𝐎𝐔𝐏 𝐂𝐎𝐍𝐅𝐈𝐆𝐔𝐑𝐀𝐓𝐈𝐎𝐍𝐒═─◄█▓▒_  
-❑━➩ *ANTI BADWORD* : ${db.data.chats[from].badword? 'on ✅': 'off ❎'}
-❑━➩ *ANTI FOREIGN NUMBER* : ${db.data.chats[from].antiforeignnum? 'on ✅': 'off ❎'}
-❑━➩ *ANTI BOT* : ${db.data.chats[from].antibot? 'on ✅': 'off ❎'}
-❑━➩ *ANTI VIEW ONCE* : ${db.data.chats[from].antiviewonce? 'on ✅': 'off ❎'}
-❑━➩ *ANTI SPAM* : ${db.data.chats[from].antispam? 'on ✅': 'off ❎'}
-❑━➩ *ANTI VERTEX* : ${db.data.chats[from].antivirtex? 'on ✅': 'off ❎'}
-❑━➩ *ANTI MEDIA* : ${db.data.chats[from].antimedia? 'on ✅': 'off ❎'}
-❑━➩ *ANTI IMAGE* : ${db.data.chats[from].antiimage? 'on ✅': 'off ❎'}
-❑━➩ *ANTI VIDEO* : ${db.data.chats[from].antivideo? 'on ✅': 'off ❎'}
-❑━➩ *ANTI AUDIO* : ${db.data.chats[from].antiaudio? 'on ✅': 'off ❎'}
-❑━➩ *ANTI POLL* : ${db.data.chats[from].antipoll? 'on ✅': 'off ❎'}
-❑━➩ *ANTI STICKER* : ${db.data.chats[from].antisticker? 'on ✅': 'off ❎'}
-❑━➩ *ANTI LOCATION* : ${db.data.chats[from].antilocation? 'on ✅': 'off ❎'}
-❑━➩ *ANTI DOCUMENT* : ${db.data.chats[from].antidocument? 'on ✅': 'off ❎'}
-❑━➩ *ANTI CONTACT* : ${db.data.chats[from].anticontact? 'on ✅': 'off ❎'}
-❑━➩ *ANTI LINKS* : ${db.data.chats[from].antilink? 'on ✅': 'off ❎'}
-❑━➩ *ANTI GROUP LINK* : ${db.data.chats[from].antilinkgc? 'on ✅': 'off ❎'}`
+ _░▒▓█►─═  𝐆𝐑𝐎𝐔𝐏 𝐂𝐎𝐍𝐅𝐈𝐆𝐔𝐑𝐀𝐓𝐈𝐎𝐍𝐒 ═─◄█▓▒░_  
+✯───────────────✯───────────────✯
+📌 ➩ *ANTI BADWORD* : ${db.data.chats[from].badword? 'on ✅': 'off ❎'}
+📌 ➩ *ANTI PROMOTE* : ${db.data.chats[from].antipromote? 'on ✅': 'off ❎'}
+📌 ➩ *ANTI FOREIGN NUMBER* : ${db.data.chats[from].antiforeignnum? 'on ✅': 'off ❎'}
+📌 ➩ *ANTI BOT* : ${db.data.chats[from].antibot? 'on ✅': 'off ❎'}
+📌 ➩ *ANTI VIEW ONCE* : ${db.data.chats[from].antiviewonce? 'on ✅': 'off ❎'}
+📌 ➩ *ANTI SPAM* : ${db.data.chats[from].antispam? 'on ✅': 'off ❎'}
+📌 ➩ *ANTI VERTEX* : ${db.data.chats[from].antivirtex? 'on ✅': 'off ❎'}
+📌 ➩ *ANTI MEDIA* : ${db.data.chats[from].antimedia? 'on ✅': 'off ❎'}
+📌 ➩ *ANTI IMAGE* : ${db.data.chats[from].antiimage? 'on ✅': 'off ❎'}
+📌 ➩ *ANTI VIDEO* : ${db.data.chats[from].antivideo? 'on ✅': 'off ❎'}
+📌 ➩ *ANTI AUDIO* : ${db.data.chats[from].antiaudio? 'on ✅': 'off ❎'}
+📌 ➩ *ANTI POLL* : ${db.data.chats[from].antipoll? 'on ✅': 'off ❎'}
+📌 ➩ *ANTI STICKER* : ${db.data.chats[from].antisticker? 'on ✅': 'off ❎'}
+📌 ➩ *ANTI LOCATION* : ${db.data.chats[from].antilocation? 'on ✅': 'off ❎'}
+📌 ➩ *ANTI DOCUMENT* : ${db.data.chats[from].antidocument? 'on ✅': 'off ❎'}
+📌 ➩ *ANTI CONTACT* : ${db.data.chats[from].anticontact? 'on ✅': 'off ❎'}
+📌 ➩ *ANTI LINKS* : ${db.data.chats[from].antilink? 'on ✅': 'off ❎'}
+📌 ➩ *ANTI GROUP LINK* : ${db.data.chats[from].antilinkgc? 'on ✅': 'off ❎'}`
             
 XeonBotInc.sendMessage(from,
   {image : groupicon, caption : `_GROUP ICON_`},{quoted:m})
@@ -2047,10 +2074,10 @@ XeonBotInc.sendMessage(from,
                         thumbnail: groupicon,
                         sourceUrl: websitex,
                         mediaType: 1,
-                        renderLargerThumbnail: true
+                        renderLargerThumbnail: false
       }
     }
-  }, {quoted:m})
+  }, {quoted:ginfoquote})
   
 
           }
@@ -6669,19 +6696,6 @@ await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
 }
             }
             break
-            case 'antipromote': {
-              if (!m.isGroup) return XeonStickGroup()
-if (!isBotAdmins) return XeonStickBotAdmin()
-if (!isAdmins && !XeonTheCreator) return XeonStickAdmin()
-              if (args.length < 1) return replygcxeon('on/off?')
-              if (args[0] === 'on') {
-                 db.data.chats[from].antipromote = true
-                 replygcxeon(`${command} is enabled`)
-              } else if (args[0] === 'off') {
-                 db.data.chats[from].antipromote = false
-                 replygcxeon(`${command} is disabled`)
-              }
-           }
             case 'antipromotion': {
                if (!m.isGroup) return XeonStickGroup()
 if (!isBotAdmins) return XeonStickBotAdmin()

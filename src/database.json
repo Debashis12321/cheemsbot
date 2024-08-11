@@ -1,4 +1,12 @@
 {
+  "sticker": {},
+  "database": {},
+  "game": {
+    "math": []
+  },
+  "others": {
+    "vote": []
+  },
   "users": {
     "919366316018@s.whatsapp.net": {
       "serialNumber": "5748ef2731f9b0ab993964d915670166",
@@ -271,7 +279,7 @@
       "badword": 0,
       "afkReason": "",
       "nick": "Dibyendu Samanta",
-      "premium": "false",
+      "premium": false,
       "limit": 100,
       "totalLimit": 0
     },
@@ -318,9 +326,19 @@
       "premium": "true",
       "limit": 1000,
       "totalLimit": 0
+    },
+    "917449401660@s.whatsapp.net": {
+      "serialNumber": "c7a2d5a65b839e77bdc20b8117fc6870",
+      "title": "User",
+      "afkTime": -1,
+      "badword": 0,
+      "afkReason": "",
+      "nick": "__its_abhra__",
+      "premium": false,
+      "limit": 100,
+      "totalLimit": 0
     }
   },
-  "database": {},
   "chats": {
     "120363047626537933@g.us": {
       "badword": false,
@@ -626,7 +644,7 @@
       "antilink": false,
       "antipromotion": false,
       "antilinkgc": false,
-      "antipromote": false
+      "antipromote": true
     },
     "120363256563056288@g.us": {
       "badword": false,
@@ -673,7 +691,7 @@
       "antiforeignnum": false,
       "antibot": false,
       "antiviewonce": true,
-      "antipromote": true,
+      "antipromote": false,
       "antispam": false,
       "antivirtex": false,
       "antimedia": false,
@@ -694,7 +712,7 @@
       "antiforeignnum": false,
       "antibot": false,
       "antiviewonce": true,
-      "antipromote": true,
+      "antipromote": false,
       "antispam": false,
       "antivirtex": false,
       "antimedia": false,
@@ -715,7 +733,7 @@
       "antiforeignnum": false,
       "antibot": false,
       "antiviewonce": true,
-      "antipromote": true,
+      "antipromote": false,
       "antispam": false,
       "antivirtex": false,
       "antimedia": false,
@@ -736,7 +754,7 @@
       "antiforeignnum": false,
       "antibot": false,
       "antiviewonce": true,
-      "antipromote": true,
+      "antipromote": false,
       "antispam": false,
       "antivirtex": false,
       "antimedia": false,
@@ -757,7 +775,7 @@
       "antiforeignnum": false,
       "antibot": false,
       "antiviewonce": true,
-      "antipromote": true,
+      "antipromote": false,
       "antispam": false,
       "antivirtex": false,
       "antimedia": false,
@@ -778,7 +796,7 @@
       "antiforeignnum": false,
       "antibot": false,
       "antiviewonce": true,
-      "antipromote": true,
+      "antipromote": false,
       "antispam": false,
       "antivirtex": false,
       "antimedia": false,
@@ -799,7 +817,7 @@
       "antiforeignnum": false,
       "antibot": false,
       "antiviewonce": true,
-      "antipromote": true,
+      "antipromote": false,
       "antispam": false,
       "antivirtex": false,
       "antimedia": false,
@@ -820,7 +838,28 @@
       "antiforeignnum": false,
       "antibot": false,
       "antiviewonce": true,
-      "antipromote": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
+    },
+    "917605888159-1619669991@g.us": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
       "antispam": false,
       "antivirtex": false,
       "antimedia": false,
@@ -836,9 +875,6 @@
       "antipromotion": false,
       "antilinkgc": false
     }
-  },
-  "game": {
-    "math": []
   },
   "settings": {
     "919366316018@s.whatsapp.net": {
@@ -970,7 +1006,7 @@
       }
     },
     "15202238877@s.whatsapp.net": {
-      "totalhit": 438,
+      "totalhit": 482,
       "totalError": 0,
       "online": false,
       "autosticker": false,
@@ -1002,7 +1038,7 @@
       }
     },
     "15202268780@s.whatsapp.net": {
-      "totalhit": 794,
+      "totalhit": 807,
       "totalError": 0,
       "online": false,
       "autosticker": false,
@@ -1063,9 +1099,5 @@
     }
   },
   "message": {},
-  "antipromote": {},
-  "sticker": {},
-  "others": {
-    "vote": []
-  }
+  "antipromote": {}
 }
