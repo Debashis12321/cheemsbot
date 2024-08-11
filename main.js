@@ -279,7 +279,7 @@ Thank you.
 
 > Regards : Group admins
 > Credit : ${ownername}`
-let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')|| 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
+let pp = await XeonBotInc.profilePictureUrl(anu.id, 'image')|| 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
 let groupicon = await getBuffer(pp)
                 let joingrp = { key: 
                   { fromMe: false, 
@@ -487,7 +487,7 @@ let msgs = generateWAMessageFromContent(anu.id, {
 },{
   quoted: joingrp,
   })
-XeonBotInc.relayMessage(anu.id, msgs.message)
+XeonBotInc.relayMessage(anu.id, msgs.message, {})
 }
 }
 } catch (err) {
