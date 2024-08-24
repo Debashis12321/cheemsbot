@@ -308,7 +308,7 @@ module.exports = XeonBotInc = async (XeonBotInc, m, msg, chatUpdate, store) => {
         const XeonTheCreator = [botNumber, ...owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
         const isPremium= XeonTheCreator || checkPremiumUser(m.sender, premium)
         expiredPremiumCheck(XeonBotInc, m, premium)
-       //✯───────────────✯───────────────✯----------------------------------------
+       //✯───────────────✯───────────────✯
         //universal hidetag function
         let  taggrp
         if(isGroup)
@@ -720,6 +720,7 @@ return arr[Math.floor(Math.random() * arr.length)]
                   if (!('antidocument' in chats)) chats.antidocument = false
                   if (!('antilink' in chats)) chats.antilink = false
                   if (!('antilinkgc' in chats)) chats.antilinkgc = false
+                  if (!('antidelete' in chats)) chats.antidelete = true
                   if (!('antipromotion' in chats)) chats.antipromotion = false
                } else global.db.data.chats[from] = {
                   badword: false,
@@ -735,6 +736,7 @@ return arr[Math.floor(Math.random() * arr.length)]
                   antiaudio: false,
                   antipoll: false,
                   antisticker: false,
+                  antidelete: true,
                   antilocation: false,
                   antidocument: false,
                   anticontact: false,
@@ -814,7 +816,21 @@ return arr[Math.floor(Math.random() * arr.length)]
     console.error('Error uploading image to Imgur:', error)
     throw error
   }
-}        
+}    
+    
+
+
+			// Anti Delete
+			if (m.type == 'protocolMessage' && global.db.data.chats[from].antidelete) {
+				const mess = chatUpdate.messages[0].message.protocolMessage
+				if (store.messages && store.messages[from] && store.messages[from].array) {
+					const chats = store.messages[from].array.find(a => a.id === mess.key.id);
+					chats.msg.contextInfo = { mentionedJid: [chats.key.participant], isForwarded: true, forwardingScore: 1, quotedMessage: { conversation: '*Anti Delete❗*'}, ...chats.key }
+					await XeonBotInc.relayMessage(from, { [chats.type]: chats.msg }, {})
+				}
+			}
+		
+
         async function ephoto(url, texk) {
 let form = new FormData 
 let gT = await axios.get(url, {
@@ -855,6 +871,7 @@ let { data } = await axios.post("https://en.ephoto360.com/effect/create-image", 
 })
 return build_server + data.image
 }
+
 
 //autoreact
 const xeonreact = async () => {
@@ -2224,12 +2241,12 @@ XeonBotInc.sendMessage(from,
           case 'global-reation':
             {
               if(!XeonTheCreator) return XeonStickOwner()
-                if(argsa[0] === 'on')
+                if(args[0] === 'on')
                   {
                     reactions = true
                     replygcxeon(`${command} is enabled`)
                   }
-                  else ifif(argsa[0] === 'off') 
+                  else if(args[0] === 'off') 
                 {
                   reactions = false
                   replygcxeon(`${command} is disabled`)
@@ -2297,7 +2314,7 @@ XeonBotInc.sendMessage(from,
               //alive message for personal chat
               else if(isGroup)
               {
-                let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')|| 'https://t3.ftcdn.net/jpg/06/95/82/34/360_F_695823409_EfMuGZeDX3PyImMtJ2gAzDcxINg8VkFz.jpg' //group icon link
+                let pp = await XeonBotInc.profilePictureUrl(m.chat, 'image')|| fs.readFileSync('./XeonMedia/fbimg.jpg') //group icon link
                 let Icon = await getBuffer(pp) //group icon image
                  //invite link of that group in which aliv message is sent
                 let groupaddress 
@@ -6097,6 +6114,34 @@ await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
     } else if (/image/.test(type)) {
         return XeonBotInc.sendFile(m.chat, buffer, 'media.jpg', msg[type].caption || '', m)
     }
+}
+break
+
+case 'antidelete': {
+  if (!m.isGroup) return XeonStickGroup()
+  if (text === 'on') {
+    if (db.data.chats[from].antidelete) return replygcxeon('*Sudah Aktif Sebelumnya*')
+      db.data.chats[from].antidelete = true
+    replygcxeon('*Anti Delete Activated !*')
+  } else if (text === 'off') {
+    db.data.chats[from].antidelete = false
+    replygcxeon('*Anti Delete Disabled !*')
+  } else {
+    let buttonnya = [{
+      name: 'single_select',
+      buttonParamsJson: {
+        title: 'Pilih',
+        sections: [{
+          title: 'Anti Delete',
+          rows: [
+            { title: 'ENABLE', description: 'Enable Antidelete', id: 'antidelete on' },
+            { title: 'DISABLE', description: 'Disable Antidelete', id: 'antidelete off' },
+          ]
+        }]
+      }
+    }]
+    await XeonBotInc.sendButtonMsg(m.chat, 'Group Mode', xeonytimewisher, 'Please choose', null, buttonnya, m);
+  }
 }
 break
             case 'antiviewonce':{
@@ -11694,46 +11739,8 @@ break
 			const { remini } = require('./lib/remini')
 			let media = await quoted.download()
 			let proses = await remini(media, "enhance")
-			let msgs = generateWAMessageFromContent(m.chat, {
-  viewOnceMessage: {
-    message: {
-        "messageContextInfo": {
-          "deviceListMetadata": {},
-          "deviceListMetadataVersion": 2
-        },
-        interactiveMessage: proto.Message.InteractiveMessage.create({
-          body: proto.Message.InteractiveMessage.Body.create({
-            text: `Hi ${pushname}
-_*Here is the result of: ${command}*_`
-          }),
-          footer: proto.Message.InteractiveMessage.Footer.create({
-            text: botname
-          }),
-          header: proto.Message.InteractiveMessage.Header.create({
-          hasMediaAttachment: false,
-          ...await prepareWAMessageMedia({ image: proses }, { upload: XeonBotInc.waUploadToServer })
-          }),
-          nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
-            buttons: [{
-            "name": "quick_reply",
-              "buttonParamsJson": `{\"display_text\":\"😍\",\"id\":\""}`
-            }],
-          }),
-          contextInfo: {
-                  mentionedJid: [m.sender], 
-                  forwardingScore: 999,
-                  isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                  newsletterJid: '120363222395675670@newsletter',
-                  newsletterName: ownername,
-                  serverMessageId: 143
-                }
-                }
-       })
-    }
-  }
-}, { quoted: m })
-return await XeonBotInc.relayMessage(m.chat, msgs.message, {})
+      XeonBotInc.sendMessage(from , { image : proses, caption : `HERE IS YOUR IMAGE`},{quoted : m})
+			
 			}
 			break
 			case 'define': 

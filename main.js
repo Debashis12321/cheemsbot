@@ -30,6 +30,8 @@ const Pino = require("pino")
 const readline = require("readline")
 const { parsePhoneNumber } = require("libphonenumber-js")
 const makeWASocket = require("@whiskeysockets/baileys").default
+const gradient = require('gradient-string');
+const myGradient = gradient(['red', 'yellow', 'green', 'blue', 'magenta', 'cyan']);
 
 
 // premium users
@@ -60,7 +62,6 @@ global.loadDatabase = async function loadDatabase() {
     game: {},
     settings: {},
     message: {},
-    antipromote : {},
     ...(global.db.data || {})
   }
   global.db.chain = _.chain(global.db.data)
@@ -169,7 +170,6 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./session`)
       //    console.log(chalk.black(chalk.bgGreen(`Your Pairing Code : `)), chalk.black(chalk.white(code)))
       // }, 3000)
    }
-   
    XeonBotInc.ev.on('connection.update', async (update) => {
 	const {
 		connection,
@@ -206,12 +206,25 @@ try{
 		}
 		if (update.connection == "open" || update.receivedPendingNotifications == "true") {
 			console.log(color(` `,'magenta'))
+      console.log(myGradient(`❑━────────────────────────────────━꧁༒༻☬ད ░▒▓█►─═╭──╯ ✸ ╰──╮ ═─◄█▓▒░ ཌ☬༺༒꧂━───────────────────────────────━❑`))
+      console.log(myGradient(`████████████████████████████████████████████████████████████████████████████████████████████████████████████`))
+      console.log(myGradient(`█                                                                                                          █`))
+      console.log(myGradient(`█  ██████╗ ██████╗      ██████╗██╗  ██╗███████╗███████╗███╗   ███╗███████╗      ██████╗  ██████╗ ████████╗ █`))
+      console.log(myGradient(`█  ██╔══██╗██╔══██╗    ██╔════╝██║  ██║██╔════╝██╔════╝████╗ ████║██╔════╝      ██╔══██╗██╔═══██╗╚══██╔══╝ █`))
+      console.log(myGradient(`█  ██║  ██║██║  ██║    ██║     ███████║█████╗  █████╗  ██╔████╔██║███████╗█████╗██████╔╝██║   ██║   ██║    █`))
+      console.log(myGradient(`█  ██║  ██║██║  ██║    ██║     ██╔══██║██╔══╝  ██╔══╝  ██║╚██╔╝██║╚════██║╚════╝██╔══██╗██║   ██║   ██║    █`))
+      console.log(myGradient(`█  ██████╔╝██████╔╝    ╚██████╗██║  ██║███████╗███████╗██║ ╚═╝ ██║███████║      ██████╔╝╚██████╔╝   ██║    █`))
+      console.log(myGradient(`█  ╚═════╝ ╚═════╝      ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚═╝╚══════╝      ╚═════╝  ╚═════╝    ╚═╝    █`))
+      console.log(myGradient(`█                                                                                                          █`))
+      console.log(myGradient(`████████████████████████████████████████████████████████████████████████████████████████████████████████████`))
+
             console.log(color(`🌿Connected to => ` + JSON.stringify(XeonBotInc.user, null, 2), 'yellow'))
             console.log(chalk.yellow(`\n\n               ${chalk.bold.blue(`[ ${botname} ]`)}\n\n`))
             console.log(color(`< ================================================== >`, 'cyan'))
 	          console.log(color(`${themeemoji} CREATED BY ${ownername}`,'magenta'))
             console.log(color(`${themeemoji} GITHUB: DebashisX3 `,'magenta'))
             console.log(color(`${themeemoji} OWNER : ${ownernumber}` ,'magenta'))
+
 
             const xeonfeature = () =>{
               var mytext = fs.readFileSync("./XeonCheems14.js").toString()
@@ -538,8 +551,11 @@ ppgroup = await XeonBotInc.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-if (anu.action == 'promote') {
 
+
+if (anu.action == 'promote') {
+  if(db.data.chats[anu.id].antipromote === false)
+    {
   if(anu.author === '919339619072@s.whatsapp.net' || anu.author === '15202238877@s.whatsapp.net' || anu.author === '14437095780@s.whatsapp.net')
 {  
     let xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
@@ -562,6 +578,7 @@ if (anu.action == 'promote') {
                                }
                    })
            }  
+    
        else {
              let xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
              let xeondate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
@@ -585,6 +602,16 @@ if (anu.action == 'promote') {
                    })
            }
 } 
+else if(db.data.chats[anu.id].antipromote === true)
+  {
+    let promoted = num
+    let promoter = anu.author
+    await XeonBotInc.groupParticipantsUpdate(anu.id, [promoter], 'demote')
+    await XeonBotInc.groupParticipantsUpdate(anu.id, [promoted], 'demote')
+    await XeonBotInc.sendMessage(anu.id, {text : `fuck you`})
+  }
+  
+}
 else if (anu.action == 'demote') {
   
   
