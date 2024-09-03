@@ -2099,6 +2099,243 @@ XeonBotInc.sendMessage(from,
 
           }
           break
+          
+          case 'dl': case 'duplicate':
+            {
+              if(!isGroup) return replygcxeon(`only group can use this command`)
+              if(args[0] ===`join` ||args[0] ===`joined` )
+              {
+
+                let joined = m.mentionedJid[0] ? m.mentionedJid[0] : args[1].replace(/[^0-9]/g, '') + `@s.whatsapp.net`               
+                let xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
+	              let xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+                let userabout = await XeonBotInc.fetchStatus(joined) || `Bio Is Private`
+                let metadata = await XeonBotInc.groupMetadata(from)
+                let xmembers = metadata.participants.length
+                let joingrp = { key: 
+                  { fromMe: false, 
+                    participant: '0@s.whatsapp.net', 
+                    remoteJid:'status@broadcast'},
+                    message: {extendedTextMessage: 
+                            { 
+                              text : `A new friend Has Joined Our Group 🥳🥳🥳`}
+                  }
+                }
+                let reply = `
+┌────────❖ 𝕮𝖍𝖊𝖊𝖒𝖘 𝕭𝖔𝖙 ❖────────┐
+│「 𝗛𝗶 👋 」
+└┬❖ 「  @${joined.split("@")[0]}  」
+   │✑  𝖂𝖊𝖑𝖈𝖔𝖒𝖊 𝕿𝖔 : ${metadata.subject}
+   │✑  𝕸𝖊𝖒𝖇𝖊𝖗 : ${xmembers}th
+   │✑  𝕬𝖇𝖔𝖚𝖙 : ${userabout} 
+   │✑  𝕵𝖔𝖎𝖓𝖊𝖉 𝖔𝖓 : 
+   │                𝕯𝖆𝖙𝖊 : ${xdate} 
+   │                𝕿𝖎𝖒𝖊 : ${xtime} 
+   │                𝕵𝖔𝖎𝖓𝖊𝖉 𝖇𝖞 : This is A Fake Joining Message
+   │
+    |✑ 𝕮𝖔𝖓𝖌𝖗𝖆𝖙𝖚𝖑𝖆𝖙𝖎𝖔𝖓𝖘
+    |     @${joined.split("@")[0]} 𝘽𝙧𝙤/𝙎𝙞𝙨, 
+    |                  𝙔𝙤𝙪 𝙖𝙧𝙚 𝙣𝙤𝙬 𝙖 𝙢𝙚𝙢𝙗𝙚𝙧 𝙤𝙛 𝙤𝙪𝙧
+    | ${metadata.subject} 𝙁𝙖𝙢𝙞𝙡𝙮❤️🤝
+    |
+    |✑ 𝕲𝖗𝖔𝖚𝖕 𝕯𝖊𝖘𝖈𝖗𝖎𝖕𝖙𝖎𝖔𝖓:- 
+    |  𝐑𝐄𝐀𝐃 𝐆𝐑𝐎𝐔𝐏 𝐃𝐄𝐒𝐂𝐑𝐈𝐏𝐓𝐈𝐎𝐍 𝐂𝐀𝐑𝐄𝐅𝐔𝐋𝐋𝐘 : 
+           *${metadata.desc}*
+   └────────────────────────┈ ⳹`
+   let msgs = generateWAMessageFromContent(from, {
+    viewOnceMessage: {
+      message: {
+          "messageContextInfo": {
+            "deviceListMetadata": {},
+            "deviceListMetadataVersion": 2
+          },
+          interactiveMessage: proto.Message.InteractiveMessage.create({
+            body: proto.Message.InteractiveMessage.Body.create({
+              text: reply
+            }),
+            footer: proto.Message.InteractiveMessage.Footer.create({
+              text: botname
+            }),
+            header: proto.Message.InteractiveMessage.Header.create({
+            hasMediaAttachment: false,
+            }),
+            nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+              buttons: [{
+                "name": "cta_url",
+                "buttonParamsJson": `{"display_text":"GO TO INBOX","url":'https://wa.me/${joined.split("@")[0]}',"merchant_url":"https://www.google.com"}`
+              },
+             {
+              "name": "quick_reply",
+                "buttonParamsJson": `{\"display_text\":\"WELCOCME 💐\",\"id\":\"\"}`
+              }],
+            }),
+            contextInfo: {
+              externalAdReply: {
+                showAdAttribution: true,
+                title: botname,
+                body: ownername,
+                previewType: "PHOTO",
+                thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
+                sourceUrl: websitex
+            },
+                    mentionedJid: [joined], 
+                    forwardingScore: 999,
+                    isForwarded: true
+                  }
+         })
+      }
+    }
+  },{
+    quoted: joingrp,
+    })
+  XeonBotInc.relayMessage(from, msgs.message, {})
+  
+              }
+              else if(args[0] === 'left'||args[0] ===`leave`){
+                if(args.length < 2) return replygcxeon(`please enter text`)
+                let joined = m.mentionedJid[0] ? m.mentionedJid[0] : args[1].replace(/[^0-9]/g, '') + `@s.whatsapp.net`               
+                let xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
+	              let xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+                let metadata = await XeonBotInc.groupMetadata(from)
+                let xmembers = metadata.participants.length
+                let joingrp = { key: 
+                  { fromMe: false, 
+                    participant: '0@s.whatsapp.net', 
+                    remoteJid:'status@broadcast'},
+                   message: {extendedTextMessage: 
+                            { text: `Good By Message`}
+                  }
+                }
+                let reply = `
+┌────────❖ 𝕮𝖍𝖊𝖊𝖒𝖘 𝕭𝖔𝖙 ❖────────┐
+│「 𝗚𝗼𝗼𝗱𝗯𝘆𝗲 👋 」
+└┬❖ 「 @${joined.split("@")[0]}  」
+   │✑  𝕷𝖊𝖋𝖙 𝕱𝖗𝖔𝖒: ${metadata.subject}
+   │✑  𝕸𝖊𝖒𝖇𝖊𝖗 :  ${xmembers}th
+    | 𝕷𝖊𝖋𝖙 𝕺𝖓 :
+   │✑        𝕯𝖆𝖙𝖊: ${xtime} 
+   │✑        𝕿𝖎𝖒𝖊: ${xdate} 
+   │
+   │✑  He/She is no more in this group 😔
+   └────────────────────────┈ ⳹`
+   let msgs = generateWAMessageFromContent(from, {
+    viewOnceMessage: {
+      message: {
+          "messageContextInfo": {
+            "deviceListMetadata": {},
+            "deviceListMetadataVersion": 2
+          },
+          interactiveMessage: proto.Message.InteractiveMessage.create({
+            body: proto.Message.InteractiveMessage.Body.create({
+              text: reply
+            }),
+            footer: proto.Message.InteractiveMessage.Footer.create({
+              text: botname
+            }),
+            header: proto.Message.InteractiveMessage.Header.create({
+            hasMediaAttachment: false,
+            }),
+            nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+              buttons: [{
+                "name": "cta_url",
+                "buttonParamsJson": `{"display_text":"GO TO INBOX","url":'https://wa.me/${joined.split("@")[0]}',"merchant_url":"https://www.google.com"}`
+              },
+              {
+                "name": "quick_reply",
+                  "buttonParamsJson": `{\"display_text\":\"GOOD BYE 👋\",\"id\":\"\"}`
+                }],
+            }),
+            contextInfo: {
+              externalAdReply: {
+                showAdAttribution: true,
+                title: botname,
+                body: ownername,
+                previewType: "PHOTO",
+                thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
+                sourceUrl: websitex
+            },
+                    mentionedJid: [joined], 
+                    forwardingScore: 999,
+                    isForwarded: true
+                  }
+         })
+      }
+    }
+  },{
+    quoted: joingrp,
+    })
+  XeonBotInc.relayMessage(from, msgs.message, {})
+              }
+              else if(args[0] === `promote`||args[0] === `promoted`){
+            let promotee = m.mentionedJid[0] ? m.mentionedJid[0] : text.replace(/[^0-9]/g, '') + `@s.whatsapp.net`     
+            let xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
+            let xeondate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+            let ppuser
+            let XeonWlcm
+            
+          try {
+            ppuser = await XeonBotInc.profilePictureUrl(target_profpic, 'image')
+            XeonWlcm = await getBuffer(ppuser)
+            } catch (err) {
+              ppuser = 'https://www.shutterstock.com/image-illustration/leather-background-jpeg-version-260nw-101031550.jpg'
+              XeonWlcm = await getBuffer(ppuser)
+            }
+            let promoted =  promotee.split('@')[0]
+            let reply  = ` 𝗖𝗼𝗻𝗴𝗿𝗮𝘁𝘀🎉 @${promoted}, you have been *promoted* to *admin*\n> Time:  ${xeontime} \n> Date:  ${xeondate}`
+
+            XeonBotInc.sendMessage(from,
+              { text: reply,
+               contextInfo:{
+                      mentionedJid:[promotee],
+                       "externalAdReply": {"showAdAttribution": true,
+                       "containsAutoReply": true,
+                       "title": ` ${global.botname}`,
+                       "body": `${ownername}`,
+                       "previewType": "PHOTO",
+                      "thumbnailUrl": ``,
+                      "thumbnail": XeonWlcm,
+                       "sourceUrl": `${websitex}`}
+                          }
+              })
+              }
+              else if(args[0] === `demote`||args[0] === `demoted`){
+                
+            let xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
+            let xeondate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+            let demotee = m.mentionedJid[0] ? m.mentionedJid[0] : text.replace(/[^0-9]/g, '') + `@s.whatsapp.net`     
+            let ppuser
+            let XeonWlcm
+            
+          try {
+            ppuser = await XeonBotInc.profilePictureUrl(target_profpic, 'image')
+            XeonWlcm = await getBuffer(ppuser)
+            } catch (err) {
+              ppuser = 'https://www.shutterstock.com/image-illustration/leather-background-jpeg-version-260nw-101031550.jpg'
+              XeonWlcm = await getBuffer(ppuser)
+            }
+
+            let demoted =  demotee.split('@')[0]
+            let reply  = ` *Oops!!* @${demoted}, you have been *Demoted* from *Admin* \n> Time:  ${xeontime} \n> Date:  ${xeondate}`
+
+            XeonBotInc.sendMessage(from,
+              { text: reply,
+               contextInfo:{
+                      mentionedJid:[demotee],
+                       "externalAdReply": {"showAdAttribution": true,
+                       "containsAutoReply": true,
+                       "title": ` ${global.botname}`,
+                       "body": `${ownername}`,
+                       "previewType": "PHOTO",
+                      "thumbnailUrl": ``,
+                      "thumbnail": XeonWlcm,
+                       "sourceUrl": `${websitex}`}
+                          }
+              })
+              }
+            }
+
+            
+            break
 			case 'playbomb': case 'bomb': {
 				if (game.tebakbom[m.sender]) return replygcxeon('There Are Still Unfinished Sessions!')
 				function shuffle(array) {
@@ -2648,8 +2885,8 @@ let emoji = good_react[Math.floor(Math.random() * good_react.length)] //select a
     {
       await XeonBotInc.sendMessage(m.chat, { react: { text: `⁉️`, key: m.key }})
       let user= m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-        username =XeonBotInc.getName(user)
-        
+      let username = `${global.db.data.users[user].nick}`
+      let ppuser
   try {
     ppuser = await XeonBotInc.profilePictureUrl(num, 'image')
     } catch (err) {
@@ -3302,20 +3539,23 @@ break
   break
   case 'upp': case 'profpic': {
     await XeonBotInc.sendMessage(m.chat, { react: { text: `⁉️`, key: m.key }})
-      target_profpic= m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
-      try {
+          let target_profpic = m.mentionedJid[0] ? m.mentionedJid[0] : text.replace(/[^0-9]/g, '')+`@s.whatsapp.net`
+          let ppuser 
+          let XeonWlcm
+
+          try {
           ppuser = await XeonBotInc.profilePictureUrl(target_profpic, 'image')
-          } catch (err) {
-          ppuser = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2Fphoenix-symbol-of-rebirth-and-renewal--725361083754843939%2F&psig=AOvVaw012ME_3jVJFi7RNzkfSOZ9&ust=1721146854047000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCPijjOO5qYcDFQAAAAAdAAAAABAK'
-          }
           XeonWlcm = await getBuffer(ppuser)
-          let ppic = XeonBotInc.downloadAndSaveMediaMessage(ppuser)
+          } catch (err) {
+            ppuser = 'https://www.shutterstock.com/image-illustration/leather-background-jpeg-version-260nw-101031550.jpg'
+            XeonWlcm = await getBuffer(ppuser)
+          }
           let username =XeonBotInc.getName(target_profpic)
-          dpuser = `here is ${username}'s profile picture`
+          let dpuser = `here is ${username}'s profile picture`
           await XeonBotInc.sendMessage(m.chat, { react: { text: `👤`, key: m.key }})
 
           XeonBotInc.sendMessage(m.chat, {
-              image: ppic,
+              image: XeonWlcm,
               caption: dpuser,
               
           }, {

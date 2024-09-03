@@ -31,6 +31,7 @@ const readline = require("readline")
 const { parsePhoneNumber } = require("libphonenumber-js")
 const makeWASocket = require("@whiskeysockets/baileys").default
 const gradient = require('gradient-string');
+const { text } = require('cheerio')
 const myGradient = gradient(['red', 'yellow', 'green', 'blue', 'magenta', 'cyan']);
 
 
@@ -298,9 +299,9 @@ let groupicon = await getBuffer(pp)
                   { fromMe: false, 
                     participant: '0@s.whatsapp.net', 
                     remoteJid:'status@broadcast'},
-                    message: {imageMessage: 
-                            { image: groupicon,
-                              caption : `A new friend Has Joined Our Group 🥳🥳🥳`}
+                    message: {extendedTextMessage: 
+                            { 
+                              text : `A new friend Has Joined Our Group 🥳🥳🥳`}
                   }
                 }
 	            const xmembers = metadata.participants.length
@@ -584,7 +585,7 @@ if (anu.action == 'promote') {
              let xeondate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
              let xeonName = num
              let XeonWlcm = await getBuffer(ppuser)
-              let promoter = anu.author
+             let promoter = anu.author
              xeonbody = ` 𝗖𝗼𝗻𝗴𝗿𝗮𝘁𝘀🎉 @${xeonName.split("@")[0]}, you have been *promoted* to *admin* \n*Promoted by* @${promoter.split("@")[0]}\n\n> Time:  ${xeontime.split("@")[0]} \n> Date:  ${xeondate.split("@")[0]}`
              XeonBotInc.sendMessage(anu.id,
                    { text: xeonbody,
