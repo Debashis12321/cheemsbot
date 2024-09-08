@@ -2018,6 +2018,47 @@ if(reactall === true)
                   }
             }
             break
+            case 'meter':
+              {
+                if(!text) return replygcxeon(`Example ${prefix + command} height_in_inches`)
+                let inch = text.replace(/[^0-9]/g, '')
+                let meter = inch*0.0254
+                replybot(`${pushname} Your Height is ${meter} meters`)
+              }
+              break
+            case 'bmi':
+              {
+                if(!text) return replygcxeon(`Example: ${prefix + command} weight(kg) height(m)\nIf you don't know your height in meters, use ${prefix}meter height_in_inches\nExample: ${prefix + command} 12`)
+                let weight = text.split(" ")[0]
+                let height = text.split(" ")[1]
+                let bmi = weight/(height*height)
+                let reply 
+                if(bmi<18.5) reply = `Underweight`
+                else if (bmi>=18.5 && bmi<=24.9) reply = `Normal`
+                else if(bmi>=25 && bmi<=29.9) reply = `Overweight`
+                else if(bmi>=30) reply = `Obese`
+                try {
+                  ppuser = await XeonBotInc.profilePictureUrl(m.sender, 'image')
+              } catch (err) {
+                ppuser = 'https://www.shutterstock.com/image-illustration/leather-background-jpeg-version-260nw-101031550.jpg'
+              }
+          XeonWlcm = await getBuffer(ppuser)
+                await XeonBotInc.sendMessage(from, 
+                  {text : `Hello ${pushname} Your BMI is ${bmi}\nPhysical Condition : ${reply}`,
+                    contextInfo:{
+                      externalAdReply:{
+                        showAdAttribution: true,
+                        title: botname,
+                        body: ownername,
+                        thumbnail: XeonWlcm,
+                        sourceUrl: websitex,
+                        mediaType: 1,
+                        renderLargerThumbnail: false,
+                      }
+                    }}
+                )
+              }
+              break
           case 'ginfo' : case 'groupinfo': 
           {
             if(!isGroup) return XeonStickGroup()
@@ -3231,7 +3272,7 @@ break
   try {
           ppuser = await XeonBotInc.profilePictureUrl(a, 'image')
       } catch (err) {
-      ppuser = 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
+      ppuser = 'https://www.shutterstock.com/image-illustration/leather-background-jpeg-version-260nw-101031550.jpg'
       }
   XeonWlcm = await getBuffer(ppuser)
   await XeonBotInc.sendMessage(m.chat, { react: { text: `👩‍❤️‍👨`, key: m.key }})
@@ -3516,7 +3557,7 @@ break
   try {
           ppuser = await XeonBotInc.profilePictureUrl(a, 'image')
       } catch (err) {
-      ppuser = 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
+      ppuser = 'https://www.shutterstock.com/image-illustration/leather-background-jpeg-version-260nw-101031550.jpg'
       }
   XeonWlcm = await getBuffer(ppuser)
   
@@ -12522,7 +12563,7 @@ case 'husband':
 if (!m.isGroup) return XeonStickGroup()
     let member = participants.map(u => u.id)
 let husband = member[Math.floor(Math.random() * member.length)]
-let wife= m.mentionedJid[0] ? m.mentionedJid[0] : text.replace(/[^0-9]/g, '')
+let wife= m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
 
 let ps = groupMetadata.participants.map(v => v.id);
 do {
@@ -12638,7 +12679,7 @@ case 'wife':
 if (!m.isGroup) return XeonStickGroup()
     let member = participants.map(u => u.id)
 let wife = member[Math.floor(Math.random() * member.length)]
-let husband= m.mentionedJid[0] ? m.mentionedJid[0] : text.replace(/[^0-9]/g, '')
+let husband= m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
 
 let ps = groupMetadata.participants.map(v => v.id);
 do {

@@ -1,12 +1,4 @@
 {
-  "sticker": {},
-  "database": {},
-  "game": {
-    "math": []
-  },
-  "others": {
-    "vote": []
-  },
   "users": {
     "919366316018@s.whatsapp.net": {
       "serialNumber": "5748ef2731f9b0ab993964d915670166",
@@ -345,7 +337,7 @@
       "badword": 0,
       "afkReason": "",
       "nick": "~👻 ATIF",
-      "premium": "false",
+      "premium": false,
       "limit": 100,
       "totalLimit": 0
     },
@@ -370,8 +362,31 @@
       "premium": "false",
       "limit": 100,
       "totalLimit": 0
+    },
+    "919907106071@s.whatsapp.net": {
+      "serialNumber": "06910399f1f464e2dea1c6fa2823878a",
+      "title": "User",
+      "afkTime": -1,
+      "badword": 0,
+      "afkReason": "",
+      "nick": "Saraswati Jana",
+      "premium": false,
+      "limit": 100,
+      "totalLimit": 0
+    },
+    "917479010668@s.whatsapp.net": {
+      "serialNumber": "c7d5243d200b4ed80da0faa28963e970",
+      "title": "User",
+      "afkTime": -1,
+      "badword": 0,
+      "afkReason": "",
+      "nick": "Butterfly",
+      "premium": "false",
+      "limit": 100,
+      "totalLimit": 0
     }
   },
+  "database": {},
   "chats": {
     "120363047626537933@g.us": {
       "badword": false,
@@ -1117,6 +1132,9 @@
       "antilinkgc": false
     }
   },
+  "game": {
+    "math": []
+  },
   "settings": {
     "919366316018@s.whatsapp.net": {
       "totalhit": 250,
@@ -1247,7 +1265,7 @@
       }
     },
     "15202238877@s.whatsapp.net": {
-      "totalhit": 510,
+      "totalhit": 531,
       "totalError": 0,
       "online": false,
       "autosticker": false,
@@ -1340,5 +1358,9 @@
     }
   },
   "message": {},
+  "sticker": {},
+  "others": {
+    "vote": []
+  },
   "antipromote": {}
 }
