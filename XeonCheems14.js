@@ -2610,8 +2610,8 @@ XeonBotInc.sendMessage(from,
                   let alive_img = pickRandom(aliveimg)
                   let {key} = await XeonBotInc.sendMessage(from,
                   {
-                    image : imagesuffle, //random image selection part(defined in line no 161)
-                    caption : alive_img,
+                    image : alive_img, //random image selection part(defined in line no 161)
+                    caption : alive,
                     contextInfo:
                     {
                       externalAdReply:
