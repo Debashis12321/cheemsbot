@@ -164,6 +164,7 @@ const ownerimage5 = fs.readFileSync('./XeonMedia/owner_images/ownerimage5.png')
 const ownerimages = [ownerimage1, ownerimage2, ownerimage3, ownerimage4, ownerimage5]
 const { gameSlot, gameCasinoSolo, gameMerampok, gameTangkapOr, daily, transferLimit, transferUang, buy, setLimit, setUang } = require('./lib/game');
 const { toLower } = require('lodash')
+const { time } = require('console')
 
 //store database
 const db_respon_list = JSON.parse(fs.readFileSync('./src/store/list.json'))
@@ -219,6 +220,9 @@ const reSize = async(buffer, ukur1, ukur2) => {
       resolve(ab)
    })
 }
+
+//restarting 
+
 //module
 module.exports = XeonBotInc = async (XeonBotInc, m, msg, chatUpdate, store) => {
     try {
@@ -2539,7 +2543,7 @@ XeonBotInc.sendMessage(from,
               break
             case 'alive': //alive response message
               {
-                await XeonBotInc.sendMessage(m.chat, { react: { text: `🦄`, key:m.key}}) // reaction to alive message
+                await XeonBotInc.sendMessage(m.chat, { react: { text: `🦄`, key: m.key}}) // reaction to alive message
                 //alive message fake quote reply
                 let q_alive = { key: 
                   { fromMe: false, 
@@ -2562,15 +2566,52 @@ XeonBotInc.sendMessage(from,
                 //anyone of these emojies will be send along alive message, placed after owner name, selection is randomized
                 let imagesuffle  = ownerimages[Math.floor(Math.random() * ownerimages.length)] //random image selection(defined in line no 161) 
                 let good_react =['😀','😃','😄','😁','😆','🥹','☺️','😊','😇','🙂','🙃','😉','😍','😌','🥰','😘','😗','😙','😚','😋','😛','😝','🤓','😎','🤩','🥳','🙂‍↕️','🥺','🤗','🤔','🫣','🤭','🫢','🫡','🤫','🫠','🤠','😺','🎃','💜','❤️','💚','🖤','♥️','🤎','❤️‍🩹','❣','💕','💝','🫀','💖','💗','❤️‍🔥','💜','💌']
-                let emoji = good_react[Math.floor(Math.random() * good_react.length)]  // random selection
+                let emoji = pickRandom(good_react)  // random selection
                 
                 //alive message for groups
               if(!isGroup)
                 {
+                  let img1 = fs.readFileSync('./XeonMedia/alive_img/img1.jpg')
+                  let img2 = fs.readFileSync('./XeonMedia/alive_img/img2.jpg')
+                  let img3 = fs.readFileSync('./XeonMedia/alive_img/img3.jpg')
+                  let img4 = fs.readFileSync('./XeonMedia/alive_img/img4.jpg')
+                  let img5 = fs.readFileSync('./XeonMedia/alive_img/img5.jpg')
+                  let img6 = fs.readFileSync('./XeonMedia/alive_img/img6.jpg')
+                  let img7 = fs.readFileSync('./XeonMedia/alive_img/img7.jpg')
+                  let img8 = fs.readFileSync('./XeonMedia/alive_img/img8.jpg')
+                  let img9 = fs.readFileSync('./XeonMedia/alive_img/img9.jpg')
+                  let img10 = fs.readFileSync('./XeonMedia/alive_img/img10.jpg')
+                  let img11 = fs.readFileSync('./XeonMedia/alive_img/img11.jpg')
+                  let img12 = fs.readFileSync('./XeonMedia/alive_img/img12.jpg')
+                  let img13 = fs.readFileSync('./XeonMedia/alive_img/img13.jpg')
+                  let img14 = fs.readFileSync('./XeonMedia/alive_img/img14.jpg')
+                  let img15 = fs.readFileSync('./XeonMedia/alive_img/img15.jpg')
+                  let img16 = fs.readFileSync('./XeonMedia/alive_img/img16.jpg')
+                  let img17 = fs.readFileSync('./XeonMedia/alive_img/img17.jpg')
+                  let img18 = fs.readFileSync('./XeonMedia/alive_img/img18.jpg')
+                  let img19 = fs.readFileSync('./XeonMedia/alive_img/img19.jpg')
+                  let img20 = fs.readFileSync('./XeonMedia/alive_img/img20.jpg')
+                  let img21 = fs.readFileSync('./XeonMedia/alive_img/img21.jpg')
+                  let img22 = fs.readFileSync('./XeonMedia/alive_img/img22.jpg')
+                  let img23 = fs.readFileSync('./XeonMedia/alive_img/img23.jpg')
+                  let img24 = fs.readFileSync('./XeonMedia/alive_img/img24.jpg')
+                  let img25 = fs.readFileSync('./XeonMedia/alive_img/img25.jpg')
+                  let img26 = fs.readFileSync('./XeonMedia/alive_img/img26.jpg')
+                  let img27 = fs.readFileSync('./XeonMedia/alive_img/img27.jpg')
+                  let img28 = fs.readFileSync('./XeonMedia/alive_img/img28.jpg')
+                  let img29 = fs.readFileSync('./XeonMedia/alive_img/img29.jpg')
+                  let img30 = fs.readFileSync('./XeonMedia/alive_img/img30.jpg')
+                  let img31 = fs.readFileSync('./XeonMedia/alive_img/img31.jpg')
+                  let img32 = fs.readFileSync('./XeonMedia/alive_img/img32.jpg')
+                  let img33 = fs.readFileSync('./XeonMedia/alive_img/img33.jpg')
+                  let img34 = fs.readFileSync('./XeonMedia/alive_img/img34.jpg')
+                  let img35 = fs.readFileSync('./XeonMedia/alive_img/img35.jpg')
+                  let aliveimg = [img1,img2,img3,img4,img5,img6,img7,img8,img9,img10,img11,img12,img13,img14,img15,img16,img17,img18,img19,img20,img21,img22,img23,img24,img25,img26,img27,img28,img29,img30,img31,img32,img33,img34,img35]
+                  let alive_img = pickRandom(aliveimg)
                   let {key} = await XeonBotInc.sendMessage(from,
                   {
                     image : imagesuffle, //random image selection part(defined in line no 161)
-                    caption : alive,
+                    caption : alive_img,
                     contextInfo:
                     {
                       externalAdReply:
@@ -2627,10 +2668,46 @@ XeonBotInc.sendMessage(from,
               await XeonBotInc.sendMessage(m.chat, { react: { text: `🫀`, key: key }}) // reaction to alive response message
               }
               //alive message audio response, same for personal chat and group chat
+              let aud1 = fs.readFileSync('./XeonMedia/alive_aud/Alive.mp3')
+              let aud2 = fs.readFileSync('./XeonMedia/alive_aud/Babu.mp3')
+              let aud3 = fs.readFileSync('./XeonMedia/alive_aud/Bot.mp3')
+              let aud4 = fs.readFileSync('./XeonMedia/alive_aud/Bot1.mp3')
+              let aud5 = fs.readFileSync('./XeonMedia/alive_aud/Bot2.mp3')
+              let aud6 = fs.readFileSync('./XeonMedia/alive_aud/Bot3.mp3')
+              let aud7 = fs.readFileSync('./XeonMedia/alive_aud/Bot4.mp3')
+              let aud8 = fs.readFileSync('./XeonMedia/alive_aud/Bot5.mp3')
+              let aud9 = fs.readFileSync('./XeonMedia/alive_aud/Bot6.mp3')
+              let aud10 = fs.readFileSync('./XeonMedia/alive_aud/Bot7.mp3')
+              let aud11 = fs.readFileSync('./XeonMedia/alive_aud/Bot8.mp3')
+              let aud12 = fs.readFileSync('./XeonMedia/alive_aud/Bot9.mp3')
+              let aud13 = fs.readFileSync('./XeonMedia/alive_aud/Bot10.mp3')
+              let aud14 = fs.readFileSync('./XeonMedia/alive_aud/Bot11.mp3')
+              let aud15 = fs.readFileSync('./XeonMedia/alive_aud/Bot12.mp3')
+              let aud16 = fs.readFileSync('./XeonMedia/alive_aud/Bot13.mp3')
+              let aud17 = fs.readFileSync('./XeonMedia/alive_aud/Bot14.mp3')
+              let aud18 = fs.readFileSync('./XeonMedia/alive_aud/Bot15.mp3')
+              let aud19 = fs.readFileSync('./XeonMedia/alive_aud/Bot16.mp3')
+              let aud20 = fs.readFileSync('./XeonMedia/alive_aud/Bot17.mp3')
+              let aud21 = fs.readFileSync('./XeonMedia/alive_aud/Bot18.mp3')
+              let aud22 = fs.readFileSync('./XeonMedia/alive_aud/Bot19.mp3')
+              let aud23 = fs.readFileSync('./XeonMedia/alive_aud/Bot20.mp3')
+              let aud24 = fs.readFileSync('./XeonMedia/alive_aud/Bot21.mp3')
+              let aud25 = fs.readFileSync('./XeonMedia/alive_aud/Bot22.mp3')
+              let aud26 = fs.readFileSync('./XeonMedia/alive_aud/Bot23.mp3')
+              let aud27 = fs.readFileSync('./XeonMedia/alive_aud/Bot24.mp3')
+              let aud28 = fs.readFileSync('./XeonMedia/alive_aud/Bot25.mp3')
+              let aud29 = fs.readFileSync('./XeonMedia/alive_aud/Bot26.mp3')
+              let aud30 = fs.readFileSync('./XeonMedia/alive_aud/Guru.mp3')
+              let aud31 = fs.readFileSync('./XeonMedia/alive_aud/Guru1.mp3')
+              let aud32 = fs.readFileSync('./XeonMedia/alive_aud/Guru2.mp3')
+              let aud33 = fs.readFileSync('./XeonMedia/alive_aud/Guru3.mp3')
+              let aud34 = fs.readFileSync('./XeonMedia/alive_aud/Guru4.mp3')
+              let audio = [aud1, aud2, aud3, aud4, aud5, aud6, aud7, aud8, aud9, aud10, aud11, aud12, aud13, aud14, aud15, aud16, aud17, aud18, aud19, aud20, aud21, aud22, aud23, aud24, aud25, aud26, aud27, aud28, aud29, aud30, aud31, aud32, aud33, aud34]  
+              let aud_msg = pickRandom(audio)
                XeonBotInc.sendMessage(m.chat, {
-                  audio: fs.readFileSync('./XeonMedia/audio/nomoskar.mp3'),
+                  audio: aud_msg,
                   mimetype: 'audio/mpeg',
-                  seconds: 355556601,
+                  seconds: 36000000,
                   ptt: true //audio will be sent in voice message format
               }, {
                   quoted: alive_audio
@@ -12020,7 +12097,7 @@ break
 			const { remini } = require('./lib/remini')
 			let media = await quoted.download()
 			let proses = await remini(media, "enhance")
-      XeonBotInc.sendMessage(from , { image : proses, caption : `HERE IS YOUR IMAGE`},{quoted : m})
+      XeonBotInc.sendMessage(from , { image : proses},{quoted : m})
 			
 			}
 			break

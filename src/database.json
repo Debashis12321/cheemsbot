@@ -1,4 +1,12 @@
 {
+  "sticker": {},
+  "database": {},
+  "game": {
+    "math": []
+  },
+  "others": {
+    "vote": []
+  },
   "users": {
     "919366316018@s.whatsapp.net": {
       "serialNumber": "5748ef2731f9b0ab993964d915670166",
@@ -384,9 +392,30 @@
       "premium": "false",
       "limit": 100,
       "totalLimit": 0
+    },
+    "918327526811@s.whatsapp.net": {
+      "serialNumber": "23f93df96ae4b6353b6397b3b40e7c07",
+      "title": "User",
+      "afkTime": -1,
+      "badword": 0,
+      "afkReason": "",
+      "nick": "𝑺𝒍𝒆𝒆𝒑𝒊𝒏𝒈...🗿",
+      "premium": false,
+      "limit": 100,
+      "totalLimit": 0
+    },
+    "918777407351@s.whatsapp.net": {
+      "serialNumber": "d38a402ab87645378521b211e8f7b8cf",
+      "title": "Premium",
+      "afkTime": -1,
+      "badword": 0,
+      "afkReason": "",
+      "nick": "__its_abhra_bot__",
+      "premium": "true",
+      "limit": 1000,
+      "totalLimit": 0
     }
   },
-  "database": {},
   "chats": {
     "120363047626537933@g.us": {
       "badword": false,
@@ -1130,10 +1159,73 @@
       "antilink": false,
       "antipromotion": false,
       "antilinkgc": false
+    },
+    "918777407351@s.whatsapp.net": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antidelete": true,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
+    },
+    "917449401660@s.whatsapp.net": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antidelete": true,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
+    },
+    "917890284690@s.whatsapp.net": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antidelete": true,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
     }
-  },
-  "game": {
-    "math": []
   },
   "settings": {
     "919366316018@s.whatsapp.net": {
@@ -1265,7 +1357,7 @@
       }
     },
     "15202238877@s.whatsapp.net": {
-      "totalhit": 531,
+      "totalhit": 550,
       "totalError": 0,
       "online": false,
       "autosticker": false,
@@ -1355,12 +1447,38 @@
           "alias": "919339619072@s.whatsapp.net"
         }
       }
+    },
+    "918777407351@s.whatsapp.net": {
+      "totalhit": 2,
+      "totalError": 0,
+      "online": false,
+      "autosticker": false,
+      "autodownload": false,
+      "autobio": false,
+      "autoread": true,
+      "autoblocknum": false,
+      "onlyindia": false,
+      "onlyindo": false,
+      "onlygrub": false,
+      "onlypc": false,
+      "autorecordtype": false,
+      "autorecord": false,
+      "autotype": false,
+      "watermark": {
+        "packname": "Sticker By",
+        "author": "Debashis Dey"
+      },
+      "about": {
+        "bot": {
+          "nick": "__its_abhra_bot__",
+          "alias": "꧁﴿»✥«·-𝕯𝕯 𝕮𝖍𝖊𝖊𝖒𝖘-𝕭𝖔𝖙-·»✥«﴾꧂"
+        },
+        "owner": {
+          "alias": "919339619072@s.whatsapp.net"
+        }
+      }
     }
   },
   "message": {},
-  "sticker": {},
-  "others": {
-    "vote": []
-  },
   "antipromote": {}
 }

@@ -225,7 +225,7 @@ try{
 	          console.log(color(`${themeemoji} CREATED BY ${ownername}`,'magenta'))
             console.log(color(`${themeemoji} GITHUB: DebashisX3 `,'magenta'))
             console.log(color(`${themeemoji} OWNER : ${ownernumber}` ,'magenta'))
-
+            await sleep(3600000)
 
             const xeonfeature = () =>{
               var mytext = fs.readFileSync("./XeonCheems14.js").toString()
