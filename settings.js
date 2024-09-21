@@ -4,7 +4,7 @@
 //Instagram: unicorn_xeon13
 //Telegram: t.me/xeonbotinc
 //GitHub: @DGXeon
-//WhatsApp: +917449401660
+//WhatsApp: +919339619072
 //want more free bot scripts? subscribe to my youtube channel: https://youtube.com/@DGXeon
 
 const fs = require('fs')
@@ -13,19 +13,19 @@ const chalk = require('chalk')
 //owmner v card
 global.ytname = "NO YT-Channel " //ur yt chanel name
 global.socialm = "GitHub: Debashis121212" //ur github or insta name
-global.location = "Belur, Birbhum, WB,INDIA  " //ur location
-global.fbprofile = 'https://www.facebook.com/profile.php?id=100079784274234'
-global.igprofile = 'https://www.instagram.com/__its_abhra__/'
-global.gitprof = 'https://github.com/DebashisX3/'
-global.tg = 'https://t.me/abhrajit_sunny'
-global.walink = 'https://wa.me/917449401660'
-global.thumbimage_url = fs.readFileSync('./XeonMedia/fbimg.jpg')
+global.location = "Nalhati, Birbhum, WB,INDIA  " //ur location
+global.fbprofile = 'https://www.facebook.com/Debashi.Dey.X2/'
+global.igprofile = 'https://www.instagram.com/debashis_x1/'
+global.gitprof = 'https://github.com/DebashisX2/'
+global.tg = 'https://t.me/Debashis_005'
+global.walink = 'https://wa.me/qr/ZPZ7Z6WYJ752O1'
+global.thumbimage_url = 'https://assets.telegraphindia.com/abp/2022/Jun/1655905064_roddur.jpg'
 //new
-global.botname = '꧁﴿»ABHRAJIT XD BOT«﴾꧂' //ur bot name
-global.ownernumber = '917449401660@s.whatsapp.net' //ur owner number
-global.botnumber = "917449401660@s.whatsapp.net"
-global.ownername = '꧁﴿☬✞ ABHRAJIT ✞☬﴾꧂™' //ur owner name
-global.websitex = 'https://www.facebook.com/profile.php?id=100079784274234'
+global.botname = '꧁﴿»✥«·-𝕯𝕯 𝕮𝖍𝖊𝖊𝖒𝖘-𝕭𝖔𝖙-·»✥«﴾꧂' //ur bot name
+global.ownernumber = '919339619072@s.whatsapp.net' //ur owner number
+global.botnumber = "15202238877@s.whatsapp.net"
+global.ownername = '꧁﴿☬✞ 𝔇𝔢𝔟𝔞𝔰𝔥𝔦𝔰 𝔇𝔢𝔶 ✞☬﴾꧂™' //ur owner name
+global.websitex = "https://www.facebook.com/Debashi.Dey.X2/"
 global.wagc = "https://chat.whatsapp.com/C4NU6KefgoLL9W8vpbhbEY"
 global.repo_link = `https://github.com/DebashisX3/cheemsbot-md-v14`
 global.themeemoji = '📌'
@@ -51,20 +51,20 @@ Click below buttons for more.👇
 
 😊✌️A Simple WhatsApp Tool 🥰🤟🏻, 
 Created By ${ownername} 👑`
-global.owner_react = '🥰'
-global.wm = "▂▃▅▇█▓▒░ ABHRAJIT XD BOT ░▒▓█▇▅▃▂ "
-global.botscript = 'https://github.com/DebashisX3/cheemsbot-md-v14' //script link
+global.owner_react = '🫡'
+global.wm = "▂▃▅▇█▓▒░ 𝕯𝕯 𝕮𝖍𝖊𝖊𝖒𝖘 𝕸𝖚𝖑𝖙𝖎𝖉𝖊𝖛𝖎𝖈𝖊 𝕭𝖔𝖙 ░▒▓█▇▅▃▂ "
+global.botscript = 'https://github.com/DebashisX1/cheemsbot-v12' //script link
 global.packname = "Sticker By"
-global.author = "ABHRAJIT"
-global.creator = "917449401660@s.whatsapp.net"
+global.author = "Debashis Dey"
+global.creator = "919339619072@s.whatsapp.net"
 global.xprefix = '.'
 global.isonline = false
 
-global.premium = ["917449401660"] // Premium User
+global.premium = ["919339619072"] // Premium User
 global.hituet = 0
 
 //bot sett
-global.typemenu = 'v12' // menu type 'v1' => 'v12'
+global.typemenu = 'v13' // menu type 'v1' => 'v12'
 global.typereply = 'v4' // reply type 'v1' => 'v4'
 global.autoblocknumber = '92' //set autoblock country code
 global.antiforeignnumber = '91' //set anti foreign number country code
@@ -74,7 +74,7 @@ global.autoswview = true //auto status/story view
 global.adminevent = true //show promote/demote message
 global.groupevent = true //show update messages in group chat
 global.reactall = true //send reaction to all messages
-global.disturbgirls = true
+global.disturbgirls = false
 //msg
 global.mess = {
 	limit: 'Your limit is up!',
@@ -82,6 +82,40 @@ global.mess = {
     done: 'Done✓',
     error: 'Error!',
     success: 'Here you go!'
+}
+
+global.listv = ['•','●','■','✿','▲','➩','➢','➣','➤','✦','✧','△','❀','○','□','♤','♡','◇','♧','々','〆']
+global.tempatDB = 'database.json'
+
+global.limit = {
+	free: 100,
+	premium: 999,
+	vip: 'VIP'
+}
+
+global.uang = {
+	free: 10000,
+	premium: 1000000,
+	vip: 10000000
+}
+
+global.mess = {
+	error: 'Error!',
+	nsfw: 'Nsfw is disabled in this group, Please tell the admin to enable',
+	done: 'Done'
+}
+
+global.bot = {
+	limit: 0,
+	uang: 0
+}
+
+global.game = {
+	suit: {},
+	menfes: {},
+	tictactoe: {},
+	kuismath: {},
+	tebakbom: {},
 }
 //thumbnail
 global.thumb = fs.readFileSync('./XeonMedia/theme/cheemspic.jpg')

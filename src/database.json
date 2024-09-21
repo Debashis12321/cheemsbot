@@ -1,4 +1,12 @@
 {
+  "sticker": {},
+  "database": {},
+  "game": {
+    "math": []
+  },
+  "others": {
+    "vote": []
+  },
   "users": {
     "919366316018@s.whatsapp.net": {
       "serialNumber": "5748ef2731f9b0ab993964d915670166",
@@ -161,7 +169,7 @@
       "badword": 0,
       "afkReason": "",
       "nick": "Raj",
-      "premium": "false",
+      "premium": false,
       "limit": 100,
       "totalLimit": 0
     },
@@ -271,7 +279,7 @@
       "badword": 0,
       "afkReason": "",
       "nick": "Dibyendu Samanta",
-      "premium": "false",
+      "premium": false,
       "limit": 100,
       "totalLimit": 0
     },
@@ -319,8 +327,85 @@
       "limit": 1000,
       "totalLimit": 0
     },
+    "917449401660@s.whatsapp.net": {
+      "serialNumber": "c7a2d5a65b839e77bdc20b8117fc6870",
+      "title": "User",
+      "afkTime": -1,
+      "badword": 0,
+      "afkReason": "",
+      "nick": "__its_abhra__",
+      "premium": false,
+      "limit": 100,
+      "totalLimit": 0
+    },
+    "919749837183@s.whatsapp.net": {
+      "serialNumber": "a753b5af917aa6b48650f6285e4fea21",
+      "title": "User",
+      "afkTime": -1,
+      "badword": 0,
+      "afkReason": "",
+      "nick": "~👻 ATIF",
+      "premium": false,
+      "limit": 100,
+      "totalLimit": 0
+    },
+    "95034925920350@lid": {
+      "serialNumber": "6d43aefe1493a14bcfce8fb0d25fc47c",
+      "title": "User",
+      "afkTime": -1,
+      "badword": 0,
+      "afkReason": "",
+      "nick": "Jeet Maji",
+      "premium": "false",
+      "limit": 100,
+      "totalLimit": 0
+    },
+    "13135550002@s.whatsapp.net": {
+      "serialNumber": "5338ef97bfece746cb1d77082a8d911e",
+      "title": "User",
+      "afkTime": -1,
+      "badword": 0,
+      "afkReason": "",
+      "nick": "13135550002",
+      "premium": "false",
+      "limit": 100,
+      "totalLimit": 0
+    },
+    "919907106071@s.whatsapp.net": {
+      "serialNumber": "06910399f1f464e2dea1c6fa2823878a",
+      "title": "User",
+      "afkTime": -1,
+      "badword": 0,
+      "afkReason": "",
+      "nick": "Saraswati Jana",
+      "premium": false,
+      "limit": 100,
+      "totalLimit": 0
+    },
+    "917479010668@s.whatsapp.net": {
+      "serialNumber": "c7d5243d200b4ed80da0faa28963e970",
+      "title": "User",
+      "afkTime": -1,
+      "badword": 0,
+      "afkReason": "",
+      "nick": "Butterfly",
+      "premium": "false",
+      "limit": 100,
+      "totalLimit": 0
+    },
+    "918327526811@s.whatsapp.net": {
+      "serialNumber": "23f93df96ae4b6353b6397b3b40e7c07",
+      "title": "User",
+      "afkTime": -1,
+      "badword": 0,
+      "afkReason": "",
+      "nick": "𝑺𝒍𝒆𝒆𝒑𝒊𝒏𝒈...🗿",
+      "premium": false,
+      "limit": 100,
+      "totalLimit": 0
+    },
     "918777407351@s.whatsapp.net": {
-      "serialNumber": "cf7ddd746b8f6257caecfbd3f2b81d99",
+      "serialNumber": "d38a402ab87645378521b211e8f7b8cf",
       "title": "Premium",
       "afkTime": -1,
       "badword": 0,
@@ -331,7 +416,6 @@
       "totalLimit": 0
     }
   },
-  "database": {},
   "chats": {
     "120363047626537933@g.us": {
       "badword": false,
@@ -492,7 +576,8 @@
       "antilink": false,
       "antipromotion": false,
       "antilinkgc": false,
-      "antipromote": false
+      "antipromote": false,
+      "antidelete": true
     },
     "919366316018@s.whatsapp.net": {
       "badword": false,
@@ -533,7 +618,8 @@
       "antilink": false,
       "antipromotion": false,
       "antilinkgc": false,
-      "antipromote": false
+      "antipromote": false,
+      "antidelete": true
     },
     "14437095780@s.whatsapp.net": {
       "badword": false,
@@ -554,7 +640,8 @@
       "antilink": false,
       "antipromotion": false,
       "antilinkgc": false,
-      "antipromote": false
+      "antipromote": false,
+      "antidelete": true
     },
     "919339619072@s.whatsapp.net": {
       "badword": false,
@@ -575,7 +662,8 @@
       "antilink": false,
       "antipromotion": false,
       "antilinkgc": false,
-      "antipromote": false
+      "antipromote": false,
+      "antidelete": true
     },
     "120363236965220457@g.us": {
       "badword": false,
@@ -637,7 +725,8 @@
       "antilink": false,
       "antipromotion": false,
       "antilinkgc": false,
-      "antipromote": false
+      "antipromote": true,
+      "antidelete": true
     },
     "120363256563056288@g.us": {
       "badword": false,
@@ -684,7 +773,7 @@
       "antiforeignnum": false,
       "antibot": false,
       "antiviewonce": true,
-      "antipromote": true,
+      "antipromote": false,
       "antispam": false,
       "antivirtex": false,
       "antimedia": false,
@@ -705,7 +794,7 @@
       "antiforeignnum": false,
       "antibot": false,
       "antiviewonce": true,
-      "antipromote": true,
+      "antipromote": false,
       "antispam": false,
       "antivirtex": false,
       "antimedia": false,
@@ -726,7 +815,7 @@
       "antiforeignnum": false,
       "antibot": false,
       "antiviewonce": true,
-      "antipromote": true,
+      "antipromote": false,
       "antispam": false,
       "antivirtex": false,
       "antimedia": false,
@@ -740,14 +829,15 @@
       "anticontact": false,
       "antilink": false,
       "antipromotion": false,
-      "antilinkgc": false
+      "antilinkgc": false,
+      "antidelete": true
     },
     "61480003907@s.whatsapp.net": {
       "badword": false,
       "antiforeignnum": false,
       "antibot": false,
       "antiviewonce": true,
-      "antipromote": true,
+      "antipromote": false,
       "antispam": false,
       "antivirtex": false,
       "antimedia": false,
@@ -782,14 +872,81 @@
       "anticontact": false,
       "antilink": false,
       "antipromotion": false,
-      "antilinkgc": false
+      "antilinkgc": false,
+      "antidelete": true
     },
-    "918777407351@s.whatsapp.net": {
+    "120363318641286209@g.us": {
       "badword": false,
       "antiforeignnum": false,
       "antibot": false,
       "antiviewonce": true,
-      "antipromote": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false,
+      "antidelete": true
+    },
+    "1234567890@s.whatsapp.net": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false,
+      "antidelete": true
+    },
+    "120363320765476923@g.us": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false,
+      "antidelete": true
+    },
+    "917605888159-1619669991@g.us": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
       "antispam": false,
       "antivirtex": false,
       "antimedia": false,
@@ -804,10 +961,271 @@
       "antilink": false,
       "antipromotion": false,
       "antilinkgc": false
+    },
+    "120363020574277935@g.us": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antidelete": true,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
+    },
+    "120363108490887818@g.us": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antidelete": true,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
+    },
+    "919339975598@s.whatsapp.net": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antidelete": true,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
+    },
+    "15202268780:36@s.whatsapp.net": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antidelete": true,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
+    },
+    "15202268780:38@s.whatsapp.net": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antidelete": true,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
+    },
+    "15202268780:39@s.whatsapp.net": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antidelete": true,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
+    },
+    "120363305656646617@g.us": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antidelete": true,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
+    },
+    "919339619077@s.whatsapp.net": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antidelete": true,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
+    },
+    "120363283350782976@g.us": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antidelete": true,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
+    },
+    "918777407351@s.whatsapp.net": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antidelete": true,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
+    },
+    "917449401660@s.whatsapp.net": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antidelete": true,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
+    },
+    "917890284690@s.whatsapp.net": {
+      "badword": false,
+      "antiforeignnum": false,
+      "antibot": false,
+      "antiviewonce": true,
+      "antipromote": false,
+      "antispam": false,
+      "antivirtex": false,
+      "antimedia": false,
+      "antiimage": false,
+      "antivideo": false,
+      "antiaudio": false,
+      "antipoll": false,
+      "antisticker": false,
+      "antidelete": true,
+      "antilocation": false,
+      "antidocument": false,
+      "anticontact": false,
+      "antilink": false,
+      "antipromotion": false,
+      "antilinkgc": false
     }
-  },
-  "game": {
-    "math": []
   },
   "settings": {
     "919366316018@s.whatsapp.net": {
@@ -939,7 +1357,7 @@
       }
     },
     "15202238877@s.whatsapp.net": {
-      "totalhit": 435,
+      "totalhit": 550,
       "totalError": 0,
       "online": false,
       "autosticker": false,
@@ -971,7 +1389,7 @@
       }
     },
     "15202268780@s.whatsapp.net": {
-      "totalhit": 366,
+      "totalhit": 983,
       "totalError": 0,
       "online": false,
       "autosticker": false,
@@ -1031,7 +1449,7 @@
       }
     },
     "918777407351@s.whatsapp.net": {
-      "totalhit": 0,
+      "totalhit": 2,
       "totalError": 0,
       "online": false,
       "autosticker": false,
@@ -1048,23 +1466,19 @@
       "autotype": false,
       "watermark": {
         "packname": "Sticker By",
-        "author": "ABHRAJIT"
+        "author": "Debashis Dey"
       },
       "about": {
         "bot": {
           "nick": "__its_abhra_bot__",
-          "alias": "꧁﴿»ABHRAJIT XD BOT«﴾꧂"
+          "alias": "꧁﴿»✥«·-𝕯𝕯 𝕮𝖍𝖊𝖊𝖒𝖘-𝕭𝖔𝖙-·»✥«﴾꧂"
         },
         "owner": {
-          "alias": "917449401660@s.whatsapp.net"
+          "alias": "919339619072@s.whatsapp.net"
         }
       }
     }
   },
   "message": {},
-  "antipromote": {},
-  "sticker": {},
-  "others": {
-    "vote": []
-  }
+  "antipromote": {}
 }

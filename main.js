@@ -30,6 +30,9 @@ const Pino = require("pino")
 const readline = require("readline")
 const { parsePhoneNumber } = require("libphonenumber-js")
 const makeWASocket = require("@whiskeysockets/baileys").default
+const gradient = require('gradient-string');
+const { text } = require('cheerio')
+const myGradient = gradient(['red', 'yellow', 'green', 'blue', 'magenta', 'cyan']);
 
 
 // premium users
@@ -60,7 +63,6 @@ global.loadDatabase = async function loadDatabase() {
     game: {},
     settings: {},
     message: {},
-    antipromote : {},
     ...(global.db.data || {})
   }
   global.db.chain = _.chain(global.db.data)
@@ -169,7 +171,6 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./session`)
       //    console.log(chalk.black(chalk.bgGreen(`Your Pairing Code : `)), chalk.black(chalk.white(code)))
       // }, 3000)
    }
-   
    XeonBotInc.ev.on('connection.update', async (update) => {
 	const {
 		connection,
@@ -206,12 +207,25 @@ try{
 		}
 		if (update.connection == "open" || update.receivedPendingNotifications == "true") {
 			console.log(color(` `,'magenta'))
+      console.log(myGradient(`❑━────────────────────────────────━꧁༒༻☬ད ░▒▓█►─═╭──╯ ✸ ╰──╮ ═─◄█▓▒░ ཌ☬༺༒꧂━───────────────────────────────━❑`))
+      console.log(myGradient(`████████████████████████████████████████████████████████████████████████████████████████████████████████████`))
+      console.log(myGradient(`█                                                                                                          █`))
+      console.log(myGradient(`█  ██████╗ ██████╗      ██████╗██╗  ██╗███████╗███████╗███╗   ███╗███████╗      ██████╗  ██████╗ ████████╗ █`))
+      console.log(myGradient(`█  ██╔══██╗██╔══██╗    ██╔════╝██║  ██║██╔════╝██╔════╝████╗ ████║██╔════╝      ██╔══██╗██╔═══██╗╚══██╔══╝ █`))
+      console.log(myGradient(`█  ██║  ██║██║  ██║    ██║     ███████║█████╗  █████╗  ██╔████╔██║███████╗█████╗██████╔╝██║   ██║   ██║    █`))
+      console.log(myGradient(`█  ██║  ██║██║  ██║    ██║     ██╔══██║██╔══╝  ██╔══╝  ██║╚██╔╝██║╚════██║╚════╝██╔══██╗██║   ██║   ██║    █`))
+      console.log(myGradient(`█  ██████╔╝██████╔╝    ╚██████╗██║  ██║███████╗███████╗██║ ╚═╝ ██║███████║      ██████╔╝╚██████╔╝   ██║    █`))
+      console.log(myGradient(`█  ╚═════╝ ╚═════╝      ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚═╝╚══════╝      ╚═════╝  ╚═════╝    ╚═╝    █`))
+      console.log(myGradient(`█                                                                                                          █`))
+      console.log(myGradient(`████████████████████████████████████████████████████████████████████████████████████████████████████████████`))
+
             console.log(color(`🌿Connected to => ` + JSON.stringify(XeonBotInc.user, null, 2), 'yellow'))
             console.log(chalk.yellow(`\n\n               ${chalk.bold.blue(`[ ${botname} ]`)}\n\n`))
             console.log(color(`< ================================================== >`, 'cyan'))
 	          console.log(color(`${themeemoji} CREATED BY ${ownername}`,'magenta'))
             console.log(color(`${themeemoji} GITHUB: DebashisX3 `,'magenta'))
-            console.log(color(`${themeemoji} OWNER : ${ownernumber}` ,'green'))
+            console.log(color(`${themeemoji} OWNER : ${ownernumber}` ,'magenta'))
+            await sleep(3600000)
 
             const xeonfeature = () =>{
               var mytext = fs.readFileSync("./XeonCheems14.js").toString()
@@ -221,14 +235,6 @@ try{
           
             let timestampe = speed()
             let latensie = speed() - timestampe
-            let openmsg = `Hello User,
-${botname} Has Been Started
-Version : 14.0.0
-Latency : ${latensie.toFixed(4)} miliseconds
-Total Features : ${xeonfeature()}
-Menu Type : ${typemenu}
-Credit : ${ownername}`
-            XeonBotInc.sendMessage(ownernumber, { text : openmsg})
 		}
 	
 } catch (err) {
@@ -238,6 +244,7 @@ Credit : ${ownername}`
 })
 XeonBotInc.ev.on('creds.update', saveCreds)
 XeonBotInc.ev.on("messages.upsert",  () => { })
+
 //------------------------------------------------------
 
 //farewell/welcome
@@ -267,27 +274,47 @@ XeonLft = await getBuffer(ppuser)
                 const xeonbuffer = await getBuffer(ppuser)
                 let xeonName = num
                 const xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
-	            const xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
-                let bio = await XeonBotInc.fetchStatus(num)
-                let username =XeonBotInc.getName(num)
+	              const xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+                let userabout = await XeonBotInc.fetchStatus(num) || `Bio Is Private`
+                let ibwelcm = `🙋🏻‍♂️ Hi Friend 👋,
+🎀 Welcome to our Group.💖
+🔰 Hope you will have a good time with our\n*${metadata.subject}* Family 🫂🤝
+
+🪀This is *${botname}*, and I welcome you to our group, 
+Thank you.
+
+> Regards : Group admins
+> Credit : ${ownername}`
+let pp = await XeonBotInc.profilePictureUrl(anu.id, 'image')|| 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
+let groupicon = await getBuffer(pp)
                 let joingrp = { key: 
                   { fromMe: false, 
                     participant: '0@s.whatsapp.net', 
                     remoteJid:'status@broadcast'},
-                   message: {extendedTextMessage: 
-                            { text: `A new friend Has Joined Our Group 🥳🥳🥳`}
+                    message: {extendedTextMessage: 
+                            { 
+                              text : `A new friend Has Joined Our Group 🥳🥳🥳`}
                   }
                 }
 	            const xmembers = metadata.participants.length
-                xeonbody = `
+              let adder 
+              
+              
+              let xeonbody
+              if (anu.author === '')
+              {
+                    adder = ''
+                    xeonbody = `
 ┌────────❖ 𝕮𝖍𝖊𝖊𝖒𝖘 𝕭𝖔𝖙 ❖────────┐
 │「 𝗛𝗶 👋 」
 └┬❖ 「  @${xeonName.split("@")[0]}  」
    │✑  𝖂𝖊𝖑𝖈𝖔𝖒𝖊 𝕿𝖔 : ${metadata.subject}
    │✑  𝕸𝖊𝖒𝖇𝖊𝖗 : ${xmembers}th
+   │✑  𝕬𝖇𝖔𝖚𝖙 : ${userabout} 
    │✑  𝕵𝖔𝖎𝖓𝖊𝖉 𝖔𝖓 : 
-   │                𝕯𝖆𝖙𝖊: ${xdate} 
-   │                𝕿𝖎𝖒𝖊: ${xtime} 
+   │                𝕯𝖆𝖙𝖊 : ${xdate} 
+   │                𝕿𝖎𝖒𝖊 : ${xtime} 
+   │                𝕵𝖔𝖎𝖓𝖊𝖉 𝖇𝖞 : Using Group Invite Link
    │
     |✑ 𝕮𝖔𝖓𝖌𝖗𝖆𝖙𝖚𝖑𝖆𝖙𝖎𝖔𝖓𝖘
     |     @${xeonName.split("@")[0]} 𝘽𝙧𝙤/𝙎𝙞𝙨, 
@@ -296,8 +323,34 @@ XeonLft = await getBuffer(ppuser)
     |
     |✑ 𝕲𝖗𝖔𝖚𝖕 𝕯𝖊𝖘𝖈𝖗𝖎𝖕𝖙𝖎𝖔𝖓:- 
     |  𝐑𝐄𝐀𝐃 𝐆𝐑𝐎𝐔𝐏 𝐃𝐄𝐒𝐂𝐑𝐈𝐏𝐓𝐈𝐎𝐍 𝐂𝐀𝐑𝐄𝐅𝐔𝐋𝐋𝐘 : 
-         *${metadata.desc}*
+           *${metadata.desc}*
    └────────────────────────┈ ⳹`
+              }
+              else 
+              {
+                    adder = anu.author
+                    xeonbody = `
+┌────────❖ 𝕮𝖍𝖊𝖊𝖒𝖘 𝕭𝖔𝖙 ❖────────┐
+│「 𝗛𝗶 👋 」
+└┬❖ 「  @${xeonName.split("@")[0]}  」
+   │✑  𝖂𝖊𝖑𝖈𝖔𝖒𝖊 𝕿𝖔 : ${metadata.subject}
+   │✑  𝕸𝖊𝖒𝖇𝖊𝖗 : ${xmembers}th
+   │✑  𝕬𝖇𝖔𝖚𝖙 : ${userabout} 
+   │✑  𝕵𝖔𝖎𝖓𝖊𝖉 𝖔𝖓 : 
+   │                𝕯𝖆𝖙𝖊 : ${xdate} 
+   │                𝕿𝖎𝖒𝖊 : ${xtime} 
+   │                𝕬𝖉𝖉𝖊𝖉 𝖇𝖞 : @${adder.split('@')[0]}
+   │
+    |✑ 𝕮𝖔𝖓𝖌𝖗𝖆𝖙𝖚𝖑𝖆𝖙𝖎𝖔𝖓𝖘
+    |     @${xeonName.split("@")[0]} 𝘽𝙧𝙤/𝙎𝙞𝙨, 
+    |                  𝙔𝙤𝙪 𝙖𝙧𝙚 𝙣𝙤𝙬 𝙖 𝙢𝙚𝙢𝙗𝙚𝙧 𝙤𝙛 𝙤𝙪𝙧
+    | ${metadata.subject} 𝙁𝙖𝙢𝙞𝙡𝙮❤️🤝
+    |
+    |✑ 𝕲𝖗𝖔𝖚𝖕 𝕯𝖊𝖘𝖈𝖗𝖎𝖕𝖙𝖎𝖔𝖓:- 
+    |  𝐑𝐄𝐀𝐃 𝐆𝐑𝐎𝐔𝐏 𝐃𝐄𝐒𝐂𝐑𝐈𝐏𝐓𝐈𝐎𝐍 𝐂𝐀𝐑𝐄𝐅𝐔𝐋𝐋𝐘 : 
+       *${metadata.desc}*
+   └────────────────────────┈ ⳹`
+              }
 let msgs = generateWAMessageFromContent(anu.id, {
   viewOnceMessage: {
     message: {
@@ -334,14 +387,9 @@ let msgs = generateWAMessageFromContent(anu.id, {
               thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
               sourceUrl: websitex
           },
-                  mentionedJid: [num], 
+                  mentionedJid: [num, adder], 
                   forwardingScore: 999,
-                  isForwarded: true,
-                  forwardedNewsletterMessageInfo: {
-                  newsletterJid: '120363222395675670@newsletter',
-                  newsletterName: ownername,
-                  serverMessageId: 143
-                }
+                  isForwarded: true
                 }
        })
     }
@@ -350,7 +398,24 @@ let msgs = generateWAMessageFromContent(anu.id, {
   quoted: joingrp,
   })
 XeonBotInc.relayMessage(anu.id, msgs.message, {})
-                } else if (anu.action == 'remove') {
+
+XeonBotInc.sendMessage(num, 
+  {text : ibwelcm,
+  contextInfo: {
+    externalAdReply:{
+      showAdAttribution: true,
+      title : botname,
+      body : `𝐆𝐫𝐨𝐮𝐩 𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐌𝐞𝐬𝐬𝐚𝐠𝐞`,
+      previewType : `PHOTO`,
+      thumbnail : fs.readFileSync('./XeonMedia/theme/thumb.png'),
+      sourceUrl: websitex,
+      renderLargerThumbnail: false,
+    }
+  }
+})            
+} 
+
+else if (anu.action == 'remove') {
                 	const xeonbuffer = await getBuffer(ppuser)
                   const xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
 	                const xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
@@ -428,7 +493,7 @@ let msgs = generateWAMessageFromContent(anu.id, {
 },{
   quoted: joingrp,
   })
-XeonBotInc.relayMessage(anu.id, msgs.message)
+XeonBotInc.relayMessage(anu.id, msgs.message, {})
 }
 }
 } catch (err) {
@@ -479,8 +544,11 @@ ppgroup = await XeonBotInc.profilePictureUrl(anu.id, 'image')
 } catch (err) {
 ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 }
-if (anu.action == 'promote') {
 
+
+if (anu.action == 'promote') {
+  if(db.data.chats[anu.id].antipromote === false)
+    {
   if(anu.author === '919339619072@s.whatsapp.net' || anu.author === '15202238877@s.whatsapp.net' || anu.author === '14437095780@s.whatsapp.net')
 {  
     let xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
@@ -503,12 +571,13 @@ if (anu.action == 'promote') {
                                }
                    })
            }  
+    
        else {
              let xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
              let xeondate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
              let xeonName = num
              let XeonWlcm = await getBuffer(ppuser)
-              let promoter = anu.author
+             let promoter = anu.author
              xeonbody = ` 𝗖𝗼𝗻𝗴𝗿𝗮𝘁𝘀🎉 @${xeonName.split("@")[0]}, you have been *promoted* to *admin* \n*Promoted by* @${promoter.split("@")[0]}\n\n> Time:  ${xeontime.split("@")[0]} \n> Date:  ${xeondate.split("@")[0]}`
              XeonBotInc.sendMessage(anu.id,
                    { text: xeonbody,
@@ -526,6 +595,16 @@ if (anu.action == 'promote') {
                    })
            }
 } 
+else if(db.data.chats[anu.id].antipromote === true)
+  {
+    let promoted = num
+    let promoter = anu.author
+    await XeonBotInc.groupParticipantsUpdate(anu.id, [promoter], 'demote')
+    await XeonBotInc.groupParticipantsUpdate(anu.id, [promoted], 'demote')
+    await XeonBotInc.sendMessage(anu.id, {text : `fuck you`})
+  }
+  
+}
 else if (anu.action == 'demote') {
   
   
