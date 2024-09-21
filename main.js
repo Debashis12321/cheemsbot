@@ -235,6 +235,14 @@ try{
           
             let timestampe = speed()
             let latensie = speed() - timestampe
+            let openmsg = `Hello User,
+${botname} Has Been Started
+Version : 14.0.0
+Latency : ${latensie.toFixed(4)} miliseconds
+Total Features : ${xeonfeature()}
+Menu Type : ${typemenu}
+Credit : ${ownername}`
+            XeonBotInc.sendMessage(ownernumber, { text : openmsg})
 		}
 	
 } catch (err) {
@@ -285,7 +293,7 @@ Thank you.
 
 > Regards : Group admins
 > Credit : ${ownername}`
-let pp = await XeonBotInc.profilePictureUrl(anu.id, 'image')|| 'https://images.app.goo.gl/5kHFgvSatAYWunaw9'
+let pp = await XeonBotInc.profilePictureUrl(anu.id, 'image')|| 'https://www.shutterstock.com/image-illustration/leather-background-jpeg-version-260nw-101031550.jpg'
 let groupicon = await getBuffer(pp)
                 let joingrp = { key: 
                   { fromMe: false, 

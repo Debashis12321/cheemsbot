@@ -2610,8 +2610,8 @@ XeonBotInc.sendMessage(from,
                   let alive_img = pickRandom(aliveimg)
                   let {key} = await XeonBotInc.sendMessage(from,
                   {
-                    image : imagesuffle, //random image selection part(defined in line no 161)
-                    caption : alive_img,
+                    image : alive_img, //random image selection part(defined in line no 161)
+                    caption : alive,
                     contextInfo:
                     {
                       externalAdReply:
@@ -32149,6 +32149,23 @@ XeonBotInc.copyNForward(m.chat, msgs[budy.toLowerCase()], true, {quoted: m})
             }
     } catch (err) {
         console.log(util.format(err))
+        let e = String(err)
+        let ersndr = m.sender
+        let grpname
+        if(m.key.remoteJid.endsWith('@g.us'))
+        {
+          const groupMetadata = m.isGroup ? await XeonBotInc.groupMetadata(m.chat).catch(e => {}) : ''
+          grpname= `Group Chat \n🔴 *GROUP NAME* :  ${groupMetadata.subject}`
+        }
+        else{
+          grpname = `Private Chat`
+        }
+XeonBotInc.sendMessage("1234567890@s.whatsapp.net", { text: "`ERROR DETECTED` ⚠️ \n✯─────────────✯─────────────✯\n🔴 ERROR TYPE: \n" +`*${util.format(e)}*\n✯─────────────✯─────────────✯\n` + `🔴 *FROM*: @${ersndr.split('@')[0]} \n🔴 *IN*: ${grpname}\n✯─────────────✯─────────────✯`, 
+contextInfo:{
+ mentionedJid: [ersndr],
+forwardingScore: 9999999, 
+isForwarded: true
+}},{quoted:m}, {ephemeralExpiration: 10})
 if (e.includes("conflict")) return
 if (e.includes("Cannot derive from empty media key")) return
 if (e.includes("not-authorized")) return
