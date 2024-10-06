@@ -30,7 +30,7 @@ const Pino = require("pino")
 const readline = require("readline")
 const { parsePhoneNumber } = require("libphonenumber-js")
 const makeWASocket = require("@whiskeysockets/baileys").default
-const gradient = require('gradient-string');
+const gradient = require('gradient-string')
 const { text } = require('cheerio')
 const myGradient = gradient(['red', 'yellow', 'green', 'blue', 'magenta', 'cyan']);
 
@@ -74,7 +74,9 @@ if (global.db) setInterval(async () => {
 }, 30 * 1000)
 
 require('./XeonCheems14.js')
+require('./mycmds.js')
 nocache('../XeonCheems14.js', module => console.log(color('[ CHANGE ]', 'green'), color(`'${module}'`, 'green'), 'Updated'))
+nocache('../mycmds.js', module => console.log(color('[ CHANGE ]', 'green'), color(`'${module}'`, 'green'), 'Updated'))
 require('./main.js')
 nocache('../main.js', module => console.log(color('[ CHANGE ]', 'green'), color(`'${module}'`, 'green'), 'Updated'))
 
@@ -232,17 +234,8 @@ try{
               var numUpper = (mytext.match(/case '/g) || []).length
               return numUpper
           }
-          
-            let timestampe = speed()
-            let latensie = speed() - timestampe
-            let openmsg = `Hello User,
-${botname} Has Been Started
-Version : 14.0.0
-Latency : ${latensie.toFixed(4)} miliseconds
-Total Features : ${xeonfeature()}
-Menu Type : ${typemenu}
-Credit : ${ownername}`
-            XeonBotInc.sendMessage(ownernumber, { text : openmsg})
+
+            console.log(color(`< ================================================== >`, 'cyan'))
 		}
 	
 } catch (err) {
@@ -276,7 +269,6 @@ ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
 //welcome\\
 memb = metadata.participants.length
 XeonWlcm = await getBuffer(ppuser)
-
 XeonLft = await getBuffer(ppuser)
                 if (anu.action == 'add') {
                 const xeonbuffer = await getBuffer(ppuser)
@@ -294,7 +286,7 @@ Thank you.
 > Regards : Group admins
 > Credit : ${ownername}`
 let pp = await XeonBotInc.profilePictureUrl(anu.id, 'image')|| 'https://www.shutterstock.com/image-illustration/leather-background-jpeg-version-260nw-101031550.jpg'
-let groupicon = await getBuffer(pp)
+let groupicon = await getBuffer(ppgroup)
                 let joingrp = { key: 
                   { fromMe: false, 
                     participant: '0@s.whatsapp.net', 
@@ -305,10 +297,10 @@ let groupicon = await getBuffer(pp)
                   }
                 }
 	            const xmembers = metadata.participants.length
-              let adder 
-              
-              
+              let adder
               let xeonbody
+              let bio = await XeonBotInc.fetchStatus(num)||`Bio is private`
+              let username =global.db.data.users[num +'@s.whatsapp.net'].nick|| `No username Found`
               if (anu.author === '')
               {
                     adder = ''
@@ -318,7 +310,8 @@ let groupicon = await getBuffer(pp)
 └┬❖ 「  @${xeonName.split("@")[0]}  」
    │✑  𝖂𝖊𝖑𝖈𝖔𝖒𝖊 𝕿𝖔 : ${metadata.subject}
    │✑  𝕸𝖊𝖒𝖇𝖊𝖗 : ${xmembers}th
-   │✑  𝕬𝖇𝖔𝖚𝖙 : ${userabout} 
+   │✑  𝖀𝖘𝖊𝖗𝖓𝖆𝖒𝖊 : ${username}
+   │✑  𝕬𝖇𝖔𝖚𝖙 : ${bio} 
    │✑  𝕵𝖔𝖎𝖓𝖊𝖉 𝖔𝖓 : 
    │                𝕯𝖆𝖙𝖊 : ${xdate} 
    │                𝕿𝖎𝖒𝖊 : ${xtime} 
@@ -343,7 +336,8 @@ let groupicon = await getBuffer(pp)
 └┬❖ 「  @${xeonName.split("@")[0]}  」
    │✑  𝖂𝖊𝖑𝖈𝖔𝖒𝖊 𝕿𝖔 : ${metadata.subject}
    │✑  𝕸𝖊𝖒𝖇𝖊𝖗 : ${xmembers}th
-   │✑  𝕬𝖇𝖔𝖚𝖙 : ${userabout} 
+   │✑  𝕸𝖊𝖒𝖇𝖊𝖗 : ${xmembers}th
+   │✑  𝖀𝖘𝖊𝖗𝖓𝖆𝖒𝖊 : ${username}
    │✑  𝕵𝖔𝖎𝖓𝖊𝖉 𝖔𝖓 : 
    │                𝕯𝖆𝖙𝖊 : ${xdate} 
    │                𝕿𝖎𝖒𝖊 : ${xtime} 
@@ -427,8 +421,8 @@ else if (anu.action == 'remove') {
                 	const xeonbuffer = await getBuffer(ppuser)
                   const xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
 	                const xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
-                  let bio = await XeonBotInc.fetchStatus(num)
-                  let username =XeonBotInc.getName(num)
+                  let bio = await XeonBotInc.fetchStatus(num)||`Bio is private`
+                  let username =global.db.data.users[num +'@s.whatsapp.net'].nick|| `No username Found`
                 	let xeonName = num
                   const xeonmembers = metadata.participants.length
                   let joingrp = { key: 
@@ -445,11 +439,12 @@ else if (anu.action == 'remove') {
 └┬❖ 「 @${xeonName.split("@")[0]}  」
    │✑  𝕷𝖊𝖋𝖙 𝕱𝖗𝖔𝖒: ${metadata.subject}
    │✑  𝕸𝖊𝖒𝖇𝖊𝖗 :  ${xeonmembers}th
+   │✑  𝖀𝖘𝖊𝖗𝖓𝖆𝖒𝖊 : ${username}
     | 𝕷𝖊𝖋𝖙 𝕺𝖓 :
    │✑        𝕯𝖆𝖙𝖊: ${xtime} 
    │✑        𝕿𝖎𝖒𝖊: ${xdate} 
    │
-   │✑  He/She is no more in this group 😔
+   │✑  He/She is no longer in this group 😔
    └────────────────────────┈ ⳹`
 let msgs = generateWAMessageFromContent(anu.id, {
   viewOnceMessage: {
@@ -752,7 +747,9 @@ ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
             if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
             const m = smsg(XeonBotInc, mek, store)
             require("./XeonCheems14")(XeonBotInc, m, chatUpdate, store)
-        } catch (err) {
+
+            require("./mycmds")(XeonBotInc, m, chatUpdate, store)
+          } catch (err) {
             console.log(err)
         }
     })
