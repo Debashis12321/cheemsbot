@@ -275,18 +275,21 @@ XeonLft = await getBuffer(ppuser)
                 let xeonName = num
                 const xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
 	              const xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
-                let userabout = await XeonBotInc.fetchStatus(num) || `Bio Is Private`
+                let gid = anu
+                let groupAdmins = gid.participants.filter(p => p.admin)
+                let listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\n')
                 let ibwelcm = `🙋🏻‍♂️ Hi Friend 👋,
 🎀 Welcome to our Group.💖
 🔰 Hope you will have a good time with our\n*${metadata.subject}* Family 🫂🤝
 
 🪀This is *${botname}*, and I welcome you to our group, 
 Thank you.
-
-> Regards : Group admins
+> Regards : Group Admins
 > Credit : ${ownername}`
-let pp = await XeonBotInc.profilePictureUrl(anu.id, 'image')|| 'https://www.shutterstock.com/image-illustration/leather-background-jpeg-version-260nw-101031550.jpg'
+let ppgroup
+try{ppgroup = await XeonBotInc.profilePictureUrl(anu.id , 'image')}catch(err){ppgroup = 'https://www.shutterstock.com/image-illustration/leather-background-jpeg-version-260nw-101031550.jpg'}
 let groupicon = await getBuffer(ppgroup)
+                 
                 let joingrp = { key: 
                   { fromMe: false, 
                     participant: '0@s.whatsapp.net', 
@@ -296,11 +299,26 @@ let groupicon = await getBuffer(ppgroup)
                               text : `A new friend Has Joined Our Group 🥳🥳🥳`}
                   }
                 }
+                XeonBotInc.sendMessage(num, 
+                  {text : ibwelcm,
+                  contextInfo: {
+                    externalAdReply:{
+                      showAdAttribution: true,
+                      title : botname,
+                      body : `𝐆𝐫𝐨𝐮𝐩 𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐌𝐞𝐬𝐬𝐚𝐠𝐞`,
+                      previewType : `PHOTO`,
+                      thumbnail : groupicon,
+                      sourceUrl: websitex,
+                      renderLargerThumbnail: false,
+                    }
+                  }
+                })
+
 	            const xmembers = metadata.participants.length
               let adder
               let xeonbody
-              let bio = await XeonBotInc.fetchStatus(num)||`Bio is private`
-              let username =global.db.data.users[num +'@s.whatsapp.net'].nick|| `No username Found`
+              let username 
+              try{username = global.db.data.users[num].nick } catch(error){username = `No username Found`}
               if (anu.author === '')
               {
                     adder = ''
@@ -311,7 +329,6 @@ let groupicon = await getBuffer(ppgroup)
    │✑  𝖂𝖊𝖑𝖈𝖔𝖒𝖊 𝕿𝖔 : ${metadata.subject}
    │✑  𝕸𝖊𝖒𝖇𝖊𝖗 : ${xmembers}th
    │✑  𝖀𝖘𝖊𝖗𝖓𝖆𝖒𝖊 : ${username}
-   │✑  𝕬𝖇𝖔𝖚𝖙 : ${bio} 
    │✑  𝕵𝖔𝖎𝖓𝖊𝖉 𝖔𝖓 : 
    │                𝕯𝖆𝖙𝖊 : ${xdate} 
    │                𝕿𝖎𝖒𝖊 : ${xtime} 
@@ -335,7 +352,6 @@ let groupicon = await getBuffer(ppgroup)
 │「 𝗛𝗶 👋 」
 └┬❖ 「  @${xeonName.split("@")[0]}  」
    │✑  𝖂𝖊𝖑𝖈𝖔𝖒𝖊 𝕿𝖔 : ${metadata.subject}
-   │✑  𝕸𝖊𝖒𝖇𝖊𝖗 : ${xmembers}th
    │✑  𝕸𝖊𝖒𝖇𝖊𝖗 : ${xmembers}th
    │✑  𝖀𝖘𝖊𝖗𝖓𝖆𝖒𝖊 : ${username}
    │✑  𝕵𝖔𝖎𝖓𝖊𝖉 𝖔𝖓 : 
@@ -399,40 +415,25 @@ let msgs = generateWAMessageFromContent(anu.id, {
 },{
   quoted: joingrp,
   })
-XeonBotInc.relayMessage(anu.id, msgs.message, {})
-
-XeonBotInc.sendMessage(num, 
-  {text : ibwelcm,
-  contextInfo: {
-    externalAdReply:{
-      showAdAttribution: true,
-      title : botname,
-      body : `𝐆𝐫𝐨𝐮𝐩 𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐌𝐞𝐬𝐬𝐚𝐠𝐞`,
-      previewType : `PHOTO`,
-      thumbnail : fs.readFileSync('./XeonMedia/theme/thumb.png'),
-      sourceUrl: websitex,
-      renderLargerThumbnail: false,
-    }
-  }
-})            
+XeonBotInc.relayMessage(anu.id, msgs.message, {})            
 } 
 
 else if (anu.action == 'remove') {
-                	const xeonbuffer = await getBuffer(ppuser)
-                  const xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
-	                const xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
-                  let bio = await XeonBotInc.fetchStatus(num)||`Bio is private`
-                  let username =global.db.data.users[num +'@s.whatsapp.net'].nick|| `No username Found`
-                	let xeonName = num
-                  const xeonmembers = metadata.participants.length
-                  let joingrp = { key: 
-                      { fromMe: false, 
-                        participant: '0@s.whatsapp.net', 
-                        remoteJid:'status@broadcast'},
-                       message: {extendedTextMessage: 
-                                { text: `Good By Message`}
-                      }
-                    }
+    const xeonbuffer = await getBuffer(ppuser)
+    const xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
+	  const xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+    let username 
+    try{username = global.db.data.users[num].nick } catch(error){username = `No username Found`}
+    let xeonName = num
+    const xeonmembers = metadata.participants.length
+    let joingrp = { key: 
+      { fromMe: false, 
+        participant: '0@s.whatsapp.net', 
+        remoteJid:'status@broadcast'},
+        message: {extendedTextMessage: 
+           { text: `Good By Message`}
+              }
+            }
                     xeonbody = `
 ┌────────❖ 𝕮𝖍𝖊𝖊𝖒𝖘 𝕭𝖔𝖙 ❖────────┐
 │「 𝗚𝗼𝗼𝗱𝗯𝘆𝗲 👋 」

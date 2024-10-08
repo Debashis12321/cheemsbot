@@ -8296,22 +8296,21 @@ case 'ytmp4': case 'ytvideo': {
   const hasil = await ytMp4(text)
   let vidlink = args[0]
   let vthumb = fs.readFileSync('./XeonMedia/theme/thumb.png')
-  let {key} = XeonBotInc.sendMessage(from, { text : `Preparing...`})
+  let {key} = await XeonBotInc.sendMessage(from, { text : `Preparing...`})
   XeonBotInc.sendMessage(m.chat, { react: { text: `⬆️`, key: m.key }})
   let vid =  { url: hasil.result }
-  let caption = `*📍Title:* ${hasil.title}
+  let caption = `*🔴 Title:* ${hasil.title}
   ${readmore}
-  *🚀Channel:* ${hasil.channel}
-  ${readmore}
-  *Views* : ${hasil.views}
-  ${readmore}
-  *Likes* : ${hasil.likes}
-  ${readmore}
-  *Dislikes* : ${hasil.dislike? hasil.dislike:''}
-  ${readmore}
-  *🗓Upload at* : ${hasil.uploadDate}
-  ${readmore}
-    *✏Description:* ${hasil.desc ? hasil.desc : 'No Description is provided for this video'}`
+*🚀 Channel:* ${hasil.channel}
+${readmore}
+▶️ *Views* : ${hasil.views}
+${readmore}
+👍 *Likes* : ${hasil.likes}       👎 *Dislikes* : ${hasil.dislike? hasil.dislike:''}
+${readmore}
+*🗓 Upload at* : ${hasil.uploadDate}
+${readmore}
+*✏ Description:* ${hasil.desc ? hasil.desc : 'No Description is provided for this video'}`
+let thumb = await getBuffer(hasil.thumb)
 let msgs = generateWAMessageFromContent(m.chat, {
   viewOnceMessage: {
     message: {
@@ -8328,7 +8327,7 @@ let msgs = generateWAMessageFromContent(m.chat, {
           }),
           header: proto.Message.InteractiveMessage.Header.create({
           hasMediaAttachment: false,
-          ...await prepareWAMessageMedia({ video: vid, seconds : 1000000 }, { upload: XeonBotInc.waUploadToServer })
+          ...await prepareWAMessageMedia({ video: vid, seconds : 3600000 }, { upload: XeonBotInc.waUploadToServer })
           }),
           nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
             buttons: [
@@ -8349,10 +8348,10 @@ let msgs = generateWAMessageFromContent(m.chat, {
               showAdAttribution: true,
               title: botname,
               body: `Cheems Bot Youtube Video Downloader`,
-              thumbnail : vthumb,
+              thumbnail : thumb,
               sourceUrl: vidlink,
-              mediatype: 2,
-              renderLargerThumbnail: true
+              mediatype: 1,
+              renderLargerThumbnail: false
             },
                   mentionedJid: [m.sender], 
                   forwardingScore: 999,
@@ -8365,6 +8364,7 @@ let msgs = generateWAMessageFromContent(m.chat, {
 }, { quoted: m })
 await XeonBotInc.relayMessage(m.chat, msgs.message, {},{quoted:m})
 XeonBotInc.sendMessage(m.chat, { react: { text: `✅`, key: m.key }})
+XeonBotInc.sendMessage(from, {delete : key})
 console.log('sent')
 }
 break
