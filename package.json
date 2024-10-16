@@ -10,7 +10,7 @@
         "media": "XeonMedia"
     },
     "scripts": {
-        "build": "npm run build",
+        "build": "yarn build",
         "start": "node index.js"
     },
     "author": "DGXeon",
